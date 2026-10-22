@@ -211,6 +211,7 @@ async function submitRegister() {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
 }
 .back-home:hover{
-  color:rgba(60, 60, 60, 0.6)
+  color:rgba(60, 60, 60, 0.6);
+  transition: all 0.1s ease;
 }
 </style>

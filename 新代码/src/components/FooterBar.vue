@@ -100,4 +100,54 @@ function toTop() {
 .bi:hover {
   background: #555;
 }
+
+/* ============================================================
+   PC 自适应
+   原样式：`.div1` 固定 350px 高、内部两个 50% 浮动的块、表格 left:100px。
+   现在：改成 flex 两端布局 + 内容最大宽度，宽屏不会被拉散，窄屏也不会挤。
+   ============================================================ */
+.div1 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: clamp(24px, 4vw, 80px);
+  height: auto;
+  min-height: 300px;
+  padding: clamp(28px, 3vw, 48px) clamp(24px, 4vw, 64px);
+  box-sizing: border-box;
+}
+
+.tab_div_foot {
+  float: none;
+  width: auto;
+  max-width: 760px;
+  flex: 1 1 520px;
+  border-right: none;
+}
+
+.foot_logo {
+  float: none;
+  width: auto;
+  flex: 0 0 clamp(220px, 22vw, 320px);
+}
+
+#foot_tab {
+  position: static;
+  left: 0;
+  top: 0;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* 底部那条蓝色信息栏：宽屏时内容居中，不要贴左边 */
+#foot {
+  justify-content: center;
+}
+
+@media (max-width: 1440px) {
+  .div1 {
+    gap: 30px;
+    padding: 28px 32px;
+  }
+}
 </style>

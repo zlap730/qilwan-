@@ -89,7 +89,7 @@ onBeforeUnmount(() => document.removeEventListener('click', onDocumentClick))
 <style scoped>
 .nav-todo {
   display: block;
-  width: 100px;
+  width: 100%;
   height: 40px;
   padding-top: 15px;
   color: rgba(255, 255, 255, 0.6);
@@ -164,5 +164,57 @@ onBeforeUnmount(() => document.removeEventListener('click', onDocumentClick))
 
 .nav-login:hover {
   background: #d2762f;
+}
+
+/* ============================================================
+   PC 自适应（1280 ~ 2560 全宽通用）
+   原样式：7 个菜单项各写死 100px、整体从左侧 40px 开始，
+   在 2560 屏上会挤在左边、和右侧 logo 之间留一大片空白。
+   现在改成：flex 均分 + 居中，两侧留出 logo 和登录区的位置。
+   ============================================================ */
+#nav_1 {
+  display: flex;
+  align-items: center;
+  padding: 0 clamp(16px, 2vw, 40px);
+  box-sizing: border-box;
+}
+
+#ul_nav {
+  flex: 0 1 auto;
+  display: flex;
+  justify-content: center;
+  gap: clamp(2px, 0.5vw, 14px);
+  /* 菜单整体居中，宽度自适应：始终给右侧 logo(100px) + 登录区(130px) 留出位置 */
+  width: min(calc(100% - 320px), 980px);
+  margin: 0 auto;
+  padding: 0;
+  left: 0;
+}
+
+#ul_nav li {
+  flex: 1 1 0;
+  min-width: 0;
+  width: auto;
+  left: 0;
+}
+
+#ul_nav li a,
+#ul_nav li a:link {
+  width: 100%;
+}
+
+/* 1280~1440 之间字号收一点，7 个菜单不会挤在一起 */
+@media (max-width: 1440px) {
+  #ul_nav li a,
+  .nav-todo {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 1280px) {
+  #ul_nav li a,
+  .nav-todo {
+    font-size: 15.5px;
+  }
 }
 </style>

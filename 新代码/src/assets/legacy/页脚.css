@@ -9,7 +9,9 @@
     
 }
 
-table{
+/* 迁移改动：原来的裸 `table` 选择器是全局的，会把装配清单的大表格整体右移 100px
+   （在宽屏上直接顶出横向滚动条），这里限定到页脚内部 */
+.div1 table{
     position: relative;
     left: 100px;
     bottom: 0px;

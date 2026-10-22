@@ -11,7 +11,11 @@ body {
   padding: 0;
 }
 
+/* PC 端设计宽度：1280 ~ 2560。
+   低于 1000 时先给一个下限，窗口再窄就出现横向滚动条（手机端后面单独做）。
+   注意别设成 1024：1024 的屏幕减去滚动条只有 ~1009 可用，会凭空多出 15px 横向滚动。 */
 body {
+  min-width: 1000px;
   font-family: '微软雅黑', 'Microsoft YaHei', system-ui, sans-serif;
   color: #222;
   background-color: #fff;
@@ -23,4 +27,22 @@ body {
 
 a {
   text-decoration: none;
+}
+
+/* 图片永远不要撑破容器（原项目里有不少按原始尺寸直接摆的图） */
+img {
+  max-width: 100%;
+}
+
+/* 长英文 / 长链接不要顶破卡片（评论、品牌说明里都可能出现） */
+p,
+li,
+td,
+th {
+  overflow-wrap: break-word;
+}
+
+/* 滚动条出现/消失时不要引起整页跳动 */
+html {
+  scrollbar-gutter: stable;
 }

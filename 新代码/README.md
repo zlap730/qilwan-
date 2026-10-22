@@ -78,6 +78,44 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
 改样式时直接改 `src/assets/legacy/` 下的文件即可；想用 `<style scoped>` 逐步收编也行，两种方式可以共存。
 
+## PC 自适应（1280 ~ 2560）
+
+桌面端已适配：5 个页面在 **1024 / 1152 / 1280 / 1440 / 1600 / 1920 / 2560** 七个宽度下
+都**没有横向滚动条，也没有表格列被裁切**。
+
+| 宽度 | 表现 |
+| --- | --- |
+| ≥ 1920 | 内容有最大宽度（首页 1080、讨论区 1100、计算器 1400、变速器大全 1400），居中，两侧留白 |
+| 1440 ~ 1919 | 默认样式，表格与字号按视口轻微缩放 |
+| 1280 ~ 1439 | 表格字号/内边距收紧，导航字号 17px |
+| 1000 ~ 1279 | 导航 15.5px、表格列更窄，仍然不出现横向滚动 |
+| < 1000 | 会出现横向滚动条（**手机端留到下一步做**） |
+
+四个固定做法（新增页面时照着来就不会出问题）：
+
+1. 容器宽度用 `min(设计宽度, xx vw)`，不要写死 px；
+2. 字号用 `clamp(最小, x vw, 最大)`；
+3. 表格用 `<colgroup>` + `table-layout: fixed` 按百分比分列（见 `CalculatorView.vue`）；
+4. 背景图 `background-size: cover`，图片统一 `max-width: 100%`（在 `base.css` 里）。
+
+改动位置：`src/assets/base.css`（全局基线）、各组件 `<style scoped>`（布局）、
+`src/assets/legacy/*.css`（v-html 里的内容 + 背景）。
+
+> 顺便修掉了 3 个「全局选择器泄漏」，它们在宽屏或其它页面都会出问题：
+> - `页脚.css` 里裸 `table { left: 100px }` —— 会把装配清单整张表右移 100px，直接顶出横向滚动条；
+> - `变速器大全.css` 里 `#header1 th, td`、`.series-section th, td`、裸 `th`、裸 `tr:hover` —— 会把页脚和计算器的表格一起染色；
+> - `@keyframes a { form { ... } }` 的 `from` 笔误。
+
+复检方法（脚本已放进仓库）：
+
+```bash
+npm run dev
+node scripts/layout-audit.mjs                                  # 审计开发服务器
+BASE_URL=http://localhost:4173 node scripts/layout-audit.mjs     # 审计构建产物（先 npm run build && npm run preview）
+```
+
+会逐条打印「页面 × 宽度」是否正常，最后一行给出问题总数（当前 `0 / 35`）。
+
 ## 目录
 
 ```
@@ -94,7 +132,7 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 │   ├── .env           本地配置（数据库、JWT、端口）
 │   └── .env.example   配置模板
 ├── public/            图标、logo、蓝图视频
-├── scripts/           extract-shifter-data.mjs（从 旧代码 抽变速器资料，可重复跑）
+├── scripts/           extract-shifter-data.mjs（从 旧代码 抽变速器资料）+ layout-audit.mjs（PC 布局审计）
 └── src/               前端
     ├── api/           http 实例（拦截器统一加 token / 401 登出）+ 接口文件
     ├── assets/legacy/  从 旧代码/css文档/ 复制来的 6 个 CSS

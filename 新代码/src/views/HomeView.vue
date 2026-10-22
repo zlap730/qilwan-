@@ -154,7 +154,8 @@ const cards = [
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  /* PC 自适应：1280 以上 4 张卡一行，窄一点自动变 3 列 / 2 列 */
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 20px;
   width: min(1080px, 86vw);
   margin: 0 auto;

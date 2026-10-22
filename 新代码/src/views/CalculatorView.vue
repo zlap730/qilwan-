@@ -140,6 +140,15 @@ async function exportXlsx() {
       <div id="div_table">
         <form @submit.prevent>
           <table id="table" border="1">
+            <!-- PC 自适应：用 colgroup 按百分比分配列宽，替代原来每格写死 px 的做法 -->
+            <colgroup>
+              <col class="c-label" />
+              <col class="c-part" />
+              <col class="c-price" />
+              <col class="c-qty" />
+              <col class="c-spec" />
+              <col class="c-remark" />
+            </colgroup>
             <tbody>
               <template v-for="row in rows" :key="row.id">
                 <tr v-if="row.gap" class="item-row gap-row">
@@ -219,75 +228,143 @@ async function exportXlsx() {
 .page-calculator {
   min-height: 100vh;
   padding: 70px 0 40px;
-  overflow-x: hidden;
 }
 
 .intro {
   display: flex;
   align-items: center;
-  gap: 30px;
-  width: min(1500px, 94vw);
+  flex-wrap: wrap;
+  gap: clamp(16px, 2vw, 30px);
+  width: min(1180px, 92vw);
   margin: 0 auto 30px;
-  padding: 24px 30px;
+  padding: 24px clamp(16px, 2vw, 30px);
   border-radius: 8px;
   background-color: bisque;
+  box-sizing: border-box;
+}
+
+.intro-text {
+  flex: 1 1 420px;
+  min-width: 0;
 }
 
 .intro-text p {
   margin: 0 0 12px;
   font-family: serif;
-  font-size: 20px;
+  font-size: clamp(16px, 1.25vw, 20px);
   font-weight: 700;
   line-height: 1.8;
 }
 
 .intro-img {
-  flex: 0 0 260px;
-  width: 260px;
+  flex: 0 1 260px;
+  width: min(260px, 34vw);
   border-radius: 15px;
 }
 
 .sheet {
-  width: min(1600px, 96vw);
+  width: min(1400px, 94vw);
   margin: 0 auto;
   padding-bottom: 40px;
   background-image: linear-gradient(0deg, #fff, bisque);
   border-radius: 8px;
 }
 
-/* 原来 6 个 li 靠 left/right 手调像素对齐，这里改成 flex 均分 */
-#nav_table ul {
+/* 原来 6 个 li 靠 left/right 手调像素对齐，这里改成和表格列同宽的 grid，
+   这样表头文字正好落在对应列上（原来是 space-around，宽屏下会错位） */
+#nav_table {
+  width: 100%;
+  height: auto;
+  min-height: 50px;
   display: flex;
-  justify-content: space-around;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+#nav_table ul {
+  display: grid;
+  grid-template-columns: 16% 27% 14% 10% 16.5% 16.5%;
+  width: 100%;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 #nav_table ul li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   right: auto;
   left: auto;
   margin-left: 0;
+  height: 100%;
+  font-size: clamp(15px, 1.3vw, 22px);
+  line-height: 1.5;
+  text-align: center;
+  /* 原样式是白字 + 四向 1px 黑描边，字小时描边会糊成一条横线，改成清晰的黑字 */
+  color: #2b2b2b;
+  text-shadow: none;
 }
 
-.col-part {
-  width: 240px;
+/* ── 表格改为流体：宽度跟着 .sheet 走，列宽由 colgroup 按百分比分配 ── */
+#div_table,
+#nav_table,
+#div_table form table {
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
 }
 
-.col-price {
-  width: 120px;
+#div_table form table {
+  table-layout: fixed;
 }
 
-.col-qty {
-  width: 80px;
+#table .c-label {
+  width: 16%;
 }
 
-.col-spec {
-  width: 200px;
+#table .c-part {
+  width: 27%;
 }
 
+#table .c-price {
+  width: 14%;
+}
+
+#table .c-qty {
+  width: 10%;
+}
+
+#table .c-spec {
+  width: 16.5%;
+}
+
+#table .c-remark {
+  width: 16.5%;
+}
+
+#table td {
+  padding: 5px 6px;
+  font-size: clamp(15px, 1.15vw, 20px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 输入框铺满单元格，不再写死 240/120/80px */
+.col-part,
+.col-price,
+.col-qty,
+.col-spec,
 .col-remark {
-  width: 200px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 下拉框原来写死 200px，窄屏时会顶破单元格 */
+#table select {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .gap-row td {
@@ -295,12 +372,13 @@ async function exportXlsx() {
 }
 
 .total-row td {
-  font-size: 19px;
+  font-size: clamp(15px, 1.1vw, 19px);
 }
 
 .auto-tip {
   color: #7a6248;
-  font-size: 14px;
+  font-size: clamp(12px, 0.95vw, 14px);
+  line-height: 1.5;
 }
 
 .export {
@@ -309,6 +387,14 @@ async function exportXlsx() {
   justify-content: center;
   gap: 14px;
   padding-top: 20px;
+}
+
+/* 原样式给 label 里的图片写死了 left:650px / top:21px，这里归零交给 flex 布局 */
+.export label,
+.export label img {
+  position: static;
+  left: 0;
+  top: 0;
 }
 
 .export img {
@@ -323,11 +409,11 @@ async function exportXlsx() {
 
 #exportButton {
   position: static;
-  width: 300px;
+  width: min(300px, 60vw);
   height: 40px;
   border-radius: 20px;
   font-family: '等线';
-  font-size: 20px;
+  font-size: clamp(16px, 1.3vw, 20px);
   letter-spacing: 1px;
   cursor: pointer;
 }
@@ -337,9 +423,9 @@ async function exportXlsx() {
   writing-mode: horizontal-tb;
   width: auto;
   margin: 18px 0 0;
-  padding-left: 40px;
-  font-size: 18px;
-  letter-spacing: 2px;
+  padding-left: clamp(16px, 3vw, 40px);
+  font-size: clamp(14px, 1.15vw, 18px);
+  letter-spacing: 1px;
 }
 
 .toast {
@@ -366,21 +452,15 @@ async function exportXlsx() {
   opacity: 0;
 }
 
-/* 原样式把表格写死 1200px，窄屏会横向溢出 */
-@media (max-width: 1280px) {
-  #div_table,
-  #nav_table,
-  #div_table form table {
-    width: 100%;
+/* 1280 左右：表格 6 列会比较挤，收紧内边距和字号 */
+@media (max-width: 1440px) {
+  #table td {
+    padding: 4px 4px;
+    font-size: 14.5px;
   }
 
-  .col-part {
-    width: 150px;
-  }
-
-  .col-spec,
-  .col-remark {
-    width: 130px;
+  #table input {
+    font-size: 13.5px;
   }
 }
 </style>

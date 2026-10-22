@@ -163,7 +163,8 @@ onMounted(load)
 }
 
 .forum-shell {
-  width: 80%;
+  /* PC 自适应：原来是 80%，在 2560 屏上会变成 2000px 宽，一屏只有一两行字 */
+  width: min(1100px, 92vw);
   min-height: 620px;
   margin: 0 auto;
   padding: 18px 24px 40px;
@@ -238,5 +239,23 @@ onMounted(load)
 .toast-leave-to {
   opacity: 0;
   transform: translate(-50%, 8px);
+}
+
+/* ============================================================
+   PC 自适应：底部发评论的浮动条
+   原来是 width:50% + left:25%（固定按视口一半宽度算），
+   2560 屏上会拉成 1280px 宽的巨条，1280 屏又偏窄；改成居中、限宽。
+   ============================================================ */
+.comment-bar {
+  width: min(760px, 94vw);
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  box-sizing: border-box;
+}
+
+/* 评论里的长链接/长英文不要撑破卡片 */
+.commentsContainer :deep(.comment-content p) {
+  overflow-wrap: anywhere;
 }
 </style>

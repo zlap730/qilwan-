@@ -3,7 +3,9 @@
     background-image: url("../img/单车与日落.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: 1890px 1000px;
+    /* PC 自适应：原来写死 1890×1000，在 2560 屏上右边会露出一条白边，改成铺满 */
+    background-size: cover;
+    background-position: center top;
 }
 
 #options-container {

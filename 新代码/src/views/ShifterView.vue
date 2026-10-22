@@ -205,10 +205,11 @@ onBeforeUnmount(() => cancelAnimationFrame(rafId))
   box-sizing: border-box;
 }
 
-/* 原来这层样式写在行内：opacity .9 + bisque + width 80% + 固定 1600px 高 */
+/* 原来这层样式写在行内：opacity .9 + bisque + width 80% + 固定 1600px 高。
+   PC 自适应：宽度改成「最大 1400px + 92vw」，2560 屏上不会被拉成 2000px 的一条。 */
 #header1 {
-  width: 80%;
-  min-height: 1600px;
+  width: min(1400px, 92vw);
+  min-height: 1100px;
   margin: 0 auto;
   padding-bottom: 40px;
   background-color: bisque;
@@ -216,10 +217,25 @@ onBeforeUnmount(() => cancelAnimationFrame(rafId))
   box-sizing: border-box;
 }
 
+/* 页头那排滚动图片的容器：原来是写死的 800×400，这里改成随屏宽收缩并居中 */
+.container {
+  width: min(800px, 100%);
+  height: auto;
+  aspect-ratio: 2 / 1;
+  max-height: 400px;
+  margin: 0 auto;
+}
+
 #head h2 {
   margin: 0 0 16px;
   padding-top: 20px;
   text-align: center;
+  font-size: clamp(20px, 1.6vw, 26px);
+}
+
+#head p {
+  margin-left: clamp(8px, 3vw, 50px);
+  font-size: clamp(14px, 1.1vw, 18px);
 }
 
 .options-wrap {
@@ -229,6 +245,25 @@ onBeforeUnmount(() => cancelAnimationFrame(rafId))
 /* 原 CSS 里是 display:none，靠 JS 打开；Vue 里常驻显示 */
 #content {
   display: block;
+  width: min(1180px, 94%);
+  height: auto;
+  max-height: 72vh;
+}
+
+/* 品牌卡：原来是 18% / 31% 的固定百分比，现在用 flex 自适应并限宽 */
+.brand-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(8px, 1vw, 18px);
+  justify-content: center;
+}
+
+.brand,
+.bsq {
+  width: auto;
+  flex: 1 1 140px;
+  max-width: 240px;
+  box-sizing: border-box;
 }
 
 #table-container {
@@ -242,7 +277,7 @@ onBeforeUnmount(() => cancelAnimationFrame(rafId))
 }
 
 .migrate-note {
-  width: 90%;
+  width: min(1180px, 90%);
   margin: 10px auto 0;
   color: #4a3b2a;
   font-size: 13px;
@@ -267,5 +302,21 @@ onBeforeUnmount(() => cancelAnimationFrame(rafId))
 
 #header1 .brand-content {
   transition: opacity 0.3s ease-in-out;
+}
+
+/* PC 自适应：品牌正文是 v-html 渲染的，只能在全局样式里约束，
+   防止宽表格 / 大图把容器顶破 */
+#header1 table {
+  max-width: 100%;
+}
+
+#header1 img {
+  max-width: 100%;
+  height: auto;
+}
+
+#header1 .brand-content p,
+#header1 .brand-content li {
+  line-height: 1.8;
 }
 </style>

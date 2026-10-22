@@ -141,7 +141,7 @@ async function submitRegister() {
       <a href="#" id="loginLink" @click.prevent="switchMode('login')">返回登录</a>
     </form>
 
-    <router-link class="back-home" to="/">← 返回首页</router-link>
+    <router-link class="back-home" to="/" >← 返回首页</router-link>
   </main>
 </template>
 
@@ -186,6 +186,9 @@ async function submitRegister() {
 .ok {
   color: #2e7d32;
 }
+#but_join{
+  padding : 0
+}
 
 #but_join,
 .zcc {
@@ -206,5 +209,8 @@ async function submitRegister() {
   color: #fff;
   font-size: 15px;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+}
+.back-home:hover{
+  color:rgba(60, 60, 60, 0.6)
 }
 </style>

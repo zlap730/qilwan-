@@ -5,7 +5,9 @@
     background-image: url("../img/深圳湾骑车壁纸图.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: 1890px 1000px; 
+    /* PC 自适应：原写死 1890×1000，宽屏右侧会露白，改成铺满 */
+    background-size: cover;
+    background-position: center top;
 }
 
 

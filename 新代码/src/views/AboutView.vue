@@ -11,9 +11,9 @@ import 安全知识图 from '@/assets/img/屏幕截图2.png'
  * 首页已经改成「工具入口」，所以这些介绍性内容单独放这里。
  */
 const 入门向导 = [
-  { title: '运动简介', to: '/pending/运动简介', img: 运动简介图 },
-  { title: '骑行技巧', to: '/pending/技巧篇', img: 骑行技巧图 },
-  { title: '安全知识', to: '/pending/骑行知识', img: 安全知识图 }
+  { title: '运动简介', to: '/article/sport', img: 运动简介图 },
+  { title: '骑行技巧', to: '/article/knowledge', img: 骑行技巧图 },
+  { title: '装备介绍', to: '/article/gear', img: 安全知识图 }
 ]
 </script>
 

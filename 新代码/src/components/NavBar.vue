@@ -25,7 +25,7 @@ function onAvatarError(event) {
  */
 const navItems = [
   { label: '首页', to: '/' },
-  { label: '整车推荐', to: '/pending/整车推荐' },
+  { label: '整车推荐', to: '/bikes' },
   { label: '车架推荐', to: '/pending/车架推荐' },
   { label: '零件道具', to: '/pending/零件道具' },
   { label: '变速器', to: '/shifters' },
@@ -77,7 +77,10 @@ onBeforeUnmount(() => document.removeEventListener('click', onDocumentClick))
         </button>
 
         <div v-show="open" class="nav-dropdown">
-          <span class="nav-tip">个人信息 / 个人空间 尚未迁移</span>
+          <router-link to="/profile" @click="close">个人信息</router-link>
+          <router-link to="/articles" @click="close">骑行知识</router-link>
+          <router-link to="/map" @click="close">车店地图</router-link>
+          <span class="nav-tip">个人空间依赖后端 /api/posts，尚未迁移</span>
           <a href="#" @click.prevent="logout">退出账号</a>
         </div>
       </template>

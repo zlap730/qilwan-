@@ -31,6 +31,12 @@ const ROUTES = [
   { path: '/forum', name: '讨论区' },
   { path: '/calculator', name: '装配清单' },
   { path: '/shifters', name: '变速器大全' },
+  { path: '/shifters/tuning', name: '变速器调试' },
+  { path: '/bikes', name: '整车推荐' },
+  { path: '/articles', name: '文章列表' },
+  { path: '/article/gear', name: '文章详情' },
+  { path: '/profile', name: '个人信息' },
+  { path: '/map', name: '地图' },
   { path: '/login', name: '登录' }
 ]
 const WIDTHS = [1024, 1152, 1280, 1440, 1600, 1920, 2560]

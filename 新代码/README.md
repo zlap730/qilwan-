@@ -66,6 +66,11 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 | `HTML/论坛.html` + `JS文件/评论区代码.js`（413 行） | `views/ForumView.vue` + `components/CommentItem.vue` + `api/comments.js` | `innerHTML` 拼字符串 → 组件插值（顺带修掉 XSS）；8 个 `getElementById` + `addEventListener` → `v-model` / `@submit` |
 | `HTML/装配计算器.html`（381 行手写 TR）+ `表格计算器.js` + `装配计算器.js` | `views/CalculatorView.vue` | 30 多个 `<tr>` → 一份数据数组 + `v-for`；点按钮算总价 → `computed` 自动算；xlsx 由 CDN 全局变量改为按需 `import()` |
 | `HTML/变速器大全.html` + `JS文件/变速器大全-选项框.js`（1,058 行） | `views/ShifterView.vue` + `data/shifterBrands.js` + `data/shifterMeta.js` | 8 个品牌的 900 多行正文原样抽成数据模块；分类/品牌切换、淡入动画、页头滚动图片、CSV 参数表全部保留 |
+| `HTML/变速器调试.html` + 3 个动画 JS | `views/TuningView.vue`（`/shifters/tuning`） | 子导航改吸顶锚点；「手变/前拨/后拨」鼠标悬停切图 → `partIndex`；异响 3 个标签 → `tabIndex`；55MB 本地教学视频改成 B 站外链 |
+| `HTML/整车页面.HTML` + `整车页面js.js` + `json/自行车推荐数据.json` | `views/BikesView.vue`（`/bikes`） + `data/bikes.json` | 73 款车 JSON 改为构建期 import（不再发请求）；问卷 4 题用 `v-model` + `computed` 过滤；wordcloud2.js 换成纯 CSS 词云 |
+| `HTML/运动简介.html`、`装备介绍和骑行知识/*.html`、`公路车.html`、`山地车.html` | `views/ArticlesView.vue`（`/articles`） + `views/ArticleView.vue`（`/article/:slug`） + `data/articles.js` + `public/articles/` | 5 篇正文抽出并清洗（去 script/内联样式/事件），图片 15 张 7.9MB 放 public；公路车页原来正文被注释，从注释里恢复了 3 节 |
+| `HTML/个人信息.html` + `JS文件/个人信息.js` | `views/ProfileView.vue`（`/profile`） + `api/users.js` | 登录态走 Pinia；读取用 `GET /api/users/me`，保存走 `PUT /api/users/:id`（multipart 头像）；注销走 `DELETE`；不再手工解析 cookie |
+| `HTML/地图.html` | `views/MapView.vue`（`/map`） | 高德 JS API 改为进入路由才加载；key 支持 `VITE_AMAP_KEY`；加载失败有明确提示而不是白屏 |
 | `HTML/登陆页面.html` 内联 script + `用户登录.js`（两份重复实现，规则还不一致） | `views/LoginView.vue` + `api/auth.js` + `stores/user.js` | 合并成一份；前端 2-30 位校验对齐后端 3-30 位；登录态统一进 Pinia |
 | **`旧代码/app/` 整个后端** | **`server/`** | 依赖补进 package.json、静态目录精简、托管 dist、修密码泄露/默认头像/`/me` 路由/越权/删号 500 等 6 个问题，详见结构说明第八节 |
 
@@ -133,17 +138,17 @@ BASE_URL=http://localhost:4173 node scripts/layout-audit.mjs     # 审计构建�
 │   ├── uploads/       用户上传的图片
 │   ├── .env           本地配置（数据库、JWT、端口）
 │   └── .env.example   配置模板
-├── public/            图标、logo、蓝图视频
+├── public/            图标、logo、蓝图视频、articles/（5 篇文章的 15 张配图）
 ├── scripts/           extract-shifter-data.mjs（从 旧代码 抽变速器资料）+ layout-audit.mjs（PC 布局审计）
 └── src/               前端
-    ├── api/           http 实例（拦截器统一加 token / 401 登出）+ 接口文件
+    ├── api/           http 实例（拦截器统一加 token / 401 登出）+ auth / comments / users 接口
     ├── assets/legacy/  从 旧代码/css文档/ 复制来的 6 个 CSS
     ├── components/    NavBar / FooterBar / CommentItem
-    ├── data/          shifterBrands.js（8 个品牌资料）+ shifterMeta.js（分类/品牌元数据）
-    ├── router/        8 条路由（首页 / 关于 / 整理中 / 讨论区 / 装配清单 / 变速器大全 / 登录）
+    ├── data/          shifterBrands.js、shifterMeta.js、bikes.json（73 款车）、articles.js（5 篇文章）
+    ├── router/        14 条路由（首页 / 关于 / 整车 / 变速器 ×2 / 文章 ×2 / 计算清单 / 讨论区 / 个人信息 / 地图 / 整理中 / 登录）
     ├── stores/        Pinia 登录态
     ├── utils/         resolveAssetUrl（统一处理 /uploads 路径）、时间格式化
-    └── views/         Home / About / Pending / Forum / Calculator / Shifter / Login
+    └── views/         Home / About / Bikes / Shifter / Tuning / Articles / Article / Calculator / Forum / Profile / Map / Pending / Login
 ```
 
 ## 已知未完成

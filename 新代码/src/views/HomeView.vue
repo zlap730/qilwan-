@@ -17,8 +17,8 @@ import 人身装备图 from '@/assets/img/人身装备.webp'
  * 布局比例和截图一致，但能跟着屏宽缩放。
  */
 const 变速器入口 = [
-  { label: '前变速器', to: '/pending/变速器调试', img: 前拨图 },
-  { label: '后变速器', to: '/pending/变速器调试', img: 后变速器图 },
+  { label: '前变速器', to: '/shifters/tuning', img: 前拨图 },
+  { label: '后变速器', to: '/shifters/tuning', img: 后变速器图 },
   { label: '圈刹夹器', to: '/pending/刹车调试', img: 夹器图 },
   { label: '碟片夹器', to: '/pending/刹车调试', img: 碟刹图 }
 ]

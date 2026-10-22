@@ -1,0 +1,588 @@
+{
+  "bikes": [
+    {
+      "name": "千里达 M2.1",
+      "price": 1599,
+      "type": ["city"],
+      "needs": ["durable"],
+      "brand": "domestic",
+      "config": "高碳钢车架、单速设计、防锈链条"
+    },
+    {
+      "name": "狼途 KT028",
+      "price": 1899,
+      "type": ["city"],
+      "needs": ["comfort"],
+      "brand": "domestic",
+      "config": "加厚坐垫、前置车篮、后置货架"
+    },
+    {
+      "name": "捷安特 Escape 3",
+      "price": 2298,
+      "type": ["city", "mixed"],
+      "needs": ["comfort"],
+      "brand": "international",
+      "config": "铝合金车架、7速变速、V型刹车"
+    },
+    {
+      "name": "美利达 勇士500",
+      "price": 3499,
+      "type": ["mountain"],
+      "needs": ["durable"],
+      "brand": "international",
+      "config": "26寸轮组、机械碟刹、避震前叉"
+    },
+    {
+      "name": "喜德盛 逐日800",
+      "price": 4399,
+      "type": ["mixed", "road"],
+      "needs": ["speed"],
+      "brand": "domestic",
+      "config": "27.5寸轮组、30速变速、油压碟刹"
+    },
+    {
+      "name": "崔克 Marlin 5",
+      "price": 6899,
+      "type": ["mountain"],
+      "needs": ["speed"],
+      "brand": "international",
+      "config": "Alpha Silver铝合金车架、液压成型技术"
+    },
+    {
+      "name": "SPECIALIZED ALLEZ",
+      "price": 8599,
+      "type": ["road"],
+      "needs": ["light"],
+      "brand": "international",
+      "config": "E5铝合金车架、碳纤维前叉、仅重8.9kg"
+    },
+    {
+      "name": "迪卡侬 RIVERSIDE 900",
+      "price": 7999,
+      "type": ["mixed"],
+      "needs": ["multi"],
+      "brand": "international",
+      "config": "可扩展货架系统、全地形轮胎"
+    },
+    {
+      "name": "闪电 S-Works Tarmac",
+      "price": 56800,
+      "type": ["road"],
+      "needs": ["speed"],
+      "brand": "international",
+      "config": "全碳纤维车架、SRAM RED eTap AXS 12速"
+    },
+    {
+      "name": "大行 PDA025",
+      "price": 15980,
+      "type": ["city"],
+      "needs": ["light"],
+      "brand": "domestic",
+      "config": "超轻折叠设计、航空铝材、仅9.8kg"
+    },
+    {
+      "name": "永久 H125",
+      "price": 899,
+      "type": ["city"],
+      "needs": ["durable"],
+      "brand": "domestic",
+      "config": "高碳钢车架 28寸轮组 普通刹车系统"
+    },
+    {
+      "name": "凤凰 C200",
+      "price": 1299,
+      "type": ["city"],
+      "needs": ["comfort"],
+      "brand": "domestic",
+      "config": "弹簧减震坐垫 后置儿童座椅 防刺轮胎"
+    },
+    {
+      "name": "美利达 公爵300",
+      "price": 2799,
+      "type": ["mountain"],
+      "needs": ["durable"],
+      "brand": "international",
+      "config": "26寸轮组 机械碟刹 可锁死避震前叉"
+    },
+    {
+      "name": "UCC 布雷德1",
+      "price": 3499,
+      "type": ["road"],
+      "needs": ["speed"],
+      "brand": "international",
+      "config": "铝合金车架 16速变速系统 双层铝合金轮圈"
+    },
+    {
+      "name": "Cannondale Trail 5",
+      "price": 7899,
+      "type": ["mountain"],
+      "needs": ["speed"],
+      "brand": "international",
+      "config": "SmartForm C3铝合金 120mm行程前叉 11速传动系统"
+    },
+    {
+      "name": "瑞豹 Pardus Sport",
+      "price": 8999,
+      "type": ["road"],
+      "needs": ["light"],
+      "brand": "domestic",
+      "config": "全碳纤维车架 一体式车把 仅重7.8kg"
+    },
+    {
+      "name": "Cervelo R5 Disc",
+      "price": 45800,
+      "type": ["road"],
+      "needs": ["speed"],
+      "brand": "international",
+      "config": "碳纤维碟刹车架 SRAM Red eTap AXS 12速 功率计集成"
+    },
+    {
+      "name": "Factor OSTRO VAM",
+      "price": 126000,
+      "type": ["road"],
+      "needs": ["light"],
+      "brand": "international",
+      "config": "T700/T800碳纤维 电子变速系统 陶瓷培林轮组"
+    },
+    {
+      "name": "迪卡侬 ST520",
+      "price": 1699,
+      "type": ["city"],
+      "needs": ["multi"],
+      "brand": "international",
+      "config": "可调节把立 前后货架安装孔 挡泥板集成"
+    },
+    {
+      "name": "喜德盛 MX360",
+      "price": 4299,
+      "type": ["mixed"],
+      "needs": ["durable"],
+      "brand": "domestic",
+      "config": "液压成型铝合金车架 27.5+轮胎 兼容货架系统"
+    },
+    {
+      "name": "捷安特 ATX 860",
+      "price": 4599,
+      "type": ["mountain"],
+      "needs": ["durable"],
+      "brand": "international",
+      "config": "ALUXX铝合金车架 27.5寸轮组 Shimano Deore 10速"
+    },
+    {
+      "name": "美利达 斯特拉94",
+      "price": 6899,
+      "type": ["road"],
+      "needs": ["speed"],
+      "brand": "international",
+      "config": "轻量化铝合金车架 碳纤维前叉 16速变速系统"
+    },
+    {
+      "name": "喜德盛 RX280",
+      "price": 2899,
+      "type": ["mixed"],
+      "needs": ["multi"],
+      "brand": "domestic",
+      "config": "X6铝合金车架 可锁死避震前叉 货架安装孔"
+    },
+    {
+      "name": "大行 K3 Plus",
+      "price": 4299,
+      "type": ["city"],
+      "needs": ["light"],
+      "brand": "domestic",
+      "config": "16寸镁合金车架 3速变速 9.8kg超轻设计"
+    },
+    {
+      "name": "崔克 Domane AL 2",
+      "price": 7980,
+      "type": ["road"],
+      "needs": ["comfort"],
+      "brand": "international",
+      "config": "Alpha铝合金车架 IsoSpeed减震 28c轮胎"
+    },
+    {
+      "name": "迪卡侬 RC120",
+      "price": 3499,
+      "type": ["road"],
+      "needs": ["speed"],
+      "brand": "international",
+      "config": "6061铝合金车架 Shimano Claris 8速 双枢轴刹车"
+    },
+    {
+      "name": "千里达 V1000",
+      "price": 2399,
+      "type": ["mountain"],
+      "needs": ["durable"],
+      "brand": "domestic",
+      "config": "液压一体成型车架 27速 油压碟刹"
+    },
+    {
+      "name": "UCC 冲击波",
+      "price": 5399,
+      "type": ["road"],
+      "needs": ["light"],
+      "brand": "international",
+      "config": "T800碳纤维车架 全内走线设计 18速变速"
+    },
+    {
+      "name": "凤凰 TZ180",
+      "price": 899,
+      "type": ["city"],
+      "needs": ["comfort"],
+      "brand": "domestic",
+      "config": "28寸高碳钢车架 弹簧鞍座 全包链罩"
+    },
+    {
+      "name": "永久 F8",
+      "price": 1599,
+      "type": ["mixed"],
+      "needs": ["multi"],
+      "brand": "domestic",
+      "config": "可调节把立 前后货架孔位 防刺轮胎"
+    },
+    {
+      "name": "SPECIALIZED Rockhopper",
+      "price": 6899,
+      "type": ["mountain"],
+      "needs": ["durable"],
+      "brand": "international",
+      "config": "A1铝合金车架 100mm行程前叉 29寸轮径"
+    },
+    {
+      "name": "瑞豹 Super Sport",
+      "price": 12800,
+      "type": ["road"],
+      "needs": ["speed"],
+      "brand": "domestic",
+      "config": "全碳纤维车架 Shimano 105电变 仅7.6kg"
+    },
+    {
+      "name": "狼途 KY028",
+      "price": 2199,
+      "type": ["city"],
+      "needs": ["comfort"],
+      "brand": "domestic",
+      "config": "加宽加厚鞍座 全地形轮胎 前后挡泥板"
+    },
+    {
+      "name": "Cannondale Topstone 4",
+      "price": 8999,
+      "type": ["mixed"],
+      "needs": ["multi"],
+      "brand": "international",
+      "config": "SmartForm C2铝合金 40c轮胎 货架安装孔"
+    },
+    {
+      "name": "JAVA Fuoco",
+      "price": 6799,
+      "type": ["road"],
+      "needs": ["light"],
+      "brand": "domestic",
+      "config": "碳纤维前叉 隐藏式座管夹 破风车架设计"
+    },
+    {
+      "name": "迪卡侬 Riverside 500",
+      "price": 2499,
+      "type": ["mixed"],
+      "needs": ["comfort"],
+      "brand": "international",
+      "config": "可调角度把立 人体工学鞍座 7速变速系统"
+    },
+    {
+      "name": "喜德盛 英雄600",
+      "price": 3699,
+      "type": ["mountain"],
+      "needs": ["durable"],
+      "brand": "domestic",
+      "config": "X7铝合金车架 27.5寸轮组 油压碟刹"
+    },
+    {
+      "name": "美利达 挑战者300",
+      "price": 5199,
+      "type": ["mountain"],
+      "needs": ["speed"],
+      "brand": "international",
+      "config": "HFS液压成型技术 120mm行程前叉 12速传动"
+    },
+    {
+      "name": "大行 D8",
+      "price": 3298,
+      "type": ["city"],
+      "needs": ["light"],
+      "brand": "domestic",
+      "config": "马甲线技术 8速变速 11.6kg折叠车"
+    },
+    {
+      "name": "崔克 Verve 2",
+      "price": 5699,
+      "type": ["city"],
+      "needs": ["comfort"],
+      "brand": "international",
+      "config": "Alpha Gold铝合金 人体工学握把 避震座管"
+    },
+    {
+      "name": "永久 飞鸽系列",
+      "price": 799,
+      "type": ["city"],
+      "needs": ["durable"],
+      "brand": "domestic",
+      "config": "28寸加重车架 全链罩设计 载重后货架"
+    },
+    {
+      "name": "捷安特 Liv Alight 2",
+      "price": 2599,
+      "type": ["city"],
+      "needs": ["comfort"],
+      "brand": "international",
+      "config": "女性几何车架 低跨点设计 7速变速系统"
+    },
+    {
+      "name": "千里达 征服者",
+      "price": 6899,
+      "type": ["mountain"],
+      "needs": ["speed"],
+      "brand": "domestic",
+      "config": "碳纤维车架 Fox 34前叉 SRAM GX 12速"
+    },
+    {
+      "name": "SPECIALIZED Turbo Vado",
+      "price": 32800,
+      "type": ["city"],
+      "needs": ["multi"],
+      "brand": "international",
+      "config": "电动助力系统 90km续航 集成式前灯"
+    },
+    {
+      "name": "瑞豹 Robin Sport",
+      "price": 8999,
+      "type": ["road"],
+      "needs": ["light"],
+      "brand": "domestic",
+      "config": "T800碳纤维 全内走线设计 18速机械变速"
+    },
+    {
+      "name": "迪卡侬 BTwin 500",
+      "price": 1499,
+      "type": ["city"],
+      "needs": ["comfort"],
+      "brand": "international",
+      "config": "可调式车把 加宽轮胎 折叠脚踏设计"
+    },
+    {
+      "name": "UCC 德曼特3",
+      "price": 4399,
+      "type": ["mountain"],
+      "needs": ["durable"],
+      "brand": "international",
+      "config": "6061铝合金 油压碟刹 27.5+轮胎"
+    },
+    {
+      "name": "狼途 LT700",
+      "price": 2899,
+      "type": ["mixed"],
+      "needs": ["multi"],
+      "brand": "domestic",
+      "config": "可兼容儿童座椅 前后货架孔位 防锈链条"
+    },
+    {
+      "name": "JAVA Siluro",
+      "price": 14999,
+      "type": ["road"],
+      "needs": ["speed"],
+      "brand": "domestic",
+      "config": "全碳纤维气动架 电子变速系统 50mm高框轮组"
+    },
+    {
+      "name": "Cannondale Quick 6",
+      "price": 3699,
+      "type": ["city"],
+      "needs": ["comfort"],
+      "brand": "international",
+      "config": "SmartForm C3铝合金 直立骑行姿势 挡泥板预装"
+    },
+    {
+      "name": "凤凰 26寸山地车",
+      "price": 699,
+      "type": ["mountain"],
+      "needs": ["durable"],
+      "brand": "domestic",
+      "config": "高碳钢车架 21速变速 双碟刹系统"
+    },
+    {
+      "name": "喜德盛 传奇500",
+      "price": 5399,
+      "type": ["mountain"],
+      "needs": ["speed"],
+      "brand": "domestic",
+      "config": "X6铝合金 12速变速 RockShox前叉"
+    },
+    {
+      "name": "崔克 Powerfly 4",
+      "price": 45800,
+      "type": ["mountain"],
+      "needs": ["multi"],
+      "brand": "international",
+      "config": "电助力山地车 625Wh电池 Bosch Performance电机"
+    },
+    {
+      "name": "美利达 探索者100",
+      "price": 2599,
+      "type": ["mixed"],
+      "needs": ["comfort"],
+      "brand": "international",
+      "config": "平把公路设计 700x35c轮胎 轻量化铝合金"
+    },
+    {
+      "name": "捷安特 FastRoad SL2",
+      "price": 4299,
+      "type": ["road"],
+      "needs": ["speed"],
+      "brand": "international",
+      "config": "D型座管设计 Shimano Sora 9速 28c轮胎"
+    },
+    {
+      "name": "大行 P8",
+      "price": 3699,
+      "type": ["city"],
+      "needs": ["light"],
+      "brand": "domestic",
+      "config": "铬钼钢车架 8速变速 打气筒座管"
+    },
+    {
+      "name": "迪卡侬 EL900",
+      "price": 8999,
+      "type": ["road"],
+      "needs": ["speed"],
+      "brand": "international",
+      "config": "碳纤维车架 Shimano 105套件 液压碟刹"
+    },
+    {
+      "name": "千里达 M720",
+      "price": 2199,
+      "type": ["mountain"],
+      "needs": ["durable"],
+      "brand": "domestic",
+      "config": "27.5寸轮组 液压碟刹 可锁死避震前叉"
+    },
+    {
+      "name": "SPECIALIZED Sirrus X 3.0",
+      "price": 6599,
+      "type": ["mixed"],
+      "needs": ["comfort"],
+      "brand": "international",
+      "config": "Body Geometry坐垫 轻量化铝合金 9速变速"
+    },
+    {
+      "name": "瑞豹 知更鸟",
+      "price": 7899,
+      "type": ["road"],
+      "needs": ["light"],
+      "brand": "domestic",
+      "config": "全碳纤维车架 一体式车把 仅7.2kg"
+    },
+    {
+      "name": "UCC 山脊",
+      "price": 3299,
+      "type": ["mountain"],
+      "needs": ["durable"],
+      "brand": "international",
+      "config": "6061铝合金车架 27速 Shimano Altus变速"
+    },
+    {
+      "name": "永久 26寸折叠车",
+      "price": 899,
+      "type": ["city"],
+      "needs": ["multi"],
+      "brand": "domestic",
+      "config": "高碳钢车架 单速设计 折叠尺寸80x60x30cm"
+    },
+    {
+      "name": "狼途 KT600",
+      "price": 1999,
+      "type": ["city"],
+      "needs": ["comfort"],
+      "brand": "domestic",
+      "config": "加长挡泥板 后置儿童座椅 车篮快拆系统"
+    },
+    {
+      "name": "JAVA 终结者",
+      "price": 6899,
+      "type": ["road"],
+      "needs": ["speed"],
+      "brand": "domestic",
+      "config": "碳纤维前叉 空气动力学车架 22速变速"
+    },
+    {
+      "name": "Cannondale Synapse",
+      "price": 12999,
+      "type": ["road"],
+      "needs": ["comfort"],
+      "brand": "international",
+      "config": "SmartForm C1铝合金 SAVE减震技术 32c轮胎"
+    },
+    {
+      "name": "喜德盛 黑客800",
+      "price": 2799,
+      "type": ["mountain"],
+      "needs": ["durable"],
+      "brand": "domestic",
+      "config": "X6铝合金 27.5寸轮组 油压碟刹"
+    },
+    {
+      "name": "崔克 Checkpoint ALR 4",
+      "price": 13999,
+      "type": ["mixed"],
+      "needs": ["multi"],
+      "brand": "international",
+      "config": "铝合金砾石公路车 IsoSpeed技术 货架安装孔"
+    },
+    {
+      "name": "捷安特 Revolt F1",
+      "price": 7899,
+      "type": ["mixed"],
+      "needs": ["comfort"],
+      "brand": "international",
+      "config": "D-Fuse座管 12mm筒轴 38c真空胎"
+    },
+    {
+      "name": "迪卡侬 Triban RC500",
+      "price": 3499,
+      "type": ["road"],
+      "needs": ["speed"],
+      "brand": "international",
+      "config": "6061铝合金 微转变速系统 28mm轮胎"
+    },
+    {
+      "name": "大行 NDA083",
+      "price": 6899,
+      "type": ["city"],
+      "needs": ["light"],
+      "brand": "domestic",
+      "config": "航空铝材车架 内变速花鼓 磁吸折叠装置"
+    },
+    {
+      "name": "凤凰 城市巡航者",
+      "price": 1099,
+      "type": ["city"],
+      "needs": ["comfort"],
+      "brand": "domestic",
+      "config": "加宽加厚鞍座 全包式链罩 前后反光片"
+    },
+    {
+      "name": "瑞豹 火烈鸟",
+      "price": 23800,
+      "type": ["road"],
+      "needs": ["speed"],
+      "brand": "domestic",
+      "config": "T1100碳纤维 Dura-Ace电变 陶瓷培林轮组"
+    },
+    {
+      "name": "UCC 竞争者",
+      "price": 8999,
+      "type": ["mountain"],
+      "needs": ["durable"],
+      "brand": "international",
+      "config": "碳纤维车架 RockShox Recon前叉 12速传动"
+    }
+  ]
+}

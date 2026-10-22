@@ -118,31 +118,67 @@ git tag -a v0.2.0 -m "补完个人信息和个人空间"
 
 ---
 
-## 4. 备份到 GitHub / Gitee（建议尽早做）
+## 4. 推送到 GitHub（已配置好）
 
-现在代码只在这台电脑上，硬盘一坏就全没了。**推送到远程是最重要的一步。**
+远程仓库已经配好了：
 
-### 4.1 先在网站上建一个空仓库
+```
+origin  https://github.com/zlap730/qilwan-.git
+```
 
-- GitHub：右上角 `+` → `New repository` → 名字随便（如 `qile-web`）→ **不要**勾选 “Add a README” / “Add .gitignore”（本地已经有了）→ Create
-- 或者用国内更快、无需翻墙的 Gitee（码云），操作一样
-
-### 4.2 把本地仓库连上去（两种方式任选一种）
-
-**方式 A：HTTPS（简单，但要输密码/令牌）**
+因为这台电脑访问 GitHub 需要代理（Clash 开在 `127.0.0.1:7890`），已经在本仓库里配了：
 
 ```bash
-git remote add origin https://github.com/你的用户名/骑乐网.git
+git config --local http.proxy http://127.0.0.1:7890
+git config --local https.proxy http://127.0.0.1:7890
+```
+
+> 注意：这是**只对本仓库生效**的配置，不动全局设置。用代理软件时记得让 Clash 保持开启。
+
+### 第一次推送（需要登录一次 GitHub）
+
+双击 **`推送到GitHub.cmd`**，会弹出一个登录窗口：
+
+1. 选 `Sign in with your browser`（用浏览器登录）；
+2. 浏览器里登录你的 `zlap730` 账号，点 `Authorize`；
+3. 窗口关闭后会自动推送，看到 `[成功]` 即可。
+
+也可以直接敲命令（弹窗是一样的）：
+
+```bash
 git push -u origin main --tags
 ```
 
-**方式 B：桌面版客户端（推荐给第一次用的人）**
+> 登录凭据会被 Windows 凭据管理器记住，**以后推送不用再登录**。
+> 如果提示要密码：GitHub 现在不接受账号密码，需要用 Personal Access Token
+> （网站 Settings → Developer settings → Personal access tokens → Generate new token，勾选 `repo`），把令牌当密码粘贴。
 
-装一个 **GitHub Desktop** 或 **Sourcetree**，登录账号后选 “Add existing repository”，选中 `C:\Users\19168\Desktop\骑乐网v0.0.1`，
-之后点 “Publish repository” 就能推上去，界面里点按钮就能提交/推送，不需要记命令。
+### 以后每次同步只需要两行
 
-> 推送时如果提示要密码，GitHub 现在要求用 **Personal Access Token** 代替密码（网站 Settings → Developer settings → Personal access tokens 生成）；
-> Gitee 直接输账号密码即可。
+```bash
+git push            # 把本地提交推到 GitHub
+git pull            # 把 GitHub 上的新提交拉到本地（换电脑时用）
+```
+
+---
+
+## 4.5 用 Gitee（码云）备份的话
+
+国内访问 Gitee 不需要代理，速度也快，可以同时配一个远程仓库做双备份：
+
+```bash
+git remote add gitee https://gitee.com/你的用户名/仓库名.git
+git push gitee main --tags
+```
+
+之后 `git push origin main` 推 GitHub，`git push gitee main` 推 Gitee；想一次推两边可以 `git push origin main && git push gitee main`。
+
+<!-- 以下是另一种协作方式，留作参考 -->
+
+### 4.6 用桌面版客户端（可选，图形界面点按钮）
+
+装一个 **GitHub Desktop**，登录账号后选 “Add existing repository”，选中 `C:\Users\19168\Desktop\骑乐网v0.0.1`，
+之后提交、推送都点按钮即可，不需要记命令。
 
 ### 4.3 之后每次同步
 

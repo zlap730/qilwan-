@@ -167,54 +167,75 @@ onBeforeUnmount(() => document.removeEventListener('click', onDocumentClick))
 }
 
 /* ============================================================
-   PC 自适应（1280 ~ 2560 全宽通用）
-   原样式：7 个菜单项各写死 100px、整体从左侧 40px 开始，
-   在 2560 屏上会挤在左边、和右侧 logo 之间留一大片空白。
-   现在改成：flex 均分 + 居中，两侧留出 logo 和登录区的位置。
+   PC 自适应（1024 ~ 2560 全宽通用）
+   原样式：7 个菜单项各写死 100px、整体从左侧 40px 开始。
+   现在：菜单整组仍靠左排（左对齐，不居中），每项宽度跟着文字走，
+   间隙用 clamp 随屏宽微调，右侧给 logo 和登录区留出固定位置。
    ============================================================ */
 #nav_1 {
   display: flex;
   align-items: center;
-  padding: 0 clamp(16px, 2vw, 40px);
+  justify-content: flex-start;
+  padding: 0 clamp(16px, 2vw, 32px);
   box-sizing: border-box;
 }
 
 #ul_nav {
   flex: 0 1 auto;
   display: flex;
-  justify-content: center;
-  gap: clamp(2px, 0.5vw, 14px);
-  /* 菜单整体居中，宽度自适应：始终给右侧 logo(100px) + 登录区(130px) 留出位置 */
-  width: min(calc(100% - 320px), 980px);
-  margin: 0 auto;
+  justify-content: flex-start;
+  gap: clamp(4px, 0.7vw, 18px);
+  /* 靠左排，不再用 margin:auto 居中；给自己留出右侧 logo(100px)+登录区(130px) 的空间 */
+  width: auto;
+  max-width: calc(100% - 300px);
+  margin: 0;
   padding: 0;
   left: 0;
 }
 
 #ul_nav li {
-  flex: 1 1 0;
-  min-width: 0;
+  flex: 0 1 auto;
   width: auto;
+  min-width: 0;
   left: 0;
+  text-align: left;
 }
 
+/* 文字左对齐，链接宽度跟着文字走（下划线也只压在文字下面） */
 #ul_nav li a,
-#ul_nav li a:link {
-  width: 100%;
+#ul_nav li a:link,
+.nav-todo {
+  width: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: left;
+  white-space: nowrap;
 }
 
 /* 1280~1440 之间字号收一点，7 个菜单不会挤在一起 */
 @media (max-width: 1440px) {
+  #ul_nav {
+    gap: 10px;
+  }
+
   #ul_nav li a,
   .nav-todo {
     font-size: 17px;
+    padding-left: 8px;
+    padding-right: 8px;
   }
 }
 
 @media (max-width: 1280px) {
+  #ul_nav {
+    gap: 6px;
+  }
+
   #ul_nav li a,
   .nav-todo {
     font-size: 15.5px;
+    padding-left: 6px;
+    padding-right: 6px;
   }
 }
 </style>

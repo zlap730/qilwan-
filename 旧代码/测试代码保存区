@@ -1,0 +1,676 @@
+        <!-- 轮播图 -->
+        <div class="s" id="top_s">
+            <div class="a">
+                <img src="img/图个好看.png" alt="" loading="lazy">
+                <!-- <img src="img/屏幕截图 2024-05-12 163404.png" alt=""> -->
+                <img src="img/装备1.png" alt="" loading="lazy">
+                <img src="img/轮播图1.jpg" alt="" loading="lazy">
+                <img src="img/00.jpg" alt="" loading="lazy">
+            </div>
+        </div>
+
+            
+
+        <div id="电梯导航">
+
+            <ul>
+                <!-- 待填写 -->
+                <a href="" id="hov_a1">
+                    <div>
+                        <h3 id="nav_div_h3">关于我们</h3>
+                    </div>
+                </a>
+                <!-- 待填写 -->
+                <a href="" id="hov_a1">
+                    <div>
+                        <h3 id="nav_div_h3">新闻</h3>
+                    </div>
+                </a>
+                <a href="HTML/论坛.html" id="hov_a1">
+                    <div>
+                        <h3 id="nav_div_h3">讨论区</h3>
+                    </div>
+                </a>
+                <!-- 待填写 -->
+                <a href="" id="hov_a1">
+                    <div>
+                        <h3 id="nav_div_h3">车店地址</h3>
+                    </div>
+                </a>
+            </ul>
+        </div>
+
+        <!-- 登录窗口 -->
+        <div id="loginContainer"></div>
+
+        <!-- <div class="element div-border donghua" style="right: 70px;" >
+            <div class="div2 div-text-border div-text">骑乐网是提供给广大骑友的小工具网站，内包含对各个品牌的介绍，骑行知识和论坛。骑行是我们生活的一部分，是热爱生活的过程。</div>
+            <div class="float">
+                <p class="div-in-text" style="text-shadow: 3px 3px 3px rgba(255, 255, 0, 0.514);">关于我们</p>
+            </div>
+        </div> -->
+
+        <h3 id="h3-text">不同种类的运动</h3>
+        <hr color="black" width="1080" size="3" >
+
+       <!--自行车种类-->
+        <section id="naver">
+            
+                    <script src="JS文件/div盒子动画.js"></script>
+                    <div class="div-img2  hov" id="hov">
+                        <a href="公路车.html" style="color: black;" onmouseover="hov(this)" onmouseout="lika(this)" >
+                        <img src="img/公路车.jpg" alt="无法加载..." loading="lazy" width="400" height="300" class="img-border-radius">
+                        
+                            <p class="strong-p">公路车<br>Road Bike</p>
+                        </a>
+                    </div>
+                    
+                    <div class="div-img2" id="hov">
+                        <a href="" style="color: black;" onmouseover="hov(this)" onmouseout="lika(this)">
+                        <img src="img/瓜车图片.png" loading="lazy" alt="无法加载..." width="400" height="300" class="img-border-radius">
+                        
+                            <p class="strong-p">砾石公路车<br>Gravel</p>
+                        </a>
+                    </div>
+            
+                
+                    <div class="div-img2" id="hov">
+<!-- 此处需要重新写页面--><a href="" style="color: black;" onmouseover="hov(this)" onmouseout="lika(this)"> 
+                    <img loading="lazy" src="img/屏幕截图 2024-05-09 123227.png" alt="无法加载..." width="400" height="300" class="img-border-radius">
+                    
+                        <p class="strong-p">山地车<br>Mountain Bike</p>
+                    </a>
+                    </div>
+
+                    <div class="div-img2" id="hov">
+                        <a href="" style="color: black;" onmouseover="hov(this)" onmouseout="lika(this)">
+                        <img src="img/HD.png" alt="无法加载..." width="400" height="300" class="img-border-radius">
+                        
+                            <p class="strong-p">速降山地车<br>Downhill Mountain Bike</p>
+                        </a>
+                    </div>
+
+                    
+                
+            
+        </section>
+        <hr color="black" size="3" width="1080" id="get_in"> 
+       
+       
+
+
+        <!-- 网站的开发初心 -->
+        <section>
+            <div id="section2-div1">
+                <div style="float: left; height: 162px; display: inline;width: 850px;" class="fade-in-right">
+                    <p id="section2-p" class="donghua">
+                            <span style="font-size: 30px;font-weight:900;font-family: '微软雅黑';">一、网站功能：</span><br>
+
+    骑行知识的宣传和讲解
+
+    这里汇聚了丰富的自行车骑行知识和维修技巧，无论是新手入门还是经验丰富的骑行者希望都能在这找到有用的信息。<span style="text-decoration:underline;">从骑行安全（如正确佩戴头盔、遵守交通规则）到长途骑行的规划（包括路线选择、补给点设置）</span>，我们都会涉及讲解
+    提供常见类型自行车骑行的技巧视频和相关UP的视频推荐，如爬坡技巧、控车练习、在不同路况下的骑行姿势等。<br><br>
+    
+    <span style="font-size: 30px;font-weight:900;font-family: '微软雅黑';">二、关于网站：</span><br>
+
+我的梦想是致力于打造一个<span id="span_p">纯公益性质</span>的自行车知识共享网站。我的目标是通过传播骑行知识和维修装配等技能和知识，让更多的人了解自行车运动带来的乐趣。自行车作为一种小众的运动方式，我希望能够让越来越多的人能够知道自行车文化的发展。
+                    </p>
+                    
+                </div>
+                <div style="float: right;" class="fade-in-left">
+                    <video src="video/动态视频.mp4" autoplay loop muted="true" id="video1"></video>
+                </div>
+            </div>
+        </section >
+        <script>
+            // 添加淡入效果的 IntersectionObserver
+            const fadeInElements = document.querySelectorAll('.fade-in-right, .fade-in-left');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // 取消观察，避免重复触发
+                    }
+                });
+            });
+
+            fadeInElements.forEach((el) => observer.observe(el));
+        </script>
+        <style>
+            .fade-in-right {
+                opacity: 0;
+                transform: translateX(-50px);
+                transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            }
+
+            .fade-in-left {
+                opacity: 0;
+                transform: translateX(50px);
+                transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            }
+
+            .visible {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        </style>
+        
+
+
+<!-- 网站声明 -->
+        <section>
+            <div id="section3-div">
+                <img src="img/关于网站.jpg" alt="无法加载..." id="img2">
+                <div>
+                    <p id="section2-p-text">
+                        <span style="font-size: 35px;">关于我们与网站：</span><br>
+                        本网站所提供的所有信息仅供学习和参考目的，应自行判断并承担使用这些信息所带来的风险。<br>
+                        本网站不对因使用网站上的信息而造成的任何直接或间接损失负责，包括但不限于人身伤害、财产损失等。<br>
+                        尽管我们尽力确保信息的准确性和完整性，但由于知识的不断更新和实际情况的多样性，信息可能存在误差，<br>若有问题可以联系邮箱告知修改以及意见。
+                        如果涉及到版权侵权问题，请联系我们，我们会尽快处理。<br>
+                    </p>
+                </div>
+            </div>
+        </section>
+        <script>
+            // 获取所有需要添加动画的小盒子元素，这里通过选择section下的所有直接子div来获取（你可以根据实际更精准的选择器来调整）
+const section = document.querySelectorAll('#section3-div'); 
+
+// 创建IntersectionObserver实例来观察元素是否进入视口
+const observer1 = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            // 当元素进入视口时，给对应的小盒子添加淡入动画类
+            entry.target.classList.add('fade-in');
+            // 取消对该元素的观察（避免重复触发等情况，可选操作）
+            observer1.unobserve(entry.target); 
+        }
+    });
+});
+
+// 对每个获取到的小盒子元素开始观察
+section.forEach((box) => {
+    observer1.observe(box);
+});
+        </script>
+     
+
+        <!--新手向导篇-->
+        <section style="background-image: linear-gradient(0deg,aliceblue 20%,bisque 100%);padding: 10px; width: auto;height: 1500px;position: relative;top: 30px;border-radius: 20px;opacity: 0.95;"id='入门向导'>
+            
+            <div style="margin-bottom:150px;">
+                <p class="p3">入门向导</p>
+                
+            </div>
+            
+
+            <div id="div4">
+                
+                <a href="HTML/运动简介.html">
+                    <img src="img/sram_gx_web_waterfall_this_is_web.webp" id="image1" loading="lazy">
+                </a>
+                  <div class="p5"> <h1>运动简介</h1></div>
+                  
+                 
+                <a href="HTML/技巧篇.html">
+                    <img src="img/屏幕截图 1.png" alt="" id="image2" loading="lazy">
+                   
+                </a>
+                     <div class="p5_2"><h1 style="margin-left: 70px;">骑行技巧</h1></div>
+                    
+                <a href="装备介绍和骑行知识/骑行知识.html">
+                    <img src="img/屏幕截图2.png" alt="" id="image3" loading="lazy">
+             
+                </a>
+                    <div class="p5_3"><h1 style="margin-right: 50px;">安全知识</h1></div>
+                    
+            </div>    
+            <!-- ====================================================================================== -->
+           
+           
+            <h2 id="h2_xs">相关自行车品牌</h2>
+            
+            <script src="JS文件/首页动态设计.js"></script>
+            
+            <div id="pp">
+                <form>
+                    <input type="button" value="国内品牌" class="but" onclick="showDiv('zp')">
+                    <input type="button" value="国外品牌" class="but" onclick="showDiv('zp2')">
+                </form>
+                <div id="zp" class="zp"><!--国内品牌推荐的表格-->
+                    <h3 id="h3_pp">国内品牌</h3>
+                    <table border="1" id="table_set1">
+                        <tr>
+                            <th>品牌</th>
+                            <th>总部</th>
+                            <th>产品定位</th>
+                            <th>购买方式</th>
+                            <th>直连链接</th>
+                        </tr>
+                        <tr>
+                            <td>喜德盛 xds</td>
+                            <td>深圳</td>
+                            <td>中高低端</td>
+                            <td>京东 淘宝 拼多多 线下门店</td>
+                            <td><a href="https://www.xidesheng.com/">https://www.xidesheng.com/</a></td>
+                        </tr>
+                        <tr>
+                            <td>捷安特 Gante</td>
+                            <td>台湾/昆山</td>
+                            <td>中高低端</td>
+                            <td>京东 淘宝 线下店</td>
+                            <td><a href="https://www.giant.com.cn/">https://www.giant.com.cn/</a></td>
+                        </tr>
+                        <tr>
+                            <td>美利达 MERIDA</td>
+                            <td>台湾/深圳</td>
+                            <td>中高端</td>
+                            <td>京东 淘宝 线下店</td>
+                            <td><a href="https://www.merida.cn/">https://www.merida.cn/</a></td>
+                        </tr>
+                        <tr>
+                            <td>坎普 CAMP</td>
+                            <td>深圳</td>
+                            <td>中高低端</td>
+                            <td>京东 淘宝 拼多多 线下经销商</td>
+                            <td><a href="https://www.campbicycle.com/">https://www.campbicycle.com/</a></td>
+                        </tr>
+                        <tr>
+                            <td>瑞豹 PARDUS</td>
+                            <td>德州</td>
+                            <td>中高低端</td>
+                            <td>京东 淘宝 线下经销商</td>
+                            <td><a href="https://parduscycle.com/">https://parduscycle.com/</a></td>
+                        </tr>
+                        <tr>
+                            <td>速比特 SUNPEED</td>
+                            <td>深圳</td>
+                            <td>中高低端</td>
+                            <td>淘宝 拼多多 线下经销商</td>
+                            <td><a href="https://www.sunpeed.com/zh/about-us.html">https://www.sunpeed.com/zh/about-us.html</a></td>
+                        </tr>
+                        <tr>
+                            <td>UCC</td>
+                            <td>广州</td>
+                            <td>中高端</td>
+                            <td>京东 淘宝 线下门店</td>
+                            <td><a href="https://www.uccbikes.com/#/">https://www.uccbikes.com/#/</a></td>
+                        </tr>
+                        <tr>
+                            <td>骓特 TWITTER</td>
+                            <td>佛山</td>
+                            <td>中端</td>
+                            <td>淘宝 拼多多</td>
+                            <td><a href="http://www.twitter-bikes.com/twabout.html">http://www.twitter-bikes.com/twabout.html</a></td>
+                        </tr>
+                        <tr>
+                            <td>佳沃 JAVA</td>
+                            <td>深圳</td>
+                            <td>中低端</td>
+                            <td>京东 淘宝 线下店</td>
+                            <td><a href="https://www.javabikes.com/Products.html">https://www.javabikes.com/Products.html</a></td>
+                        </tr>
+                        <tr>
+                            <td>萨瓦 SAVA</td>
+                            <td>深圳</td>
+                            <td>中低端</td>
+                            <td>京东 淘宝 拼多多</td>
+                            <td><a href="http://savaebike.net/about">http://savaebike.net/about</a></td>
+                        </tr>
+                        <tr>
+                            <td>中国龙 ZGL</td>
+                            <td>深圳</td>
+                            <td>中高端(车架)</td>
+                            <td>京东 淘宝</td>
+                            <td><a href="http://zglsyfc.com/">http://zglsyfc.com/</a></td>
+                        </tr>
+                        <tr>
+                            <td>千里达</td>
+                            <td>广州</td>
+                            <td>中端</td>
+                            <td>京东 淘宝 拼多多</td>
+                            <td><a href="http://trinx.cn/">http://trinx.cn/</a></td>
+                        </tr>
+                        <tr>
+                            <td>银贝斯</td>
+                            <td>厦门</td>
+                            <td>中高端</td>
+                            <td>京东 淘宝 线下门店</td>
+                            <td><a href="https://winspace-bikes.com/about-us">https://winspace-bikes.com/about-us</a></td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="zp1" class="zp">
+                    <h3 id="h3_pp">国外车厂</h3>
+                    <table border="1" align="center" id="table_set">
+                        <tr>
+                            <th>品牌</th>
+                            <th>总部</th>
+                            <th>产品定位</th>
+                            <th>购买方式</th>
+                            <th>直连链接</th>
+                        </tr>
+                        <tr>
+                            <td>崔克 TREK</td>
+                            <td><span id="span_US">美国</span></td>
+                            <td>中高端</td>
+                            <td>京东 淘宝 线下店</td>
+                            <td><a href="https://www.trekbikes.com/cn/zh_CN/">https://www.trekbikes.com/cn/zh_CN/</a></td>
+                        </tr>
+                        <tr>
+                            <td>闪电 Specialized</td>
+                            <td><span id="span_US">美国</span></td>
+                            <td>高端</td>
+                            <td>京东 淘宝 线下店</td>
+                            <td><a href="https://www.specialized.com.cn/cn/zh">https://www.specialized.com.cn/cn/zh</a></td>
+                        </tr>
+                        <tr>
+                            <td>佳能戴尔 Cannondale</td>
+                            <td><span id="span_US">美国</span></td>
+                            <td>高端</td>
+                            <td>京东 线下经销商 海外进口</td>
+                            <td><a href="https://www.cannondale.com/en-us">https://www.cannondale.com/en-us</a></td>
+                        </tr>
+                        <tr>
+                            <td>迪卡侬 BTWIN</td>
+                            <td><span id="span_F">法国</span></td>
+                            <td>中高低端</td>
+                            <td>京东 淘宝 线下门店</td>
+                            <td><a href="https://www.decathlon.com.cn/product-list?category_id=644a1c540c5c730001d1e01c">https://www.decathlon.com.cn/</a></td>
+                        </tr>
+                        <tr>
+                            <td>Lapierre</td>
+                            <td><span id="span_F">法国</span></td>
+                            <td>中高端</td>
+                            <td>线下经销商 海外进口</td>
+                            <td><a href="https://www.lapierrebikes.com/">https://www.lapierrebikes.com/</a></td>
+                        </tr>
+                        <tr>
+                            <td>BMC</td>
+                            <td><span id="span_R">瑞士</span></td>
+                            <td>中高端</td>
+                            <td>京东 线下经销商 海外进口</td>
+                            <td><a href="https://ca.bmc-switzerland.com/">https://ca.bmc-switzerland.com/(要梯子)</a></td>
+                        </tr>
+                        <tr>
+                            <td>Cervelo</td>
+                            <td><span id="span_C">加拿大</span></td>
+                            <td>中高端</td>
+                            <td>线下经销商 海外进口</td>
+                            <td><a href="https://www.cervelo.com/en-US">https://www.cervelo.com/en-US</a></td>
+                        </tr>
+                        <tr>
+                            <td>CANYON</td>
+                            <td><span id="span_G">德国</span></td>
+                            <td>中高端</td>
+                            <td>线下店</td>
+                            <td><a href="https://www.canyon.com.cn/zh-cn/">https://www.canyon.com.cn/zh-cn/</a></td>
+                        </tr>
+                        <tr>
+                            <td>比安奇 Bianchi</td>
+                            <td><span id="span_Y">意大利</span></td>
+                            <td>高端</td>
+                            <td>京东 淘宝 线下经销商</td>
+                            <td><a href="https://www.bianchi.com/">https://www.bianchi.com/</a></td>
+                        </tr>
+                        <tr>
+                            <td>皮娜 Pinarello</td>
+                            <td><span id="span_Y">意大利</span></td>
+                            <td>高端</td>
+                            <td>线下门店</td>
+                            <td><a href="https://pinarello.com/global/en">https://pinarello.com/global/en</a></td>
+                        </tr>
+                        <tr>
+                            <td>梅花 Colnago</td>
+                            <td><span id="span_Y">意大利</span></td>
+                            <td>高端</td>
+                            <td>线下门店 京东</td>
+                            <td><a href="https://www.colnago.com/en">https://www.colnago.com/en(要梯子)</a></td>
+                        </tr>
+                        <tr>
+                            <td>斯科特 Scott</td>
+                            <td><span id="span_R">瑞士</span></td>
+                            <td>高端</td>
+                            <td>线下经销商 海外进口</td>
+                            <td><a href="https://www.scott-sports.com/global/en/">https://www.scott-sports.com/global/en/</a></td>
+                        </tr>
+                        <tr>
+                            <td>酷拜 CUBE</td>
+                            <td><span id="span_G">德国</span></td>
+                            <td>中高端</td>
+                            <td>线下经销商 海外进口</td>
+                            <td><a href="https://www.cube.eu/en/">https://www.cube.eu/en/</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ========================================================== -->
+        
+        <section style="background-image: linear-gradient(180deg,aliceblue 20%,bisque 100%);padding: 10px; width: auto;height: 860px;position: relative;opacity: 0.95;" id="section-4">
+                <h1 style="text-align: center;position: relative;top: -30px;font-size: xx-large;font-family: '幼圆';font-weight:bolder;" id="工具篇">自己组装/保养/维修爱车</h1>
+                
+            <div id="section4">
+                <!-- 调试篇 -->
+                <div id="section4-div1">
+                    <h4 style="writing-mode: tb-rl;letter-spacing: 0.2em;font-family: '幼圆';font-size: 30px;position: absolute;top: 20px;left: 20px;">变速器|刹车|调试</h4>
+                    <div id="前拨">
+                        <a href="HTML/变速器调试.html"> 
+                            <img src="img/前拨.png" alt="无法显示" style="float: left;">
+                            <p style="text-align: center;font-size: 22px;margin: 0px;font-family: '幼圆';font-weight: 900;writing-mode: tb-rl;letter-spacing: 0.4em;float: right;position: relative;top: 5px;">前变速器</p>
+                        </a>
+                    </div>
+                    <div id="后变速器">
+                        <a href="HTML/变速器调试.html">
+                            <img src="img/后变速器.png" alt="无法显示">
+                            <p style="text-align: center;font-size: 22px;margin: 0px;font-family: '幼圆';font-weight: 900;writing-mode: tb-rl;letter-spacing: 0.4em;float: right;position: relative;top: 5px;">后变速器</p>
+                        </a>
+                    </div>
+                    <div id="圈刹">
+                        <a href="HTML/刹车.html">
+                            <img src="img/夹器.jpg" alt="无法显示">
+                            <p style="text-align: center;font-size: 22px;margin: 0px;font-family: '幼圆';font-weight: 900;writing-mode: tb-rl;letter-spacing: 0.4em;float: right;position: relative;top: 5px;">圈刹夹器</p>
+                        </a>
+                    </div>
+                    <div id="碟刹">
+                        <a href="HTML/刹车.html">
+                            <img src="img/碟刹.png" alt="无法显示">
+                            <p style="text-align: center;font-size: 22px;margin: 0px;font-family: '幼圆';font-weight: 900;writing-mode: tb-rl;letter-spacing: 0.4em;float: right;position: relative;top: 5px;">碟片夹器</p>
+                        </a>
+                    </div>
+                </div>
+                
+                
+                <!-- 保养篇 -->
+                <div id="section4-div2">
+                    <div>
+                        <a href="">
+                            <h3 style="text-align: center;font-family: '幼圆';font-size: 29px;margin-top: 45px;">车辆保养</h3>
+                            <img src="img/保养.png" alt="无法显示" id="保养">
+                        </a>
+                    </div>
+                </div>
+
+
+                <!-- 工具导航页面 -->
+                <div id="section4-div3">
+                    <div style="width: 270px;position: relative;top: 15px;margin: auto;">
+
+                        <a href="HTML/维修工具.html">
+                            <h3 style="text-align: center;font-family: '幼圆';font-size: 29px;">维修工具</h3>
+                            <img src="img/工具.png" alt="无法显示" id="工具img">
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 装车教程 -->
+                <div id="section4-div4">
+                    <div style="height: 330px;">
+                        <p style="position: absolute;font-size: 19px;margin: 0;line-height: 30px;font-family: '幼圆';top: 20px;left: 230px;text-align: center;font-weight: 800;">
+                            你是否有过想要自己组装一台充满<br><span style="color: rgb(248, 11, 177);">个</span><span style="color: chocolate;">性</span><span style="color: gold;">化</span>的自行车，那么你可以看看这个
+                        </p>
+                        
+                        <a href="">
+                        <div style="width: 310px;height: 350px;">
+                            <h3 style="writing-mode: tb-rl;letter-spacing: 0.2em;position: relative;bottom:270px;left: 40px;font-size: 35px;font-family: '幼圆';font-weight: 900;">自行车装配</h3>
+                            <img src="img/装车.png" alt="" id="装车">
+                        </div>
+                        </a>
+
+                        
+                    </div>
+                </div>
+
+                <!-- 异响查找处理 -->
+                <div id="section4-div5">
+                    
+                    <div style="margin: auto;width: 400px;height: 100px;">
+                        <p style="font-weight: 600; font-family: '幼圆';font-size: 19px;position: relative;top: 20px;line-height: 30px;" id="p-1">雨骑完后是否有过应为无法解决异响的烦恼<br>那你可以来看看我们提供的<span>查找方法</span>和<span>解决方法</span></p>
+                    </div>
+                    <div style=" width: 690px;height: 200px;position: relative;bottom: 20px;">
+                        
+                        <a href="HTML/异响.html" id="">
+                            <div class="异响">
+                                <h4>查找异响</h3>
+                                    <img src="img/查找异响.jpg" alt="" loading="lazy">
+                            </div>
+                        </a>
+
+                        <a href="HTML/异响.html">
+                            <div class="异响">
+                                <h4>解决异响</h4>
+                                <img src="img/异响.jpg" alt="" loading="lazy">
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+        <!-- 选择栏显示效果JS代码 -->
+        <script>
+            // 获取所有需要添加动画的小盒子元素，这里通过选择section下的所有直接子div来获取（你可以根据实际更精准的选择器来调整）
+const smallBoxes = document.querySelectorAll('#section-4 > div > div >div'); 
+
+// 创建IntersectionObserver实例来观察元素是否进入视口
+const pobserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            // 当元素进入视口时，给对应的小盒子添加淡入动画类
+            entry.target.classList.add('fade-in');
+            // 取消对该元素的观察（避免重复触发等情况，可选操作）
+            pobserver.unobserve(entry.target); 
+        }
+    });
+});
+
+// 对每个获取到的小盒子元素开始观察
+smallBoxes.forEach((box) => {
+    pobserver.observe(box);
+});
+        </script>
+
+
+
+
+
+        <!-- ========================================================== -->
+
+
+        
+        <!-- 需要调整卡片内容和样式设计到“JS/选项卡切换”里调整内容 -->
+        <div class="carousel-system">
+            <h1 style="position: relative;left: 100px;">· 其他自行车用品</h1>
+            <!-- 主卡片 -->
+            <div class="main-stage">
+            <div class="main-card" id="mainCard">
+                <div class="card-content">
+                    <a href="./HTML/服装头盔.html" class="card-link personal-gear">
+                        <h1 class="card-title">人身装备</h1>
+                        <div class="card-overlay"></div>
+                    </a>
+                </div>
+            </div>
+            </div>
+        
+            <!-- 左右堆叠效果 -->
+            <div class="stack-container left-stack" id="leftStack">
+            <!-- <div class="card-content">
+                <img src="img/示例图片2.jpg" alt="示例图片2" width="200" height="100">
+                <h3>卡片标题 2</h3>
+                <p>这里是卡片的内容描述，支持文字和图片的混合排版。</p>
+            </div> -->
+            </div>
+            <div class="stack-container right-stack" id="rightStack">
+            <!-- <div class="card-content">
+                <img src="img/示例图片3.jpg" alt="示例图片3" width="200" height="100">
+                <h3>卡片标题 3</h3>
+                <p>这里是卡片的内容描述，支持文字和图片的混合排版。</p>
+            </div> -->
+            </div>
+            
+        
+            <!-- 左右切换按钮 -->
+            <button class="nav-btn prev-btn" onclick="navigate(-1)">←</button>
+            <button class="nav-btn next-btn" onclick="navigate(1)">→</button>
+            
+            <script src="JS文件/选项卡切换.js"></script>
+        </div>
+
+
+
+           
+    </header>
+
+
+    <!-- 页脚栏 -->
+    <div class="div1">
+        <div class="tab_div_foot">
+            <table cellspacing="10" id="foot_tab">
+                <tr>
+                    <td>制作者:</td>
+                    <td>Zero_Point</td>
+                    <td>闲尘游</td>
+                    <td>晓峰</td>
+                </tr>
+                <tr>
+                    <td>创作时间：</td>
+                    <td>2024/4/22</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>注意事项：</td>
+                    <td>本网站仅供学习参考</td>
+                    <td>如有疑问请联系邮箱</td>
+                </tr>
+                <tr>
+                    <td>邮箱：</td>
+                    <td>Z1916819975@163.com</td>
+                    <td></td>
+                </tr>
+            </table>
+            
+        </div>
+
+        <div class="foot_logo">
+            <img src="img/wx_logo.png" alt="无法显示" class="wx" onmouseover="jr(this)" onmouseout="lk(this)" >
+            
+        </div>
+
+        <script src="JS文件/首页的微信动态展开.js"></script>
+        
+    </div>
+    <div class="网站信息">
+        <ul id="foot">
+            <li>©2024 普骑屋</li>
+            <li>本内容仅供参考，如有疑问可联系我们</li>
+            <li>微信号：13556870440</li>
+            <li></li>
+        </ul>
+    </div>
+    <!-- 置顶标签图标 -->
+    <div>
+        <a href="#top_s" style="color: black;"><?xml version="1.0" ?><svg class="bi" fill="currentColor" height="40" viewBox="0 0 16 16" width="40" xmlns="http://www.w3.org/2000/svg"><path d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708zM2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4z" fill-rule="evenodd"/></svg></a>    
+    </div>    

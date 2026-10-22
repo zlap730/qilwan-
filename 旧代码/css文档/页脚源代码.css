@@ -1,0 +1,98 @@
+.div1{
+    background-color:rgb(233, 233, 233);
+    color: rgb(0, 0, 0);
+    height: 350px;
+    font-size: larger;
+    font-family: '黑体';
+    font-weight: bold;    
+    width: 100%;
+    
+}
+
+table{
+    position: relative;
+    left: 100px;
+    bottom: 0px;
+}
+
+#id-div{
+    margin-bottom: 50px;
+    
+}
+
+
+.div1 table tr td:hover{
+    color: red;
+    text-decoration: underline;
+    text-shadow: 2px 2px 3px salmon;
+}
+
+.wx{
+    float: right;
+    position: relative;
+    right: 100px;
+    top: 50px;
+    transform-origin: 50% 50%;
+    transition: all ease-in 0.2s;
+}
+.div1 table tr td{
+    font-size: 19px;
+    color: rgb(0, 0, 0);
+    font-family: '黑体';
+    font-weight: 700;
+}
+
+/* 顶部返回标签css设置 */
+.bi{
+    float: right;
+    position: fixed;
+    top: 850px;
+    left: 1790px;
+    z-index: 1000;
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(124, 124, 124, 0.452);
+    border-radius: 100px;
+}
+
+.bi:hover{
+    animation-name: zhiding;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+@keyframes zhiding{
+    0%,50%{
+        background-color: rgba(124, 124, 124, 0.452);
+    }
+    50%,100%{
+        background-color: dimgrey;
+    }
+}
+
+.tab_div_foot{
+    width: 50%;
+    height: 100%;
+    float: left;
+    position: relative;
+    border-right: 2px solid rgba(0, 0, 0, 0.205);
+}
+
+.foot_logo{
+    width: 49%;
+    height: 100%;
+    float: right;
+    position: relative;  
+    
+}
+#foot_tab{
+    top: 30%;   
+}
+.网站信息{
+    width: 100%;
+    height: 35px;
+    background-color: rgb(53, 154, 255);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+

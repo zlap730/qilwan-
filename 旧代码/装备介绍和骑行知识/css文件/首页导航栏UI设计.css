@@ -1,0 +1,90 @@
+.nav_model{
+    margin: 36px;/*设置文字的间距*/
+    font-weight: bold;/*设置字体加粗 */
+    font-size: x-large;
+    padding-top: 10px;
+    color: white;
+    margin: auto;
+    width: 30px;
+    padding: 20px;
+}
+
+.background-color{
+     background-color:rgba(0, 0, 0, 0.692) ;/*背景颜色 */
+     
+}
+
+.logo_size{
+    margin-right: 30px;
+    padding-block: 10px;
+    vertical-align: middle;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-bottom: 10px;
+    display: flex;
+    padding-left: 40px;/* 推荐 */
+}
+
+.border-color{
+    border: 3px sol id black;
+    margin: 6px 12px;
+    /* padding-bottom: 16px;  */
+    padding: 20px 90px;/* 推荐 */
+    margin: 5px 30px;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+.logo_size,.border-color{
+    margin-right:40px ;/* 推荐 */
+
+}
+.logo_size,.border-color:hover{
+    transform: scale(1.2);
+    transition: all linear 0.5s;
+    font-size: 30px;
+}
+
+.p{
+    display: inline-block;
+}
+.div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.highlight-link{
+    text-decoration: underline;
+    color: rgba(0, 0, 255, 0.719);
+}
+.div-logo{
+    display: flex;
+     justify-content: left;/*元素靠左对齐 */
+     align-items: center;/*元素垂直居中 */
+}
+.nav-div-color{
+    background-color: rgba(0, 0, 0, 0.692);/* 推荐 */
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin-bottom: 20px;
+    z-index: 555;
+
+}
+.div-nav-input{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    margin-top: -21px;
+}
+
+.container{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+
+    
+

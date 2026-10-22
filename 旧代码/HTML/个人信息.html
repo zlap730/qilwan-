@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css文档/个人信息.css">
+    <link rel="icon" href="../img/iocioc.ioc" type="image/x-icon">
+    <title>个人信息</title>
+</head>
+<body>
+    <div class="container">
+        <h2>个人信息</h2>
+        <p id="registrationDate"></p> <!-- 注册时间显示 -->
+        <form id="profileForm">
+            <label for="avatar">头像:</label>
+            <input type="file" id="avatar" name="avatar" accept="image/*" onchange="previewAvatar(event)" value="上传头像">
+
+            <img id="avatarPreview" src="../app/uploads/default_avatar.png" alt="头像预览" style="display: none; width: 100px; height: 100px; border-radius: 50%; margin-top: 10px;">
+
+            <label for="username">用户名:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="email">邮箱:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">密码:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="confirmPassword">确认密码:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+
+            <label for="bio">个人简介:</label>
+            <textarea id="bio" name="bio"></textarea>
+
+            <button type="button" onclick="updateProfile()">更新信息</button>
+            <button type="button" onclick="deleteAccount()">注销账号</button>
+            <button type="button" onclick="return_home()">返回主页</button>
+        </form>
+    </div>
+    
+    <script>
+        // 页面加载时动态设置头像
+        document.addEventListener('DOMContentLoaded', () => {
+            const userCookie = document.cookie.split('; ').find(row => row.startsWith('user='));
+            const user = userCookie ? JSON.parse(decodeURIComponent(userCookie.split('=')[1])) : null;
+
+            if (!user) {
+                alert('请先登录以访问个人信息页面');
+                window.location.href = '登陆页面.html'; // 修正路径
+                return;
+            }
+
+                                                if (user && user.avatar) {
+                const avatarPreview = document.getElementById('avatarPreview');
+                let avatarPath = user.avatar;
+                
+                // 处理不同的头像路径格式
+                if (avatarPath) {
+                    if (avatarPath.includes('localhost:3000/uploads/')) {
+                        // 格式: http://localhost:3000/uploads/filename -> ../app/uploads/filename
+                        const filename = avatarPath.split('/').pop();
+                        avatarPath = `../app/uploads/${filename}`;
+                    } else if (avatarPath.startsWith('/uploads/')) {
+                        // 格式: /uploads/filename -> ../app/uploads/filename
+                        const filename = avatarPath.split('/').pop();
+                        avatarPath = `../app/uploads/${filename}`;
+                    }
+                    // 如果已经是 ../app/uploads/filename 格式，保持不变
+                }
+                
+                avatarPreview.src = avatarPath || '../app/uploads/default_avatar.png';
+                avatarPreview.style.display = 'block';
+            }
+        });
+    </script>
+    <script src="../JS文件/个人信息.js"></script>
+</body>
+</html>

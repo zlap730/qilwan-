@@ -1,0 +1,60 @@
+.div-in-text {
+    font-size: xx-large;
+    font-weight: bolder ;
+    text-align: left;    /* 设置文字位置以及大小 */
+    color: black;
+    padding-top: 20%;
+    margin-left: 40px; 
+    padding-left: 40px;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    white-space: nowrap;
+    text-indent: 2px;
+    line-height: 2px;
+
+    
+}
+.div-float{
+    position: relative;
+}
+.div-border{
+    border: 3px solid rgba(0, 0, 0, 0.274);
+    border-radius: 10px;
+    margin: 70px;
+    float: none;
+    margin-top: 120px;
+}
+
+.div-text {
+    font-size:x-large;
+    font-weight: bold;    /* 设置文字位置以及大小 */
+    color: black;
+    padding-top: 30%;
+    margin-left: 40px;
+    font-family: '等线';
+    text-shadow: 10px;
+    
+}
+
+.div2{
+    position: relative;
+    padding-top: 10px ;
+    width: 100;
+    text-align: center;
+}
+
+.div-text-border{
+    border: 3px solid rgba(0, 0, 0, 0.274);
+    border-radius: 10px;
+    width: 400px;
+    margin: auto;
+    padding-bottom: 10px;
+    top: 400px;
+}
+
+#h3-text{
+    text-align: center;
+    font-family: '微软雅黑';
+    font-weight: 600;
+    font-size: xx-large;
+}

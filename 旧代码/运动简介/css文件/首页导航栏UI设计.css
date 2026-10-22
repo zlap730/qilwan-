@@ -1,0 +1,240 @@
+.nav_model{
+    margin: 36px;/*设置文字的间距*/
+    font-weight: bold;/*设置字体加粗 */
+    font-size: x-large;
+    padding-top: 10px;
+    color: white;
+    margin: auto;
+    width: 30px;
+    padding: 20px;
+}
+
+.background-color{
+     background-color:rgba(0, 0, 0, 0.692) ;/*背景颜色 */
+     
+}
+
+.logo_size{
+    margin-right: 30px;
+    padding-block: 10px;
+    vertical-align: middle;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-bottom: 10px;
+    display: flex;
+    padding-left: 40px;/* 推荐 */
+}
+
+.border-color{
+    border: 3px sol id black;
+    margin: 6px 12px;
+    /* padding-bottom: 16px;  */
+    padding: 20px 90px;/* 推荐 */
+    margin: 5px 30px;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+.logo_size,.border-color{
+    margin-right:40px ;/* 推荐 */
+
+}
+.logo_size,.border-color:hover{
+    transform: scale(1.2);
+    transition: all linear 0.5s;
+    font-size: 30px;
+}
+
+.p{
+    display: inline-block;
+}
+.div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.highlight-link{
+    text-decoration: underline;
+    color: rgba(0, 0, 255, 0.719);
+}
+.div-logo{
+    display: flex;
+     justify-content: left;/*元素靠左对齐 */
+     align-items: center;/*元素垂直居中 */
+}
+.nav-div-color{
+    background-color: rgba(0, 0, 0, 0.692);/* 推荐 */
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+.div-nav-input{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    margin-top: -21px;
+}
+
+.container{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+
+    
+
+
+.element {
+    background-image: url('0046.jpg'); 
+    background-size: 100% 100%; 
+    background-position: center; 
+    width: 100%;
+    height: 100vh; 
+    position: relative; 
+    object-fit: cover;
+    opacity: 0.9;
+  }
+
+
+
+header{
+    height: 110px;
+  }
+.ccl{
+
+    width: 600px;
+    font-size: 23px;
+    float: right;
+    margin-right:100px; 
+    
+}
+
+.background{
+    font-size: 120px;
+    text-align: center;
+}
+.background span{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+article{
+    background: #00000073;
+    color: white;
+    height: 1600px;
+    border-radius: 20px;
+}
+.video1{
+    padding-top: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    width: 1000px;
+}
+article div span{
+    font-family: 'Segoe UI, Tahoma, Geneva, Verdana, sans-serif';
+    text-shadow: 4px 4px 4px black;
+}
+#display-div{
+    display: flex; /*设置行内元素（我也忘了这是啥，反正是设置盒子的，书上应该有）*/
+    flex-direction: column;
+    float: left; /*左浮动*/
+}
+
+#img1{
+    width: 1000px;
+    margin: 10px;
+    border: 1px solid black;        /*修改添加处*/
+    border-radius: 10px;
+}
+.vll{
+    color:red;
+}
+*{
+    list-style: none;outline:none ;
+}
+.zp{
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    background-color: #00000073;
+}
+nav>a{
+    text-indent: 1em;
+    display: inline-block;
+    font-size: 22px;
+    color: white;
+}
+nav>a:nth-child(1){text-indent: 0;}
+nav>a:link,nav>a:visited{text-decoration: none;}
+nav>a:hover{
+    text-decoration: underline;
+    color: #f03;
+}
+dl{display: none;}
+dd{
+    line-height: 38px;
+    font-size: 22px;
+    font-family: 'Courier New', Courier, monospace;
+    color: white;
+}
+dd:before{content: url();}
+dd:nth-child(2)em{
+    color: #f03;
+    font-weight: bold;
+    font-style: normal;
+}
+dd:nth-child(3) em{
+    color: #5e2d00;
+    font-weight: bold;
+    font-style: normal;
+}
+:target{display: block;}
+#zsb{
+    width: 700px;
+    height: 350px;
+}
+.jli{
+    margin: 0;
+    background: #00000073;
+    color: white;
+    height: auto;
+}
+.lx{
+    margin-top: 10px;
+    font-size: 30px;
+    text-align: center;
+}
+.lx:hover{
+    color: red;
+}
+.div1{
+    background-color:rgb(76, 86, 97);
+    color: white;
+    height: 300px;
+    font-size: larger;
+    font-family: '黑体';
+    font-weight: bold;
+    padding-top: 40px;
+    float: left;
+    width: 1900px;
+}
+
+table{
+    margin-left: 100px ;
+}
+
+#id-div{
+    margin-bottom: 50px;
+}
+
+.img-ins{
+    float: right;
+    height: 200px;
+    margin-right: 150px;
+    margin-top: 20px;
+    border-radius: 30px;
+}
+
+p{
+    text-shadow: 3px 3px 3px black;
+}

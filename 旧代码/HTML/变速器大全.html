@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../img/iocioc.ioc" type="image/x-icon">
+    <link rel="stylesheet" href="../css文档/首页导航栏UI设计.css">
+    <link rel="stylesheet" href="../css文档/变速器大全.css">
+    <title>变速器</title>
+    <script src="../JS文件/导航栏.js"></script>
+    <script src="../JS文件/变速器大全-选项框.js"></script> 
+</head>
+<body onload="defaultDisplay()">
+    <nav id="nav_1">
+        <ul id="ul_nav">
+            <!-- 链接对应网页链接 -->
+            <li><a href="../HTML/整车页面.HTML" onmouseover="jr1(this)" onmouseout="lk1(this)">整车推荐</a></li>
+            <li><a href="../HTML/车架页面.html" onmouseover="jr1(this)" onmouseout="lk1(this)">车架推荐</a></li>
+            <li><a href="../HTML/配件.html" onmouseover="jr1(this)" onmouseout="lk1(this)">零件道具</a></li>
+            <li><a href="../HTML/装配计算器.html" onmouseover="jr1(this)" onmouseout="lk1(this)">计算清单</a></li>
+            <li><a href="#get_in" onmouseover="jr1(this)" onmouseout="lk1(this)">关于网站</a></li>  
+            <li><a href="../骑乐网.html#" onmouseover="jr1(this)" onmouseout="lk1(this)">返回首页</a></li>
+        </ul>
+         <a href=""><img src="../img/logo.jpg" alt="logo" id="img_nav"></a> <!--链接关于网站的html -->
+    </nav>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    
+
+    
+    
+    <header id="header1" style="opacity: 0.9;background-color: bisque;width: 80%;margin: auto;height: 1600px;margin-top: 60px;">
+        
+        <div class="container">
+            <!-- 可以自由设置初始位置 -->
+            <img src="../img/2公路车图片.jpg" class="sliding-image" style="width: 120px; top: 50px; left: 100px;">
+            <img src="../img/00.jpg" class="sliding-image" style="width: 150px; top: 150px; left: 300px;">
+            <img src="../img/AM山地车.jpg" class="sliding-image" style="width: 100px; top: 250px; left: 500px;">
+            <img src="" class="sliding-image" style="width: 120px; top: 350px; left: 700px;">
+        </div>
+          <script>
+            const container = document.querySelector('.container');
+            const images = document.querySelectorAll('.sliding-image');
+            const containerWidth = container.offsetWidth;
+            const speed = 80; // 像素/秒
+            
+            let lastTime = performance.now();
+            
+            function animate(currentTime) {
+              const deltaTime = (currentTime - lastTime) / 1000; // 转换为秒
+              
+              images.forEach(img => {
+                const imgWidth = img.offsetWidth;
+                let currentLeft = parseFloat(img.style.left) || 0;
+                
+                // 计算新位置
+                currentLeft += speed * deltaTime;
+                
+                // 当图片完全移出右侧时重置到左侧
+                if (currentLeft > containerWidth) {
+                  currentLeft = -imgWidth;
+                  img.style.transition = 'none'; // 禁用过渡效果
+                  requestAnimationFrame(() => {
+                    img.style.left = `${currentLeft}px`;
+                    img.style.transition = ''; // 恢复过渡
+                  });
+                } else {
+                  img.style.left = `${currentLeft}px`;
+                }
+              });
+            
+              lastTime = currentTime;
+              requestAnimationFrame(animate);
+            }
+            
+            requestAnimationFrame(animate);
+            </script>
+        
+        <div id="head">
+            <h2 style="text-align: center;">相关变速器产品目录</h2>
+            <p>如果你需要选购自行车变速套件的话，可以参考以下内容</p>
+            <p>这里我们结合了市面上所有国内包括国外的知名变速品牌</p>
+            <p>希望能帮助到你选到时候你自己的变速器套件</p>
+        </div>
+        
+        <div style="width: 100%;">
+            <div id="options-container">
+                <div id="options">
+                    <div class="category" onclick="selectCategory(this)">
+                        <h2>国产</h2>
+                    </div>
+                    <div class="category" onclick="selectCategory(this)">
+                        <h2>进口</h2>
+                    </div>
+                </div>
+            </div>
+            <div id="content">
+                <!-- 这里将显示选中的品牌内容 -->
+                 <!-- 这里不需要写内容，如有内容更新，请在JS文件“变速器大全-选项框.js”中修改 -->
+            </div>
+        </div>
+    </header>
+</body>
+</html>

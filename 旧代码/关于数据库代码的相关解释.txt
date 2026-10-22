@@ -1,0 +1,174 @@
+自行车数据管理系统，这里存放了有关表格数据、评论数据等（后面如有新增后端代码要写上去）
+这里使用了Node.js 和MySQL来构建后端服务器，如果无法使用请看一下这里环境是否配置上
+
+##项目结构
+
+网站设计
+|————app  #(存放后端代码文件夹)
+|		  |
+|     ├──comments_image #存放用户评论图片的存放区，暂未使用
+|		  |
+|		  |
+|		  ├── config  #(链接数据库文件)
+|		  │   └── database                #配置数据库连接信息文件
+|     |
+|		  ├── controllers #(后端控制器)
+|		  │   └── userController          #用户控制器,包含多种功能性代码
+|     |
+|		  ├── middlewares #(中间件)
+|		  │   └── auth.js                 #JWT验证中间件
+|		  │   └── upload.js               #文件上传中间件
+|		  │
+|		  ├── models  #(模型文件)
+|		  │   └── associations.js         #统一管理表之间的关系模型
+|		  │   └── Comment.js              #评论模型
+|		  │   └── commentImages.js        #评论区图片模型
+|		  │   └── User.js                 #用户模型
+|		  │   └── index.js                #导出所有模型
+|		  │
+|		  │
+|	  	├── routes  #(路由服务器配置文件)
+|		  │   └──auth.js                  #用户登录注册的相关配置文件
+|		  │   └── userRoutes.js       		#用户信息组件
+|		  |   └──bicycleRoutes.js       	#获取MySQL中自行车相关品牌的表格数据（测试数据不在此文件项目中）
+|		  |   └──comment.js              	#评论区后端代码，包括获取图片、存储评论信息等相关功能
+|		  |   └──
+|     |
+|	  	├──uploads  #图片存储文件夹
+|	  	│   └──""""这里就是存储评论和用户信息相关的图片文件与头像图片""""
+|		  |
+|		  |
+|		  ├── app.js                  # 应用程序入口，设置 Express 服务器和路由
+|		  ├── db.js                   # 数据库连接配置
+|		  ├── package.json            # npm 配置文件，包含依赖和脚本
+|		  ├── README.md               # 项目文档
+|		  └──关于后端代码的相关解释.txt #相关的文件解释文本
+|
+|			
+|——JS文件		#这里是其他文件夹中的数据
+|——HTML
+|——zp_database.sql   #已经编译好的数据库结构（无数据）
+|——.env  #数据库链接配置文件
+├──node_modules
+│   └──"""这里用于存储node.js相关的插件数据，此文件夹不可乱动"""
+└──等等其他文件夹 
+
+
+如果需要访问数据库的话这里还需要先到my-node-backend目录下用node.js启动主入口app.js
+当中如果无法访问MySQL的话请到userRoutes.js中调整数据库的连接，包括端口等等接口连接
+其中若需要更换MySQL端口、用户、数据库的话，需要到根目录的.env文件中修改相关参数
+*****重要注意事项*****
+这里关于数据库连接，需要修改相关连接端口需要注意，然后需要重新注意一下关于文件路径的问题
+访问数据库需要到根目录下的app目录中用node.js启动主入口app.js
+如果无法访问的话到config/database.js中调整数据库的连接，包括端口等等接口连接
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+启动app.js指令：
+		
+		node ./app/app.js
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+***********************************数据库表结构（最新版本）****************************
+1、用户表users：
+CREATE TABLE users (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  username VARCHAR(50) UNIQUE NOT NULL,
+  email VARCHAR(100) UNIQUE NOT NULL,
+  password VARCHAR(255) NOT NULL,  -- bcrypt 加密后的哈希值
+  avatar VARCHAR(255) DEFAULT 'default_avatar.png',
+  bio TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+2、评论表comments：
+CREATE TABLE comments (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  content TEXT NOT NULL,
+  authorId INT NOT NULL,           -- 关联 users.id
+  targetId VARCHAR(100) NOT NULL DEFAULT 'default',  -- 被评论的目标ID
+  image VARCHAR(255),              -- 评论主图片路径
+  status ENUM('active', 'deleted') DEFAULT 'active', -- 软删除状态
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (authorId) REFERENCES users(id)
+);
+-- 为 authorId 和 targetId 添加索引
+CREATE INDEX idx_author ON comments(authorId);
+CREATE INDEX idx_target ON comments(targetId);
+
+
+3、评论图片表 commentimages：
+CREATE TABLE commentimages (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  commentId INT NOT NULL,          -- 关联 comments.id
+  imageUrl VARCHAR(255) NOT NULL,  -- 图片存储路径
+  filename VARCHAR(255) NOT NULL,  -- 原始文件名
+  mime_type VARCHAR(100) NOT NULL DEFAULT 'image/jpeg',
+  file_size INT NOT NULL DEFAULT 0,
+  status ENUM('active', 'deleted') DEFAULT 'active', -- 软删除状态
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (commentId) REFERENCES comments(id) ON DELETE CASCADE
+);
+-- 添加索引
+CREATE INDEX idx_comment ON commentimages(commentId);
+
+
+4、品牌数据表（测试用）：
+CREATE TABLE `品牌` (
+    `品牌` VARCHAR(255) NOT NULL,
+    `国家` VARCHAR(255) NOT NULL,
+    `型号` VARCHAR(255) NOT NULL,
+    `种类` VARCHAR(255) NOT NULL,
+    `价格` INT NOT NULL,
+    PRIMARY KEY (`品牌`, `型号`)
+);
+
+
+部分运行的小问题
+    1.图片存储路径：根目录/app/upload/目录中
+    2.若数据库链接失败，请检查一下端口情况。！！前端运行在5501端口，后端运行在3000端口！！
+  需要修改，则要到配置文件以及前端文件中修改端口(工作任务过于庞大，建议保持此端口不要更改)
+    3.在启动node.js前，请确认MySQL服务正在运行，且端口为上述要求
+    4.确认一下数据库配置是否正确，不正确按照.env-->database.js-->app.js来排查，启动不成
+    功也有后台显示启动失败原因以及日志
+    5.建议使用微软自带的浏览器或者chorme浏览器运行网站，使用其他网站可能存在部分功能无法使
+    用的情况。
+
+
+最新更新（2026年2月）：
+·修复了图片路径问题（统一使用相对路径）
+·实现了软删除功能
+·添加了用户头像显示
+·优化了评论界面样式
+·修复了删除功能权限检查
+·添加了详细的错误日志
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

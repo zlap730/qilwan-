@@ -1,0 +1,65 @@
+/* =========================================================================================== */
+/* 设置出场动画 */
+/* 向右移入动画 */
+@keyframes slide-right {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+.slide-right {
+    animation-name: slide-right;
+    animation-duration: 1s;
+    animation-delay: 0s;
+    animation-fill-mode: forwards;
+}
+/* 淡入动画 */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* 淡入动画类 */
+.fade-in {
+    animation-name: fade-in; /* 指定使用的动画名称为上面定义的fadeIn */
+    animation-duration: 1s; /* 动画持续时间为1秒，可按需替换 */
+    animation-fill-mode: forwards; /* 动画结束后保持最后一帧状态 */
+}
+
+@keyframes rotate-in {
+    from {
+        transform: rotate(-360deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+.rotate-in {
+    animation-name: rotate-in;
+    animation-duration: 1s;
+    animation-delay: 0s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes scale-up {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+.scale-up{
+    animation-name: scale-up;
+    animation-duration: 0.5s;
+    animation-delay: 0s;
+    animation-fill-mode: forwards;
+}

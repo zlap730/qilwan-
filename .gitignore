@@ -1,0 +1,36 @@
+# ───────────── 依赖与构建产物（可由 npm install / npm run build 重新生成）─────────────
+node_modules/
+dist/
+.npm-cache/
+
+# ───────────── 环境变量：含数据库密码与 JWT 密钥，禁止提交 ─────────────
+.env
+.env.local
+*.env.local
+
+# ───────────── 日志与系统垃圾 ─────────────
+*.log
+npm-debug.log*
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# ───────────── 旧代码里的大体积媒体：代码进仓库，媒体留在本地 ─────────────
+# 旧代码 总计约 5.5 GB（video 4.7 GB、img 452 MB），这些文件不参与迁移，
+# 也不必进版本库（GitHub 单文件上限只有 100 MB）
+旧代码/video/
+旧代码/img/
+旧代码/music/
+旧代码/**/*.mp4
+旧代码/装备介绍和骑行知识/寒蝉圆黑体*
+旧代码/装备介绍和骑行知识/*.zip
+演示视频.mp4
+
+# ───────────── 用户上传的文件属于运行期数据，只保留默认头像 ─────────────
+新代码/server/uploads/*
+!新代码/server/uploads/default_avatar.png
+
+# ───────────── 编辑器 ─────────────
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json

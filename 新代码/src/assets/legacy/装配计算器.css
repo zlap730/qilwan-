@@ -1,0 +1,200 @@
+/* 计算器表格css设置 */
+/* 这里是设置表格的主要css代码区域，如果要调就在这里调并写上注释 */
+/* 迁移改动：body{...} → .page-calculator{...}，原因同上（SPA 共用一个 body） */
+.page-calculator{
+    background-image: url("../img/深圳湾骑车壁纸图.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 1890px 1000px; 
+}
+
+
+
+
+#div_table{
+    margin: auto;
+    width: 1200px;
+    height: 1190px;  
+    background-color: aliceblue;
+    border: 1px solid black;
+    border-radius: 5px; 
+    position: relative;
+}
+
+#nav_table{
+    margin: auto;
+    width: 1200px;
+    height: 50px;  
+    background-color: aliceblue;
+    border: 1px solid black;
+    border-radius: 5px; 
+    position: relative;
+    margin-bottom: 10px;
+}
+
+#nav_table ul li {
+    list-style: none;
+    display: inline-flex;
+    margin-left: 100px;
+    font-size: 27px;
+    position: relative;
+    font-family: '等线';
+    font-weight: 700;
+}
+
+/* 表格设置 */
+#div_table form table{
+    width: 1200px;
+    position: relative;
+    color: black;
+    font-family: '黑体';
+    text-align: center;
+    position: relative;
+}
+#div_table form table th{
+    font-size: 23px;
+}
+
+#div_table form table tr td{
+    font-size: 21px;
+}
+
+#div_table form table tr td input{
+    font-size: 17px;
+    font-family: '黑体';
+    font-weight: 900;
+    text-align: center;
+    height: 20px;
+}
+
+
+/* input表单设置 */
+#单价{
+    width: 120px;
+}
+#数量{
+    width: 80px;
+}
+
+#规格{
+    width: 200px;
+}
+#备注{
+    width: 200px;
+}
+
+#div_table form table span{
+    color: blue;
+}
+
+#numnum{
+    width: 100px;
+}
+
+
+/* 导出按钮 */
+#exportButton{
+    width: 300px;
+    height: 40px; 
+    font-size: 20px;
+    font-family: '等线';
+    position: relative;
+    left: 650px;
+    margin: auto;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+    letter-spacing: 1px
+}
+
+
+
+
+#开头P{
+    width: 1500px;
+    height: 300px;
+    margin: auto;
+}
+#table_P{
+    writing-mode: vertical-rl;
+    position: absolute;
+    width: 100px;
+    bottom: 500px;
+    font-size: 24px;
+    letter-spacing: 4px;
+}
+
+#开头P p{
+    font-size: 24px;
+    margin: 0px;
+    position: relative;
+    font-family:serif;
+    font-weight: 700;
+    line-height: 50px;
+    float: left;
+    left: 60px;
+    top: 50px;
+}
+
+    /* 选择表格内的所有输入框并使它们无边框 */
+    #table input[type="text"],
+    #table input[type="number"] {
+        border: none;          /* 移除边框 */
+        outline: none;         /* 移除点击后的外部轮廓 */
+        padding: 5px;          /* 适当的内边距使输入框内容更好看 */
+        background-color: transparent; /* 使背景色透明 */
+    }
+    
+    #table input[type="text"]:focus,
+    #table input[type="number"]:focus {
+        outline: none;         /* 防止在聚焦时显示轮廓 */
+    }
+
+    /* 如果想去除输入框的背景色变化，防止在输入时的背景改变 */
+    #table input[type="text"]::-webkit-inner-spin-button,
+    #table input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none; /* 移除数值框内的小箭头 */
+    }
+
+
+
+.item-row td select{
+    font-size: 21px;
+    font-family: '黑体';
+    text-align: center;
+}
+
+#img_a{
+    width: 350px;
+    position: relative;
+    border-radius: 15px;
+    left: 80px;
+    top: 20px;
+}
+#nav_table ul li{
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    color: rgb(255, 255, 255);
+}
+
+td select{
+    width: 200px;
+}
+
+label img{
+    width: 50px;
+    height: 50px;
+    position: relative;
+    top: 21px;
+    left: 650px;
+    
+}
+label img:hover{
+    animation-name: a;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+}
+@keyframes a{
+    /* 原文写的是 form{...}（from 的笔误），属于无效关键帧，下载图标的放大动画一直没生效，这里顺手修正 */
+    from{width: 50px;height: 50px;}
+    to{width: 55px;height: 55px;}
+}
+

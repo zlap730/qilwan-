@@ -1,0 +1,27 @@
+.div1{
+    background-color:rgb(76, 86, 97);
+    color: white;
+    height: 300px;
+    font-size: larger;
+    font-family: '黑体';
+    font-weight: bold;
+    padding-top: 40px;
+    float: left;
+    width: 1900px;
+}
+
+table{
+    margin-left: 100px ;
+}
+
+#id-div{
+    margin-bottom: 50px;
+}
+
+.img-ins{
+    float: right;
+    height: 200px;
+    margin-right: 150px;
+    margin-top: 20px;
+    border-radius: 30px;
+}

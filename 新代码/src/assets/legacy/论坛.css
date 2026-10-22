@@ -1,0 +1,256 @@
+/* 迁移改动：原来的 body{...} 改成页面容器 .page-forum{...}
+   原因：SPA 里所有页面共用一个 body，body 级背景会互相覆盖。
+   只改了选择器，样式值一个字没动。 */
+.page-forum{
+  margin: 0px;
+  padding: 0px;
+  font-family: Arial, sans-serif;
+  background-image: url('../img/背景图/深圳湾2.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size:cover; 
+}
+
+#论坛导航 {
+  width: 60%;
+  height: 40px;
+  background-color: antiquewhite;
+  margin: auto;
+}
+
+h1 {
+  color: #333;
+}
+
+textarea {
+  width: 97.6%;
+  height: 100px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+  transition: all 0.1s ease-in-out;
+}
+
+.commentsContainer {
+  left: -200px;
+  position: relative;
+  width: 70%;
+  margin: auto;
+  margin-top: 20px;
+  background-color: white;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.1s ease-in-out;
+}
+
+.comment {
+  position: relative;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  transition: all 0.1s ease-in-out;
+}
+
+.comment img.comment-image {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+  border-radius: 5px;
+  width: 10%;
+  transition: transform 0.3s ease-in-out;
+}
+
+.comment img.comment-image:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.deleteButton {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  padding: 5px 10px;
+  background-color: #FF0000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.deleteButton:hover {
+  background-color: #CC0000;
+  transition: all 0.1s ease-in-out;
+}
+
+.tabs {
+  display: flex;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.tab {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-bottom: none;
+}
+
+.tab.active {
+  background-color: white;
+  border-bottom: 1px solid white;
+}
+
+.tab-contents {
+  border: 1px solid #ccc;
+  padding: 20px;
+  background-color: white;
+}
+
+.tab-content {
+  display: none;
+  transition: all 0.1s ease-in-out;
+}
+
+.tab-content.active {
+  display: block;
+  transition: all 0.1s ease-in-out;
+}
+
+.addCommentButton {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: all 0.1s ease-in-out;
+}
+
+.addCommentButton:hover {
+  background-color: #218838;
+  transition: all 0.1s ease-in-out;
+}
+
+.comment-bar {
+  position: fixed;
+  bottom: 0;
+  width: 50%;
+  background-color: #f1f1f1;
+  border-top: 1px solid #ccc;
+  padding: 10px;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.1s ease-in-out;
+  left: 25%;
+}
+
+.commentForm {
+  display: none;
+  transition: all 0.1s ease-in-out;
+}
+
+.comment-image{
+  width: 100%;
+  height: auto;
+  transition: all 0.1s ease-in-out;
+}
+
+.toggleCommentButton {
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.toggleCommentButton:hover {
+  background-color: #218838;
+  transition: all 0.1s ease-in-out;
+}
+
+.toggleCommentButton.active {
+  background-color: #FF0000;
+  transition: all 0.1s ease-in-out;
+}
+
+.toggleCommentButton.active:hover {
+  background-color: #CC0000;
+  transition: all 0.1s ease-in-out;
+}
+
+/* 模态框样式 */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 99999;
+}
+
+.modal-content {
+  
+  margin: 5% auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  aspect-ratio: 16 / 9;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.submitButton{
+  position: relative;
+  /* left: 700px; */
+  float: right;
+}

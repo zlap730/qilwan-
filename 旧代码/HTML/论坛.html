@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../img/iocioc.ioc" type="image/x-icon">
+    <link rel="stylesheet" href="../css文档/首页导航栏UI设计.css">
+    <link rel="stylesheet" href="../css文档/论坛.css">
+    <title>社区</title>
+</head>
+<body>
+    <nav id="nav_1">
+        <ul id="ul_nav">
+            <!-- 链接对应网页链接 -->
+            <li><a href="../HTML/整车页面.HTML" onmouseover="jr1(this)" onmouseout="lk1(this)">整车推荐</a></li>
+            <li><a href="../HTML/配件.html" onmouseover="jr1(this)" onmouseout="lk1(this)">零件道具</a></li>
+            <li><a href="../HTML/服装头盔.html" onmouseover="jr1(this)" onmouseout="lk1(this)">人身装备</a></li>
+            <li><a href="../HTML/装配计算器.html" onmouseover="jr1(this)" onmouseout="lk1(this)">计算清单</a></li>
+            <li><a href="#get_in" onmouseover="jr1(this)" onmouseout="lk1(this)">关于网站</a></li>  
+            <li><a href="../骑乐网.html#工具篇" onmouseover="jr1(this)" onmouseout="lk1(this)">返回首页</a></li>
+        </ul>
+         <a href=""><img src="../img/logo.jpg" alt="logo" id="img_nav"></a> <!--链接关于网站的html -->
+    </nav>
+    <script src="../JS文件/导航栏.js"></script>
+    <div style="width: 100%;height: 50px;"></div>
+
+    <section style="width: 80%;height: 700px;background-color: rgba(255, 228, 196, 0.95);margin: auto;"> 
+        <h1>讨论区</h1>
+        <div class="comments-section">
+            <div class="commentsContainer">
+                <!-- 后端的评论将显示在这里 -->
+            </div>
+        </div>
+    </section>
+
+    <div class="comment-bar">
+        <button class="toggleCommentButton">添加评论</button>
+        <div class="commentForm" style="display: none;">
+            <textarea class="commentInput" placeholder="在这里输入你的评论"></textarea>
+            <input type="file" class="commentImageInput" accept="image/*" value="上传图片">
+            <button class="submitButton">提交评论</button>
+        </div>
+    </div>
+
+        <!-- 模态框 -->
+        <div id="myModal" class="modal">
+            <span class="close">&times;</span>
+            <div class="modal-content">
+                <img id="img01" alt="Comment Image">
+            </div>
+        </div>
+
+    <script src="../JS文件/评论区代码.js"></script>
+</body>
+</html>

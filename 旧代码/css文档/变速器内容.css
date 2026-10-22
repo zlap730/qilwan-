@@ -1,0 +1,300 @@
+body{
+    background-image: url("../img/深圳湾骑车壁纸图.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 1890px 1000px;
+}
+
+#sec1{
+    width: 100%;
+    height: 46px;
+    position: fixed; /* 修改点：将 position: relative 改为 position: fixed，使其固定在页面上，类似主导航栏的固定效果 */
+    top: 60px; /* 修改点：将 top: 50px 改为 top: 0，使其固定在页面顶部 */
+    background-color: azure;
+    margin: auto;
+    transition: height 0.3s ease;
+    overflow: hidden;
+    z-index: 900;
+}
+#子导航{
+    list-style: none;
+    display: inline-flex;
+    margin: auto;
+    text-align: center;
+    margin-left: 375px;
+}
+#子导航 li{
+    font-size: 17px;
+    font-family: "微软雅黑";
+    font-weight: bold;
+    position: relative;
+    width: 170px;
+    height: 45px;
+    text-align: center;
+    list-style: none;
+}
+#子导航 li a{
+    color: black;
+    display: block;
+    width: 170px;
+    height: 31px;
+    position: relative;
+    left: 20px;
+    border-bottom: 0px solid rgb(0, 119, 255);
+    padding-top: 11px;
+    transition: border-bottom 0.07s ease;
+}
+#页面11{
+    width: 100%;
+    height: 350px;
+}
+#内容1{
+    position: relative;
+    width: 100%;
+    height: 220px;
+    top: 120px;
+}
+
+#定位图标{
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    top: 6px;
+    left: 500px;
+}
+
+#子导航 li::before{
+    content: "";
+    display: block;
+    width: 35px;
+    height: 35px;
+    background-image: url('../img/图标文件/占位.png');
+    background-size: cover;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 20px;
+}
+
+/* 新增以下样式，用于创建一个占位元素，来模拟展开折叠效果时的高度变化 */
+#sec1-placeholder {
+    height: 46px; /* 高度与 #sec1 初始高度一致，用于撑开页面布局 */
+}
+
+#sec1.hide {
+    height: 0px; /* 新增类名对应的样式，用于隐藏导航栏，将高度设为 0 */
+}
+#sec1.show {
+    height: 46px; /* 新增类名对应的样式，用于显示导航栏，恢复初始高度 */
+  
+}
+#内容1 p{
+    text-align: center;
+    position: relative;
+    font-size: 22px;
+    font-family: '等线';
+    font-weight: 600;
+    
+}
+#内容2{
+    width: 70%;
+    height: 500px;
+    background-color:rgba(255, 228, 196, 0.8);
+    margin: auto;
+}
+#内容2 #内容2文字 p{
+    font-size: 21px;
+    font-family: "等线";
+    position: relative;
+    top: 30px;
+    left: 30px;
+    width: 700px;
+}
+#内容2 #内容2文字 ul{
+    position: relative;
+    top: 30px;
+    left: 30px;
+    width: 100px;
+    font-family: '黑体';
+    text-decoration: underline crimson 2px;
+    line-height: 35px;
+    font-size: 16px;
+    
+}
+#内容2文字 ul li{
+    transition: all 0.1s ease-in-out 0.1s;
+}
+#内容2 #内容2文字 ul li:hover{
+    color: red;
+    font-size: 18px;
+    font-weight: 900;
+}
+
+
+
+#div--1 {
+    position: relative;
+    left: 170px;
+    bottom: 90px;
+    width: 400px;
+    height:200px;
+    background-color: #fdf1f1;
+    border: 1px solid #ccc;
+    transition: all 0.1s ease-in-out 0.1s;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out,visibility 0.2s ease-in-out;
+    border-radius: 10px;
+}
+#div--2{
+    position: relative;
+    left: 170px;
+    top: -270px;
+    width: 400px;
+    height:230px;
+    background-color: #fdf1f1;
+    border: 1px solid #ccc;
+    transition: all 0.1s ease-in-out 0.1s;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out,visibility 0.2s ease-in-out;
+    border-radius: 10px;
+}
+#div--3{
+    position: relative;
+    left: 170px;
+    bottom: 490px;
+    width: 400px;
+    height:230px;
+    background-color: #fdf1f1;
+    border: 1px solid #ccc;
+    transition: all 0.1s ease-in-out 0.1s;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out,visibility 0.2s ease-in-out;
+    border-radius: 10px;
+}
+
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+      visibility: hidden;
+    }
+    to {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+
+
+
+#内容3 p{
+    font-size: 18px;
+    font-weight: 600;
+}
+#内容4{
+    width: 70%;
+    height: 700px;
+    background-color:rgba(255, 228, 196, 0.8);
+    margin: auto;
+    border-top: 2px solid black;
+}
+#内容4 p{
+    font-size: 19px;
+    font-family: '等线';
+    font-weight: 900;
+    margin-left: 20px;
+}
+
+/* ====================================================== */
+.yx_div{
+    width: 75%;
+    height: 500px;
+    background-color: #ccc;
+    margin: auto;
+    padding: 0px;
+    border: #ccc 1px solid;
+    border-radius: 10px;
+    position: relative;
+}
+#yx_nav ul{
+    display: flex;
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    justify-content: center;
+    align-items: center; /* 添加这行，让列表项在交叉轴（垂直方向）上居中 */
+    z-index: 10; /* 提高导航栏的图层优先级，确保在所有内容区域之上，方便点击选项卡 */
+}
+#yx_nav ul li{
+    display: flex;
+    text-align: center;
+    width: 500px;
+    height: 50px;
+    font-size: 20px;
+    transition: all ease-in-out 0.1s;
+    font-weight: 900;
+    justify-content: center;
+    align-items: center; /* 添加这行，让列表项在交叉轴（垂直方向）上居中 */
+    z-index: 10; /* 给选项卡设置相对较高的图层优先级，确保鼠标交互等效果正常 */
+
+    /* position: relative;
+    top: 10px; */ 
+}
+.cf1{border-top-left-radius: 10px;}
+.cf3{border-top-right-radius: 10px;}
+.xs{
+    width: 100%;
+    height: 450px;
+    position:absolute;
+    opacity: 0;
+    transition: all ease-in-out 0.01s;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    transition: all ease-in-out 0.1s;
+    z-index: 5; /* 适当设置内容区域的图层优先级，初始比选项卡低，但又能合理显示 */
+}
+.xs1{
+    opacity: 1;
+    background-color: bisque;
+}
+.xs2{
+    background-color: aquamarine;
+}
+.xs3{
+    background-color: azure;
+}
+
+.xs1 ul li{
+   margin-top: 20px;
+   width: 40%;
+   font-family: '等线';
+   font-size: 18px;
+}
+/* 新增默认选项卡的样式 */
+#yx_nav ul li.default {
+    background-color: #ccc;
+}
+
+/* 新增鼠标移入和点击时选项卡的样式（变色效果） */
+#yx_nav ul li.active {
+    background-color: #e0e0e0;
+}
+/* 鼠标移入或点击选项卡时，对应内容区域显示并提高图层优先级 */
+.xs.active {
+    opacity: 1;
+    z-index: 8; /* 当内容区域显示时，提高其图层优先级，但仍低于选项卡，避免遮挡交互 */
+}
+.xs1 ul li span{
+    font-weight: 900;
+    font-size: 21px;
+    position: relative;
+}
+.xs_video{
+    width: 55%;
+    position: relative;
+    float: right;
+    bottom: 350px;
+    right: 10px;
+}

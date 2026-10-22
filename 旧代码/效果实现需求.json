@@ -1,0 +1,112 @@
+{
+    "project": {
+      "name": "mobile_app_backend",
+      "type": "nodejs",
+      "database": "mysql",
+      "features": ["用户认证", "资料管理", "带图评论"]
+    },
+    "steps": [
+      {
+        "step": 1,
+        "type": "command",
+        "description": "项目初始化与依赖安装",
+        "content": "mkdir app && cd app && npm init -y && npm install express mysql2 sequelize bcryptjs jsonwebtoken express-validator multer dotenv helmet cors"
+      },
+      {
+        "step": 2,
+        "type": "create_file",
+        "description": "环境变量配置模板",
+        "file": ".env.example",
+        "content": "DB_HOST=localhost\nDB_NAME=app_db\nDB_USER=root\nDB_PASSWORD=\nJWT_SECRET=your_jwt_secret\nPORT=3000"
+      },
+      {
+        "step": 3,
+        "type": "create_file",
+        "description": "数据库连接配置",
+        "file": "config/database.js",
+        "content": "const { Sequelize } = require('sequelize');\nrequire('dotenv').config();\n\nconst sequelize = new Sequelize(\n  process.env.DB_NAME,\n  process.env.DB_USER,\n  process.env.DB_PASSWORD, {\n    host: process.env.DB_HOST,\n    dialect: 'mysql',\n    logging: false\n  }\n);\n\nmodule.exports = sequelize;"
+      },
+      {
+        "step": 4,
+        "type": "create_dir",
+        "description": "创建模型目录结构",
+        "dirs": ["models", "routes", "middlewares", "utils"]
+      },
+      {
+        "step": 5,
+        "type": "create_file",
+        "description": "用户模型定义",
+        "file": "models/User.js",
+        "content": "const { DataTypes } = require('sequelize');\nconst sequelize = require('../config/database');\n\nconst User = sequelize.define('User', {\n  username: { type: DataTypes.STRING, unique: true },\n  email: { type: DataTypes.STRING, unique: true },\n  password: DataTypes.STRING,\n  avatar: { type: DataTypes.STRING, defaultValue: 'default_avatar.png' },\n  bio: DataTypes.TEXT\n});\n\nmodule.exports = User;"
+      },
+      {
+        "step": 6,
+        "type": "create_file",
+        "description": "评论系统模型定义",
+        "file": "models/Comment.js",
+        "content": "const { DataTypes } = require('sequelize');\nconst sequelize = require('../config/database');\n\nconst Comment = sequelize.define('Comment', {\n  content: DataTypes.TEXT,\n  targetId: DataTypes.STRING\n});\n\nmodule.exports = Comment;"
+      },
+      {
+        "step": 7,
+        "type": "create_file",
+        "description": "评论图片模型定义",
+        "file": "models/CommentImage.js",
+        "content": "const { DataTypes } = require('sequelize');\nconst sequelize = require('../config/database');\n\nconst CommentImage = sequelize.define('CommentImage', {\n  imageUrl: DataTypes.STRING\n});\n\nmodule.exports = CommentImage;"
+      },
+      {
+        "step": 8,
+        "type": "create_file",
+        "description": "模型关联配置",
+        "file": "models/associations.js",
+        "content": "const User = require('./User');\nconst Comment = require('./Comment');\nconst CommentImage = require('./CommentImage');\n\n// 用户-评论关联\nUser.hasMany(Comment, { foreignKey: 'authorId' });\nComment.belongsTo(User, { foreignKey: 'authorId' });\n\n// 评论-图片关联\nComment.hasMany(CommentImage, { foreignKey: 'commentId' });\nCommentImage.belongsTo(Comment, { foreignKey: 'commentId' });"
+      },
+      {
+        "step": 9,
+        "type": "create_file",
+        "description": "文件上传中间件配置",
+        "file": "middlewares/upload.js",
+        "content": "const multer = require('multer');\nconst path = require('path');\n\nconst storage = multer.diskStorage({\n  destination: (req, file, cb) => {\n    cb(null, 'uploads/')\n  },\n  filename: (req, file, cb) => {\n    cb(null, Date.now() + path.extname(file.originalname))\n  }\n});\n\nconst fileFilter = (req, file, cb) => {\n  const allowedTypes = ['image/jpeg', 'image/png'];\n  allowedTypes.includes(file.mimetype) ? cb(null, true) : cb(new Error('仅支持JPEG/PNG格式'));\n};\n\nconst upload = multer({\n  storage,\n  fileFilter,\n  limits: { fileSize: 5 * 1024 * 1024 }\n});\n\nmodule.exports = upload;"
+      },
+      {
+        "step": 10,
+        "type": "create_file",
+        "description": "JWT验证中间件",
+        "file": "middlewares/auth.js",
+        "content": "const jwt = require('jsonwebtoken');\nconst { User } = require('../models');\n\nconst authMiddleware = async (req, res, next) => {\n  const token = req.header('Authorization')?.replace('Bearer ', '');\n  if (!token) return res.status(401).json({ error: '未授权访问' });\n\n  try {\n    const decoded = jwt.verify(token, process.env.JWT_SECRET);\n    const user = await User.findByPk(decoded.userId);\n    if (!user) throw new Error();\n    req.user = user;\n    next();\n  } catch (err) {\n    res.status(401).json({ error: '无效令牌' });\n  }\n};\n\nmodule.exports = authMiddleware;"
+      },
+      {
+        "step": 11,
+        "type": "create_file",
+        "description": "主路由配置",
+        "file": "routes/index.js",
+        "content": "const express = require('express');\nconst router = express.Router();\n\n// 子路由导入\nrouter.use('/auth', require('./auth'));\nrouter.use('/users', require('./users'));\nrouter.use('/comments', require('./comments'));\n\nmodule.exports = router;"
+      },
+      {
+        "step": 12,
+        "type": "create_file",
+        "description": "用户认证路由",
+        "file": "routes/auth.js",
+        "content": "const express = require('express');\nconst router = express.Router();\nconst bcrypt = require('bcryptjs');\nconst jwt = require('jsonwebtoken');\nconst { User } = require('../models');\n\n// 注册逻辑\nrouter.post('/register', async (req, res) => {\n  /* 自动生成注册逻辑代码 */\n});\n\n// 登录逻辑\nrouter.post('/login', async (req, res) => {\n  /* 自动生成登录逻辑代码 */\n});\n\nmodule.exports = router;"
+      },
+      {
+        "step": 13,
+        "type": "create_file",
+        "description": "带图片上传的评论路由",
+        "file": "routes/comments.js",
+        "content": "const express = require('express');\nconst router = express.Router();\nconst auth = require('../middlewares/auth');\nconst upload = require('../middlewares/upload');\nconst { Comment, CommentImage } = require('../models');\n\n// 创建带图评论\nrouter.post('/', auth, upload.array('images', 5), async (req, res) => {\n  /* 自动生成评论创建代码 */\n});\n\n// 获取带图评论\nrouter.get('/', async (req, res) => {\n  /* 自动生成评论查询代码 */\n});\n\nmodule.exports = router;"
+      },
+      {
+        "step": 14,
+        "type": "create_file",
+        "description": "服务入口文件",
+        "file": "app.js",
+        "content": "const express = require('express');\nconst helmet = require('helmet');\nconst cors = require('cors');\nrequire('dotenv').config();\n\nconst app = express();\n\n// 中间件配置\napp.use(helmet());\napp.use(cors());\napp.use(express.json());\napp.use('/uploads', express.static('uploads'));\n\n// 路由配置\napp.use('/api', require('./routes'));\n\n// 数据库同步\nconst sequelize = require('./config/database');\nsequelize.sync({ alter: true });\n\n// 启动服务\nconst PORT = process.env.PORT || 3000;\napp.listen(PORT, () => {\n  console.log(`服务运行中：http://localhost:${PORT}`);\n});"
+      },
+      {
+        "step": 15,
+        "type": "command",
+        "description": "创建上传目录",
+        "content": "mkdir uploads"
+      }
+    ]
+  }

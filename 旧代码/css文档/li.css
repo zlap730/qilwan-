@@ -1,0 +1,31 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+body{
+    background-color:bisque ;
+}
+.table{
+    background-color:rgb(26, 26, 26);
+    background-clip: content-box;
+    color: white;
+    margin: auto;
+    margin-top: 110px;
+}
+.table th{
+    border-left: red solid 2px;
+    text-align: left;
+}
+.table th,tr,td{
+    padding-right: 150px;
+    padding-bottom: 15px;
+}
+.main{
+    width:100% ;
+    background-color: rgb(26, 26, 26);
+    background-size: cover;
+    border: 100px  rgb(26, 26, 26);
+}
+.table th{
+    font-size: 25px;
+}

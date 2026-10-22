@@ -1,0 +1,13 @@
+    <div class="nav-div-color">
+            <nav style="box-sizing: border-box;" >
+                <div class="div-logo"><img src="img/logo.jpg" alt="logo" height="90" class="logo_size"></div>
+                <div class="div" >
+                    <p align="left" class="p" style="margin-top: -70px;">
+                        <a href="骑乐网.html" class="nav_model background-color border-color ">首页</a>
+                        <a href="装备介绍/装备介绍.html" class="nav_model background-color border-color ">装备工具</a>
+                        <a href="骑行知识/骑行知识.html" class="nav_model background-color border-color ">骑行知识</a>
+                        <a href="" class="nav_model background-color border-color ">图片展示</a>
+                    </p>
+            </nav>
+        </div> 
+        </div>

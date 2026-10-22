@@ -1,0 +1,37 @@
+{
+  "name": "qile-web",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "骑乐网（普骑屋）：Vue 3 前端 + Express 后端，一个工程两个进程",
+  "scripts": {
+    "dev": "vite",
+    "server": "node --watch server/app.js",
+    "start": "concurrently -n web,api -c cyan,magenta \"npm:dev\" \"npm:server\"",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "axios": "^1.7.9",
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-validator": "^7.3.1",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.2",
+    "mysql2": "^3.14.0",
+    "pinia": "^2.3.0",
+    "sequelize": "^6.37.7",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.1",
+    "concurrently": "^9.1.2",
+    "vite": "^6.0.7"
+  }
+}

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>变速器调试</title>
+    <link rel="icon" href="../img/iocioc.ioc" type="image/x-icon">
+    <link rel="stylesheet" href="../css文档/首页导航栏UI设计.css">
+    <link rel="stylesheet" href="../css文档/页脚源代码.css">
+    <link rel="stylesheet" href="../css文档/变速器内容.css">
+</head>
+<body bgcolor="bisque" id="top_s">
+    <nav id="nav_1">
+        <ul id="ul_nav">
+            <!-- 链接对应网页链接 -->
+            <li><a href="../HTML/整车页面.HTML" onmouseover="jr1(this)" onmouseout="lk1(this)">整车推荐</a></li>
+            <li><a href="../HTML/车架页面.html" onmouseover="jr1(this)" onmouseout="lk1(this)">车架推荐</a></li>
+            <li><a href="../HTML/配件.html" onmouseover="jr1(this)" onmouseout="lk1(this)">零件道具</a></li>
+            <li><a href="../HTML/服装头盔.html" onmouseover="jr1(this)" onmouseout="lk1(this)">人身装备</a></li>
+            <li><a href="../HTML/装配计算器.html" onmouseover="jr1(this)" onmouseout="lk1(this)">计算清单</a></li>
+            <li><a href="#get_in" onmouseover="jr1(this)" onmouseout="lk1(this)">关于网站</a></li>  
+            <li><a href="../骑乐网.html#工具篇" onmouseover="jr1(this)" onmouseout="lk1(this)">返回首页</a></li>
+        </ul>
+         <a href=""><img src="../img/logo.jpg" alt="logo" id="img_nav"></a> <!--链接关于网站的html -->
+    </nav>
+    <script src="../JS文件/导航栏.js"></script>
+    
+    
+        <!-- 变速器子导航 -->
+        <div id="sec1">
+            <span style="font-size: 14px;font-family: '黑体';font-weight: 700;position: absolute;top: 15px;left: 20px;">维修调试导航栏</span>
+            <ul id="子导航">
+                <li><a href="#yx_top" onmouseover="jr2(this)" onmouseout="lk2(this)">变速异常</a></li>
+                <li><a href="#" onmouseover="jr2(this)" onmouseout="lk2(this)">机械手变</a></li>
+                <li><a href="#" onmouseover="jr2(this)" onmouseout="lk2(this)">机械指拨</a></li>
+                <li><a href="#" onmouseover="jr2(this)" onmouseout="lk2(this)">电子变速</a></li>
+                <li><a href="#" onmouseover="jr2(this)" onmouseout="lk2(this)">车梁变速</a></li>
+                <li><a href="#" onmouseover="jr2(this)" onmouseout="lk2(this)">转把变速</a></li>
+
+            </ul>
+            <script>
+                function jr2(li){
+    li.style.borderBottomColor = 'rgb(0, 119, 255)';
+    li.style.borderBottomWidth = '3px';
+    li.style.borderBottomStyle = 'solid'
+    li.style.color = 'rgb(0, 119, 255)'
+    }
+        function lk2(li){
+    li.style.borderBottomWidth = '0px';
+    li.style.color = 'rgb(0, 0, 0)'
+    }
+            </script>
+            <script src="../JS文件/变速器导航动画.js"></script>
+        </div>
+    <section id="页面11">
+        <div id="内容1">
+            <p>变速器是我们在接触骑行这门小众运动中不可避免的要用到的工具。</p>
+            <p>这个东西如同汽车的变速箱，它的出现解决了出行速度效率低下的问题。</p>
+            <p>但变速器使用到一定时间后会存在诸多小问题，如变速不准、噪音等问题。</p>
+            <p>如果你有想在家中组车或者维修更换变速器变速不准的时候，那可以看看这篇文章。</p>
+            <p>此文章在调试、安装方面尽量做到最详细，最方便理解，好让你们能够掌握这项基础技巧。</p>
+        
+        </div>
+    </section>
+    <section>
+        <div id="内容2">
+            <div style="width: 50%;height: 400px;float: left;" id="内容2文字">
+                <p style="width: 80%;">首先我们需要讲一下自行车变速的原理是如何形成的</p>
+                <p >自行车的变速系统主要是以下几种物品：</p>
+                <ul id="内容2列表">
+                    <li onmouseover="showDiv('div--1')" onmouseout="hideDiv('div--1')">左右变速器</li>
+                    <li onmouseover="showDiv('div--2')" onmouseout="hideDiv('div--2')">前拨</li>
+                    <li onmouseover="showDiv('div--3')" onmouseout="hideDiv('div--3')">后拨</li>
+                </ul>
+                <div id="div--1" >
+                    <div style="width: 100px;">
+                        <p style="font-size: 15px;width: 120px;height: 1px;margin: 0px;color: rgb(47, 61, 250);font-weight: 900;font-size: 15px;">也就是我们常说:<br>手变，指拨变速器</p>
+                        <img src="../img/手变.png" style="width: 399px;height: 199px;border-radius: 10px;">
+                    </div>
+                </div>
+                <div id="div--2" >
+                    <p style="font-size: 15px;width: 170px;height: 1px;margin: 0px;color: rgb(255, 255, 255);font-weight: 900;font-size: 19px;">前拨用来将链条挂上牙盘</p>
+                    <img src="../img/前拨.jpg" alt="" style="width: 399px;height: 229px;border-radius: 10px;">
+                </div>
+                <div id="div--3">
+                    <p style="font-size: 15px;width: 170px;height: 1px;margin: 0px;color: rgb(255, 255, 255);font-weight: 900;font-size: 19px;">后拨用来将链条挂上飞轮</p>
+                    <img src="../img/后拨.avif" alt="" style="width: 399px;height: 229px;border-radius: 10px;">
+                </div>
+               
+            </div>
+            <div id="内容3" style="float: right;width: 50%;height: 400px;">
+                <p>其中的<i style="color: rgba(0, 0, 0, 0.918);">变速方式</i>也是有多种多样的。如两大变速方式：机械线拉和电子变速</p>
+                <p>在变速器方面，变速器也有很多种类：公路车的手变头，山地的指拨器。</p>
+                <p>还有一些特殊的变速器如TT计时车的按钮变速器和部分老车自带的车梁变速器</p>                
+                <img src="../img/hq720.jpg" alt="加载错误" style="width: 87%;border-radius: 10px;" id="yx_top">
+            </div>
+        </div>
+
+        <div id="内容4">
+            <p>如果你的自行车在长时间的骑行中发现，自己的车出现变速处异响、变速卡顿、变速跳档、变速不灵敏等问题</p>            
+            <p>不妨观看一下一些别人的教学视频,这是我在网上收集别人讲的视频，个人认为这些up主讲的还算是通俗易懂</p>
+            <p>在解决问题前，我们先需要寻找一下异响或者问题的来源，这样我们可以很好的对症下药。</p>
+            <div class="yx_div">
+                <div id="yx_nav">
+                    <ul>
+                        <li class="cf cf1" data - index="0">变速不准</li>
+                        <li class="cf" data - index="1">链条跳齿</li>
+                        <li class="cf cf3" data - index="2">链条异响</li>
+                    </ul>
+                </div>
+                <div class="xs xs1">
+                    <ul>
+                        <li><span>变速线张力问题</span><br>
+                            长时间使用后，变速线可能会松弛，导致无法准确传递变速指令。
+                            变速线在车架线槽内受到磨损或摩擦增大，也会影响张力。</li>
+                        <li><span>限位螺丝调节不当</span><br>
+                            后拨或前拨上的高低限位螺丝决定了变速器的移动范围。如果螺丝调节有误，会使链条无法准确切换到对应齿盘。</li>
+                        <li><span>后拨或前拨变形</span><br>
+                            受到外力撞击，后拨或前拨的结构可能发生变形，影响其对链条的精准引导。可以检查一下尾钩情况</li>
+                        <li><span>变速线断裂</span><br>
+                            变速线在长时间使用后可能会出现断裂，导致变速器无法准确传递变速指令。</li>
+                    </ul>
+                    <video src="../video/变速不准？可能是变速线要断！.mp4" controls loop autoplay muted class="xs_video"></video>
+                    <span style="position: relative;float: right;left: 350px;bottom: 50px;"><a href="https://space.bilibili.com/427727066">此视频转载gocyc up主的视频</a></span>
+
+                </div>
+                <div class="xs xs2">
+                    <ul>
+                        <li><span>变速线拉线比问题</span><br>
+                            长时间使用后或不规范调整，变速线可能未调整到最佳状态，导致无法准确拉到对应位置。因此踩踏时也会收到链条的影响。</li>
+                        <li><span>飞轮磨损问题</span><br>
+                            飞轮齿片磨损严重，尤其是个别齿片磨损，会导致变速时链条不能顺利挂住齿片。</li>
+                        <li><span>链条磨损</span><br>
+                            链条过度拉长或磨损不均匀，在与飞轮结合时就容易出现跳齿、变速不准的情况。
+                            飞轮齿片磨损严重，尤其是个别齿片磨损，会导致变速时链条不能顺利进入正确齿位。</li>
+                        <li><span>受到外力撞击</span><br>
+                            如果后拨或前拨收到撞击，可能会导致变速器的结构可能发生变形，影响其对链条的精准引导。</li>
+                    </ul>
+                </div>
+                <div class="xs xs3">
+                    <p>一般来说</p>
+                    <p>如果链条噪声很大的话多半与变速器调整有关</p>
+                    <p>如果你已经将变速器调整到最佳状态，请你看看你的链条是否滴上润滑油</p>
+                    <p>或者自行车链条是否装反（指禧玛诺品牌，其他品牌没有正反之说）</p>
+                </div>
+                <script src="../JS文件/变速异响盒子变化.js"></script>
+            </div>
+        
+        <div style="width: 100%;height: 500px;">
+            
+        </div>
+
+        </div>
+        <script src="../JS文件/变速器动画设置.js"></script>
+
+    </section>
+
+
+
+    
+
+
+
+    <!-- 页脚栏 -->
+    <div class="div1">
+        <div class="tab_div_foot">
+            <table cellspacing="10" id="foot_tab">
+                <tr>
+                    <td>制作者:</td>
+                    <td>Zero_Point</td>
+                    <td>闲尘游</td>
+                    <td>晓峰</td>
+                </tr>
+                <tr>
+                    <td>创作时间：</td>
+                    <td>2024/4/22</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>注意事项：</td>
+                    <td>本网站仅供学习参考</td>
+                    <td>如有疑问请联系邮箱</td>
+                </tr>
+                <tr>
+                    <td>邮箱：</td>
+                    <td>Z1916819975@163.com</td>
+                    <td></td>
+                </tr>
+            </table>
+            
+        </div>
+
+        <div class="foot_logo">
+            <img src="../img/wx_logo.png" alt="无法显示" class="wx" onmouseover="jr(this)" onmouseout="lk(this)" >
+            
+        </div>
+
+        <script src="../JS文件/微信动态展开.js"></script>
+        
+    </div>
+    <div class="网站信息">
+
+    </div>
+    <!-- 置顶标签图标 -->
+    <div>
+        <a href="#top_s" style="color: black;"><?xml version="1.0" ?><svg class="bi" fill="currentColor" height="40" viewBox="0 0 16 16" width="40" xmlns="http://www.w3.org/2000/svg"><path d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708zM2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4z" fill-rule="evenodd"/></svg></a>    
+    </div>  
+</body>
+</html>

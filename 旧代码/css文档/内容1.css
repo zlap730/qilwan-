@@ -1,0 +1,823 @@
+/* body{
+ background-image: url("屏幕截图\ 2024-05-12\ 181732.png");   
+ background-repeat: no-repeat;
+ background-attachment:fixed ; 
+ background-size: cover;
+} */
+
+#电梯导航{
+
+    position: absolute;
+
+    padding: 0px;
+    margin: 0px;
+    width: 90px;
+    height: 270px;
+    bottom: 540px;
+    left: 450px;
+}
+#电梯导航 ul{
+    list-style: none;
+    position: relative;
+    line-height: 60px;
+    padding: 0px;
+    
+}
+#电梯导航 ul a div{
+    width: 90px;
+    height: 65px;
+    background-color: #eec7c7b0;
+    border: 2px solid white;
+}
+#电梯导航 ul a{
+    display: flex;
+    margin-bottom: 10px;
+    
+}
+
+#电梯导航 ul a div h3{
+    color: rgb(255, 255, 255);
+    text-shadow: 
+    -0.5px -0.5px 0 #000,
+    0.5px -0.5px 0 #000,
+    -0.5px 0.5px 0 #000,
+    0.5px 0.5px 0 #000;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+
+}
+
+#电梯导航 ul a div h3:hover{
+    color:rgb(125, 125, 255);
+    transition: all 0.1s ease-in-out;
+    border-left: 3px solid rgb(125, 125, 255);
+}
+
+#loginContainer{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    display: none;
+    z-index: 99999;
+}
+
+
+
+
+body{
+    background-image: url("../img/深圳湾骑车壁纸图.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 1890px 1000px; 
+}
+
+#video1{/* 调整视频大小 */
+    width: 950px;
+    height: auto;
+}
+
+.s{
+   position: relative;
+    margin: 80px auto 0;
+    width: 720px;
+    height: 480px;
+    overflow: hidden;
+    z-index: 1;
+    border: 2px solid rgba(0, 0, 0, 0.274);
+    border-radius: 5px;
+}
+.s img{
+    width: 720px;
+    height: 480px;
+    border-radius: 5px;
+    float: left;
+}
+.a{
+    width: 2880px;
+    height: 480px;
+    animation: name 10s 1s  infinite ease-in-out alternate-reverse none;
+}
+@keyframes name{
+    0%,25%{
+        transform:translateX(0) ;
+    }
+    25%,50%{
+        transform: translateX(-720px);
+    }
+    50%,75%{
+        transform: translateX(-1440px);
+    }
+
+    75%,100%{
+        transform: translateX(-2160px);
+    }
+}
+
+#h2_xs{
+    
+    font-size: 30px;
+    font-family: "黑体";
+    font-weight: unset;
+    text-shadow: 
+    -0.5px -0.5px 0 #000,
+    0.5px -0.5px 0 #000,
+    -0.5px 0.5px 0 #000,
+    0.5px 0.5px 0 #000;
+    color: rgba(250, 75, 157, 0.829);
+    text-align: center;
+}
+
+#pp{
+    width: 1202px;
+    height: 692px;
+    margin: auto;
+    border: 2px solid rgba(0, 0, 0, 0.274);
+    background-image: linear-gradient(90deg,rgb(197, 223, 248) 50%,rgb(178, 218, 218) 100%);
+}
+.but{
+    margin: 0;
+    width: 597px;
+    height: 40px;
+    position: relative;
+    font-size: 20px;
+    font-family: "等线";
+    font-weight: 700;
+}
+
+#table_set{
+    background-image: linear-gradient(180deg,#ffff,#cac9c9);
+    position: relative;
+    left: 0px;
+    width: 1000px;
+}
+
+#table_set1{
+    background-image: linear-gradient(180deg,#ffff,#cac9c9);
+    position: relative;
+    width: 1000px;
+}
+
+tr,td{
+    padding: 5px;
+}
+
+/* 两个名字为ZP和div盒子设置 */
+.zp {  
+    width: 1200px;
+    height: 650px;
+    border: 1px solid rgba(0, 0, 0, 0.274);
+    
+    overflow: hidden;
+    position: absolute;
+    z-index: 1; /* 初始设置为1，用于显示 */
+    background-image: linear-gradient(180deg,rgb(197, 223, 248),rgb(178, 218, 218));
+}
+.zp1 {
+    display: block; /* 初始设置为隐藏 */
+    width: 1200px;
+    height: 650px;
+    
+    position: absolute;
+    z-index: 0; /* 初始设置为0，用于隐藏 */
+    background-image: linear-gradient(180deg,rgb(197, 223, 248),rgb(178, 218, 218));
+}
+/* ============================================================ */
+
+
+
+/* 盒子内的显示模块定位 */
+#h3_pp{
+    text-align: center;
+    text-shadow: 1px 1px 1px rgb(0, 0, 0);
+}
+#pp table tr td a{
+    text-decoration: none;
+    font-family: "幼圆";
+    font-size: 20px;
+}
+#pp table tr td a:hover{
+    text-decoration: underline;
+    color: rgba(250, 75, 157, 0.829);
+}
+th{
+    font-size: 24px;
+}
+td{
+    font-size: 15px;
+    font-weight: 600;
+    font-family: '黑体';
+    padding: 5px;
+}
+
+#img2{
+    width: 500px;
+    height: 350px;
+    position: relative;
+    margin: 50px;
+}
+
+
+#section4{
+    width: 1400px;
+    background-color: rgb(250, 195, 113);
+    height: 700px;
+    margin: auto;
+    border-radius: 10px;
+}
+
+#section4-div1{
+    width: 680px;
+    height: 330px;
+    background-color: rgb(144, 173, 226);
+    position: relative;
+    top: 15px;
+    left: 10px;
+    float: left;
+    border-radius: 10px;
+}
+#section4-div2{
+    width: 340px;
+    height: 330px;
+    background-color: rgb(144, 173, 226);
+    position: relative;
+    float: right;
+    top: 15px;
+    right: 10px;
+    border-radius: 10px;
+}
+#section4-div3{
+    width: 340px;
+    height: 330px;
+    background-color:rgb(144, 173, 226);
+    position: relative;
+    float: right;
+    top: 15px;
+    right: 20px;
+    border-radius: 10px;
+}
+#section4-div4{
+    width: 680px;
+    height: 330px;
+    background-color: rgb(144, 173, 226);
+    position: relative;
+    top: 355px;
+    left: 10px;
+    border-radius: 10px;
+}
+#section4-div5{
+    width: 690px;
+    height: 330px;
+    background-color: rgb(144, 173, 226);
+    position: relative;
+    top: 7px;
+    left: 700px;
+    border-radius: 10px;
+}
+
+.hov{
+    font-size: 29px;
+    color: brown;
+}
+@keyframes dh{
+    0%{font-size: 25px;}
+    100%{font-size: 29px;}
+}
+#前拨{
+    background-color: #cac9c9;
+    width: 210px;
+    height: 130px;
+    position: relative;
+    left: 160px;
+    top: 20px;
+    border: 2px rgba(0, 0, 0, 0.274) solid;
+}
+#前拨 a img{
+    width: 180px;
+    height: 130px;
+}
+
+#后变速器{
+    background-color: #cac9c9;
+    width: 210px;
+    height: 130px;
+    position: relative;
+    float: right;
+    bottom: 114px;
+    right: 50px;
+    border: 2px rgba(0, 0, 0, 0.274) solid;
+}
+#后变速器 a img{
+    width: 180px;
+    height: 130px;
+}
+
+#圈刹{
+    background-color: #cac9c9;
+    width: 210px;
+    height: 130px;
+    position: relative;
+    float: right;
+    top: 40px;
+    right: 92px;
+    border: 2px rgba(0, 0, 0, 0.274) solid;
+}
+#圈刹 a img{
+    width: 180px;
+    height: 130px;
+}
+#碟刹{
+    background-color: #cac9c9;
+    width: 210px;
+    height: 130px;
+    position: relative;
+    float: right;
+    top: 40px;
+    left: 378px;
+    border: 2px rgba(0, 0, 0, 0.274) solid;
+}
+#碟刹 a img{
+    width: 180px;
+    height: 130px;
+}
+
+
+#工具img{
+    width: 270px;
+    height: 170px; 
+    border-radius: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.274);
+}
+
+
+#保养{
+    width: 270px;
+    height: 170px; 
+    border-radius: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.274);
+    position: relative;
+    left: 34px;
+    
+}
+
+#装车{
+    width: 380px;
+    height: auto; 
+    border-radius: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.274);
+    position: relative;
+    bottom: 440px;
+    left: 200px;
+}
+.异响{
+    width: 300px;
+    height: 200px;
+    float: left;
+    background-color: #cac9c9;
+    margin: 15px;
+    margin-left: 20px;
+}
+
+.but[type="button"]:active {
+    background-color: #e9c5c5; /* 点击时的背景颜色 */
+}
+.but[type="button"]:active,
+.but[type="button"]:focus {
+    background-color: #ffc2c2; /* 点击和聚焦时的背景颜色 */
+}
+
+
+#p-1 span{
+    color: rgba(214, 36, 36, 0.829);
+    
+}
+
+
+.异响 h4{
+    margin: 5px;
+    margin-left: 118px ;
+    position: relative;
+}
+
+
+.异响 img{
+    width: 300px;
+    height: 170px;
+}
+
+
+#ltk{
+    position: absolute;
+    width: 500px;
+    height: 50px;
+}
+
+#section4 div a{
+    color:rgb(255, 255, 255);
+    text-shadow: 
+    -0.6px -0.6px 0 #000,
+    0.6px -0.6px 0 #000,
+    -0.5px 0.5px 0 #000,
+    0.5px 0.5px 0 #000;
+}
+
+#section4 div a:hover{
+    animation-name: a_div;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+}
+@keyframes a_div{
+    from{color: white;font-size: 19px;}
+    to{
+        color: #3399FF;
+        font-size: 22px;
+        opacity: 0.8;
+    }
+}
+
+
+
+
+
+
+
+
+
+#foot{
+    display: flex;
+    list-style: none;
+    margin: 0px;
+}
+#foot li{
+    line-height: 35px;
+    margin-left: 10px;
+    font-family: '等线';
+    font-weight: 900;
+    color: #1a1a1a;
+}
+
+
+:root {
+    --main-width: 680px;    /* 4:3比例 */
+    --main-height: 400px;   
+    --stack-scale: 0.7;
+    --stack-gap: 20px;
+}
+
+.carousel-system {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    overflow: hidden;
+    background: bisque;
+    opacity: 0.95;
+
+}
+
+/* 主卡片容器 */
+.main-stage {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: var(--main-width);
+    height: var(--main-height);
+    transform: translate(-50%, -50%);
+    z-index: 100;
+}
+
+.main-card {
+    z-index: 1000; /* 确保主卡片在最顶层 */
+    border: #a8a5a5 1px solid;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: absolute;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s;
+    border-radius: 8px;
+}
+
+/* 卡片内容区域 */
+.card-content {
+    flex: 1;
+    overflow-y: auto;
+    border-radius: 8px;
+}
+
+.card-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.card-content h3 {
+    margin: 0 0 10px;
+    font-size: 20px;
+    color: #333;
+}
+
+.card-content p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+}
+
+
+
+/* 左右堆叠容器 */
+.stack-container {
+    position: absolute;
+    top: 50%;
+    width: calc(var(--main-width) * var(--stack-scale) + 50px);
+    height: calc(var(--main-height) * var(--stack-scale) );
+    transform: translateY(-50%);
+    perspective: 800px;
+}
+
+.left-stack { left: 10%; }
+.right-stack { right: 10%; }
+
+/* 堆叠卡片 */
+.stack-card {
+    position: absolute;
+    width: calc(var(--main-width) * var(--stack-scale));
+    height: calc(var(--main-height) * var(--stack-scale));
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform-style: preserve-3d;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    opacity: 0.95;
+    border: #a8a5a5 1px solid;
+}
+
+/* 导航按钮 */
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.9);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    transform: translateY(-50%);
+    transition: all 0.3s;
+    z-index: 200;
+    
+}
+
+.nav-btn:hover {
+    background: #2196F3;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.prev-btn { left: 100px; }
+.next-btn { right: 150px; }
+
+/* 动画 */
+@keyframes slideInFromRight {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInFromLeft {
+    from { transform: translateX(-100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOutToLeft {
+    to { transform: translateX(-100%); opacity: 0; }
+}
+
+@keyframes slideOutToRight {
+    to { transform: translateX(100%); opacity: 0; }
+}
+
+
+/* 新增统一卡片链接样式 */
+.card-link {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: all 0.1s ease-in-out;
+    background-size: contain;  /* 统一背景样式 */
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+/* 为每个卡片单独设置背景 */
+.card-link.personal-gear {
+    background-image: url('../img/人身装备.webp');
+    background-size: cover;  /* 示例特殊处理 */
+}
+.card-link.frame {
+    background-image: url('../img/车架.png');
+    background-size: 100% auto;  /* 自定义缩放 */
+    background-position: center;
+}
+.card-link.drivetrain {
+    background-image: url('../img/sm_gx_groupset.webp');
+    background-size: contain;
+}
+.card-link.wheels {
+    background-image: url('../img/轮组.png');
+    background-size: 100% auto;
+}
+.card-link.brakes {
+    background-image: url('../img/刹车.jpg.png');
+    background-size: cover;
+}
+.card-link.diy {
+    background-image: url('../img/车架组.jpg');
+    background-size: 100% auto;
+}
+
+.card-overlay {
+    /* ...原有样式... */
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background-color: #2196F3;
+    opacity: 0;
+}
+
+.card-overlay:hover {
+    opacity: 0.8;
+}
+
+.card-title {
+    /* ...原有样式... */
+    -webkit-text-stroke: 1px black;
+    color: white;
+    text-align: center;
+    font-size: 49px;
+    padding: 0px;
+    margin: 0px;
+    position: relative;
+    top: 250px;
+    pointer-events: none; /* 新增：防止文字阻挡鼠标事件 */
+    z-index: 9999;
+}
+.stack-container .card-link {
+    pointer-events: none !important;
+}
+
+/* 主卡片启用交互 */
+.card-title {
+    transition: font-size 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.card-overlay {
+    transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+/* #卡片1-a{
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: all 0.1s ease-in-out;
+    background-image: url('../img/人身装备.webp');
+}
+
+#卡片2-a{
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: all 0.1s ease-in-out;
+    background-image: url('../img/车架.png');
+    background-size: contain;  
+    background-position: center ;
+    background-repeat: no-repeat;
+}
+#卡片3-a{
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: all 0.1s ease-in-out;
+    background-image: url('../img/sm_gx_groupset.webp');
+    background-size: contain;  
+    background-position: center ;
+     background-repeat: no-repeat;
+}
+#卡片4-a{
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: all 0.1s ease-in-out;
+    background-image: url('../img/轮组.png');
+    background-size: contain;  
+    background-position: center ;
+     background-repeat: no-repeat;
+}
+#卡片5-a{
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: all 0.1s ease-in-out;
+    background-image: url('../img/刹车.jpg.png');
+    background-size: contain;  
+    background-position: center ;
+     background-repeat: no-repeat;
+}
+#卡片6-a{
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: all 0.1s ease-in-out;
+    background-image: url('../img/车架组.jpg');
+    background-size: contain;  
+    background-position: center ;
+     background-repeat: no-repeat;
+} */
+/* #遮蔽罩{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 102, 255);
+    border-radius: 12px;
+    padding: 0px;
+    margin: 0px;
+    top: 0px;
+    opacity: 0;
+    transition: all 0.1s ease-in-out;
+}
+
+#card-p{
+    padding: 0px;
+    margin: 0px;
+    color: white;
+    font-size: 55px;
+    font-family: '黑体';
+    text-align: center;
+    position: relative;
+    width: 400px;
+    top: 250px;
+    left: 120px;
+    transition: all 0.1s ease-in-out;
+    z-index: 999;
+    -webkit-text-stroke: 0.1px black;
+    
+} */
+
+
+#userDropdown{
+    display: block;
+    position: absolute;
+    top: 0px;
+    right: 0;
+    width: 200px;
+    height: 40px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+}
+
+#loginButton{
+    position: absolute;
+    top: 8px;
+    right: 30px;
+    width: 100px;
+    height: 40px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+    border: none;
+}
+#loginButton:hover{
+    background-color: #d6e3ff;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+}
+#userDropdown:hover{
+    background-color: #d6e3ff;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+}

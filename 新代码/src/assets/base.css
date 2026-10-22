@@ -1,0 +1,26 @@
+/* 全局基线：只做最小重置，避免和原 css文档/ 里的样式打架 */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: '微软雅黑', 'Microsoft YaHei', system-ui, sans-serif;
+  color: #222;
+  background-color: #fff;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+}

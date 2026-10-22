@@ -1,0 +1,28 @@
+.th{
+    width: 130px;
+    height: 130px;
+    background-image: url(../img/bike.png);
+    margin: 0 auto;
+    margin-top: 100px;
+    animation: bike 1s steps(31) infinite,lu 5s 1 ease-in-out forwards;
+    position: fixed;
+    left: 0;
+    top: 200px;
+    transform-style: preserve-3d;
+}
+@keyframes bike {
+    from{}
+    to{
+        background-position: 0px -4030px;
+    }
+}
+@keyframes lu{
+    0%{
+        transform: translate(0);
+        transform: scaleY(180deg);
+    }
+    100%{
+        transform: translate(1800px);
+        transform: scaleY(180deg);
+    }
+}

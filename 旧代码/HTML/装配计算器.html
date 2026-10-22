@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIY装配计算器</title>
+    <link rel="stylesheet" href="../css文档/首页导航栏UI设计.css">
+    <link rel="stylesheet" href="../css文档/装配计算器CSS.css">
+    <link rel="icon" href="../img/iocioc.ioc" type="image/x-icon">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav id="nav_1">
+        <ul id="ul_nav">
+            <!-- 链接对应网页链接 -->
+            <li><a href="../HTML/整车页面.HTML" onmouseover="jr1(this)" onmouseout="lk1(this)">整车品牌</a></li>
+            <li><a href="../HTML/车架页面.html" onmouseover="jr1(this)" onmouseout="lk1(this)">车架推荐</a></li>
+            <li><a href="../HTML/配件.html" onmouseover="jr1(this)" onmouseout="lk1(this)">零件道具</a></li>
+            <li><a href="../HTML/服装头盔.html" onmouseover="jr1(this)" onmouseout="lk1(this)">人身装备</a></li>
+            <li><a href="#get_in" onmouseover="jr1(this)" onmouseout="lk1(this)">关于网站</a></li>  
+            <li><a href="../骑乐网.html#h3-text" onmouseover="jr1(this)" onmouseout="lk1(this)">返回首页</a></li>
+        </ul>
+         <a href=""><img src="../img/logo.jpg" alt="logo" id="img_nav"></a> <!--链接关于网站的html -->
+    </nav>
+    <script src="../JS文件/导航栏.js"></script>
+
+
+
+
+    <section style="width: 1600px;height: 350px; background-color: bisque;position: relative;top: 60px;margin: auto;">
+        <div id="开头P">
+            <div style="width: 1100px;">
+                <p>我致力于为那些喜欢自己组装自行车的朋友提供便利，让你可以线上直接列出组装车所需的清单。</p>
+                <p>通过我编写的程序，你可以在填完表格后快速生成一份清单，以帮助你更加高效地采购和所需配件。</p>
+                <p>如果您希望为自己的爱车量身定制独特配置，我们也很乐意为您提供专业建议和支持，随时为您的组装之旅出谋划策。</p>
+            </div>
+            <img src="../img/晓风车架.png" alt=""  id="img_a">
+        </div>
+    </section>
+    
+    <section style="width: 1600px;height: 1500px; background-image: linear-gradient(0deg,#fff,bisque);position: relative; margin: auto;">
+        <div id="nav_table">
+            <ul>
+                <li style="top: -5px;right: 80px;">配置清单</li>
+                <li style="top: -5px;right: 45px;">物品</li>
+                <li style="top: -5px;right: 20px;">单价</li>
+                <li style="top: -5px;right: 40px;">数量</li>
+                <li style="top: -5px;right: 50px;">配件规格</li>
+                <li style="top: -5px;right: 0px;">备注</li>
+            </ul>
+        </div>
+        <!-- 填写表格 -->
+        <div id="div_table">
+            
+            <form>
+                <table border="1" id="table">
+                    
+                    
+                    
+                    <tr class="item-row">
+                        <td>车架品牌</td>
+                        
+                        <td><input type="text" name="配件" id="配件" required placeholder='必填'></td>
+                        <td><input type="number" name="单价" id="单价"></td>
+                        <td><input type="number" name="数量" id="数量" value="1"></td>
+                        <td><input type="text" name="规格" id="规格"></td>
+                        <td><input type="text" name="备注" id="备注"></td>
+                    </tr>
+                    
+                    <tr class="item-row">
+                        <td><select class="config-select">
+                            <option value="硬前叉">硬前叉</option>
+                            <option value="避震前叉">避震前叉</option>
+                        </select></td>
+                        
+                        <td><input type="text" name="配件111" id="配件" placeholder='车架带可以不填'></td>
+                        <td><input type="number" name="单价111" id="单价"></td>
+                        <td><input type="number" name="数量111" id="数量" value="1"></td>
+                        <td><input type="text" name="规格111" id="规格"></td>
+                        <td><input type="text" name="备注111" id="备注"></td>
+                    </tr>
+
+                    <tr class="item-row">
+                        <td>后避震器</td>
+                        
+                        <td><input type="text" name="配件222" id="配件" placeholder='硬尾不填'></td>
+                        <td><input type="number" name="单价222" id="单价"></td>
+                        <td><input type="number" name="数量222" id="数量" value="1"></td>
+                        <td><input type="text" name="规格222" id="规格"></td>
+                        <td><input type="text" name="备注222" id="备注"></td>
+                    </tr>
+
+                    <tr class="item-row">
+                        <td colspan="6" style="height: 25px;font-size: 14px;"></td>
+                    </tr>
+                    
+                    <tr class="item-row">
+                       
+                        
+                        <td>花鼓<span>(选填)</span></td>
+                        <td><input type="text" name="配件1" id="配件"placeholder='不需要的可以不填'></td>
+                        <td><input type="number" name="单价1" id="单价"></td>
+                        <td><input type="number" name="数量1" id="数量" value=""></td>
+                        <td><input type="text" name="规格1" id="规格"></td>
+                        <td><input type="text" name="备注1" id="备注"></td>
+                    </tr>
+                    
+                    <tr class="item-row">
+                        <td>辐条<span>(选填)</span></td>
+                        
+                        <td><input type="text" name="配件2" id="配件" placeholder="不需要的可以不填"></td>
+                        <td><input type="number" name="单价2" id="单价"></td>
+                        <td><input type="number" name="数量2" id="数量" value=""></td>
+                        <td><input type="text" name="规格2" id="规格"></td>
+                        <td><input type="text" name="备注2" id="备注"></td>
+                    </tr>
+                    
+                    <tr class="item-row">
+                        <td>外胎</td>
+                        
+                        <td><input type="text" name="配件3" id="配件" placeholder="选真空胎不填此空"></td>
+                        <td><input type="number" name="单价3" id="单价"></td>
+                        <td><input type="number" name="数量3" id="数量" value="1"></td>
+                        <td><input type="text" name="规格3" id="规格"></td>
+                        <td><input type="text" name="备注3" id="备注"></td>
+                    </tr>
+                    
+                    <tr class="item-row">
+                        <td>内胎/真空胎+自补液</td>
+                        
+                        <td><input type="text" name="配件3" id="配件" required ></td>
+                        <td><input type="number" name="单价3" id="单价"></td>
+                        <td><input type="number" name="数量3" id="数量" value="1"></td>
+                        <td><input type="text" name="规格3" id="规格"></td>
+                        <td><input type="text" name="备注3" id="备注"></td>
+                    </tr>
+                    <tr class="item-row">
+                        <td><select class="config-select">
+                            <option value="成品轮组">成品轮组</option>
+                            <option value="轮圈">轮圈</option>
+                        </select></td>
+                        
+                        
+                        <td><input type="text" name="配件4" id="配件" placeholder="必填"></td>
+                        <td><input type="number" name="单价4" id="单价"></td>
+                        <td><input type="number" name="数量4" id="数量" value="1"></td>
+                        <td><input type="text" name="规格4" id="规格"></td>
+                        <td><input type="text" name="备注4" id="备注"></td>
+                    </tr>
+                    
+                    <tr class="item-row">
+                        <td colspan="6" style="height: 25px;font-size: 14px;"></td>
+                    </tr>
+                    
+                    <tr class="item-row">
+                        
+                        <td>前拨</td>
+                        <td><input type="text" name="配件5" id="配件"></td>
+                        <td><input type="number" name="单价5" id="单价"></td>
+                        <td><input type="number" name="数量5" id="数量" value="1"></td>
+                        <td><input type="text" name="规格5" id="规格"></td>
+                        <td><input type="text" name="备注5" id="备注"></td>
+                    </tr>
+                    
+                    <tr class="item-row">
+                        <td>后拨</td>
+                        
+                        <td><input type="text" name="配件6" id="配件"></td>
+                        <td><input type="number" name="单价6" id="单价"></td>
+                        <td><input type="number" name="数量6" id="数量" value="1"></td>
+                        <td><input type="text" name="规格6" id="规格"></td>
+                        <td><input type="text" name="备注6" id="备注"></td>
+                    </tr>
+                    
+                    <tr class="item-row">
+                        <td><select class="config-select">
+                            <option value="手变头">手变</option>
+                            <option value="指拨变速器">指拨变速器</option>
+                        </select></td>>
+                        
+                        <td><input type="text" name="配件7" id="配件"></td>
+                        <td><input type="number" name="单价7" id="单价"></td>
+                        <td><input type="number" name="数量7" id="数量" value="1"></td>
+                        <td><input type="text" name="规格7" id="规格"></td>
+                        <td><input type="text" name="备注7" id="备注"></td>
+                    </tr>
+                    
+                    <tr class="item-row">
+                        <td>飞轮</td>
+                        
+                        <td><input type="text" name="配件8" id="配件"></td>
+                        <td><input type="number" name="单价8" id="单价"></td>
+                        <td><input type="number" name="数量8" id="数量" value="1"></td>
+                        <td><input type="text" name="规格8" id="规格"></td>
+                        <td><input type="text" name="备注8" id="备注"></td>
+                    </tr>
+                    
+                    <tr class="item-row">
+                        <td>中轴</td>
+                        
+                        <td><input type="text" name="配件9" id="配件"></td>
+                        <td><input type="number" name="单价9" id="单价"></td>
+                        <td><input type="number" name="数量9" id="数量" value="1"></td>
+                        <td><input type="text" name="规格9" id="规格"></td>
+                        <td><input type="text" name="备注9" id="备注"></td>
+                    </tr>
+                    
+                    <tr class="item-row">
+                        <td>牙盘</td>
+                        
+                        <td><input type="text" name="配件10" id="配件"></td>
+                        <td><input type="number" name="单价10" id="单价"></td>
+                        <td><input type="number" name="数量10" id="数量" value="1"></td>
+                        <td><input type="text" name="规格10" id="规格"></td>
+                        <td><input type="text" name="备注10" id="备注"></td>
+                    </tr>
+                    
+                    <tr class="item-row">
+                        <td>链条</td>
+                        
+                        <td><input type="text" name="配件11" id="配件" ></td>
+                        <td><input type="number" name="单价11" id="单价"></td>
+                        <td><input type="number" name="数量11" id="数量" value="1"></td>
+                        <td><input type="text" name="规格11" id="规格"></td>
+                        <td><input type="text" name="备注11" id="备注"></td>
+                    </tr>
+                    
+                    <tr class="item-row">
+                        <td>线管/线芯</td>
+                        
+                        <td><input type="text" name="配件12" id="配件"></td>
+                        <td><input type="number" name="单价12" id="单价"></td>
+                        <td><input type="number" name="数量12" id="数量" value="1"></td>
+                        <td><input type="text" name="规格12" id="规格"></td>
+                        <td><input type="text" name="备注12" id="备注"></td>
+                    </tr>
+                    
+                    <tr class="item-row">
+                        <td colspan="6" style="height: 25px;font-size: 14px;"></td>
+                    </tr>
+
+                    <tr class="item-row">
+                        
+                        <td><select class="config-select">
+                            <option value="夹器">夹器</option>
+                            <option value="碟刹">碟刹</option>
+                        </select></td>
+                        <td><input type="text" name="配件13" id="配件" placeholder="注意规格"></td>
+                        <td><input type="number" name="单价13" id="单价"></td>
+                        <td><input type="number" name="数量13" id="数量" value="1"></td>
+                        <td><input type="text" name="规格13" id="规格"></td>
+                        <td><input type="text" name="备注13" id="备注"></td>
+                    </tr>
+                    <tr class="item-row">
+                        <td>碟片</td>
+                        
+                        <td><input type="text" name="配件14" id="配件" placeholder="圈刹跳过"></td>
+                        <td><input type="number" name="单价14" id="单价"></td>
+                        <td><input type="number" name="数量14" id="数量" value="1"></td>
+                        <td><input type="text" name="规格14" id="规格"></td>
+                        <td><input type="text" name="备注14" id="备注"></td>
+                    </tr>
+                    <tr class="item-row">
+                        <td><select class="config-select">
+                            <option value="线管">线管</option>
+                            <option value="油管">油管</option>
+                        </select></td>
+                      
+                        <td><input type="text" name="配件15" id="配件"></td>
+                        <td><input type="number" name="单价15" id="单价"></td>
+                        <td><input type="number" name="数量15" id="数量" value="1"></td>
+                        <td><input type="text" name="规格15" id="规格"></td>
+                        <td><input type="text" name="备注15" id="备注"></td>
+                    </tr>
+                    <tr class="item-row">
+                        <td>刹车油/线芯<span>(选填)</span></td>
+                        
+                        <td><input type="text" name="配件16" id="配件"></td>
+                        <td><input type="number" name="单价16" id="单价"></td>
+                        <td><input type="number" name="数量16" id="数量" value="1"></td>
+                        <td><input type="text" name="规格16" id="规格"></td>
+                        <td><input type="text" name="备注16" id="备注"></td>
+                    </tr>
+                    
+                    <tr class="item-row">
+                        <td colspan="7" style="height: 25px;font-size: 14px;"></td>
+                    </tr>
+                    
+                    <tr class="item-row">
+                        
+                        <td>座管夹</td>
+                        <td><input type="text" name="配件17" id="配件"></td>
+                        <td><input type="number" name="单价17" id="单价"></td>
+                        <td><input type="number" name="数量17" id="数量" value="1"></td>
+                        <td><input type="text" name="规格17" id="规格"></td>
+                        <td><input type="text" name="备注17" id="备注"></td>
+                    </tr>
+                    <tr class="item-row">
+                        <td>车把</td>
+                        
+                        <td><input type="text" name="配件18" id="配件"></td>
+                        <td><input type="number" name="单价18" id="单价"></td>
+                        <td><input type="number" name="数量18" id="数量" value="1"></td>
+                        <td><input type="text" name="规格18" id="规格"></td>
+                        <td><input type="text" name="备注18" id="备注"></td>
+                    </tr>
+                    <tr class="item-row">
+                        <td>把立</td>
+                        
+                        <td><input type="text" name="配件19" id="配件"></td>
+                        <td><input type="number" name="单价19" id="单价"></td>
+                        <td><input type="number" name="数量19" id="数量" value="1"></td>
+                        <td><input type="text" name="规格19" id="规格"></td>
+                        <td><input type="text" name="备注19" id="备注"></td>
+                    </tr>
+                    <tr class="item-row">
+                        <td>坐管</td>
+                        
+                        <td><input type="text" name="配件20" id="配件"></td>
+                        <td><input type="number" name="单价20" id="单价"></td>
+                        <td><input type="number" name="数量20" id="数量" value="1"></td>
+                        <td><input type="text" name="规格20" id="规格"></td>
+                        <td><input type="text" name="备注20" id="备注"></td>
+                        
+                    </tr>
+                    <tr class="item-row">
+                        <td>坐垫</td>
+                        
+                        <td><input type="text" name="配件21" id="配件"></td>
+                        <td><input type="number" name="单价21" id="单价"></td>
+                        <td><input type="number" name="数量21" id="数量" value="1"></td>
+                        <td><input type="text" name="规格21" id="规格"></td>
+                        <td><input type="text" name="备注21" id="备注"></td>
+                    </tr>
+                    <tr class="item-row">
+                        <td>把带</td>
+                        
+                        <td><input type="text" name="配件22" id="配件"></td>
+                        <td><input type="number" name="单价22" id="单价"></td>
+                        <td><input type="number" name="数量22" id="数量" value="1"></td>
+                        <td><input type="text" name="规格22" id="规格"></td>
+                        <td><input type="text" name="备注22" id="备注"></td>
+                    </tr>
+                    <tr class="item-row">
+                        <td>碗组</td>
+                        
+                        <td><input type="text" name="配件23" id="配件"></td>
+                        <td><input type="number" name="单价23" id="单价"></td>
+                        <td><input type="number" name="数量23" id="数量" value="1"></td>
+                        <td><input type="text" name="规格23" id="规格"></td>
+                        <td><input type="text" name="备注23" id="备注"></td>
+                    </tr>
+                    <tr class="item-row">
+                        <td>总计预算：</td>
+                        <td><input type="text" name="" id="jsjs"></td>
+                        
+                        <td><input type="text" value="" id="numnum"></td>
+                        <td colspan="3"><input type="button" value="点击计算最终结果" style="height: 30px;width: 500px;color: black;background-color: rgb(233, 232, 232);letter-spacing: 2px;transition: all 0.2s ease-in;" onclick="jsuan()" onmouseover="chufa()" onmouseout="likai()" id="butbut"></td>
+                    </tr>
+                    <tfoot><td colspan="7" style="color: brown;">在填写的过程中请您确认好填写配件中的规格大小,以防出现配件之间规格不兼容的问题</td></tfoot>
+                    
+                </table>
+            </form>
+        </div>
+        <p id="table_P">填写此表格后可以点击下载将表格下载到本地中 | 下载不收费</p>
+        <label for="exportButton">
+            <img src="../img/图标文件/download_111133.png" alt="下载图标">
+        </label>
+        <input type="button" value="点击下载表格" id="exportButton" onmouseover="chufa1()" onmouseout="likai1()">
+        <span style="position: relative;left: 270px;top: 50px;">如果无法下载请更换成Microsoft Edge浏览器进行下载</span>
+        
+        <div>
+
+        </div>
+    </section>
+    
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+    <script src="../JS文件/装配计算器.js"></script>
+    <script src="../JS文件/表格计算器.js"></script>
+</html>

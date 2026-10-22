@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的空间</title>
+<!-- ================================================================================================================================== -->
+    <link rel="icon" href="../img/iocioc.ioc" type="image/x-icon">
+    <link rel="stylesheet" href="../css文档/首页导航栏UI设计.css">
+    <link rel="stylesheet" href="../css文档/个人空间.css">
+    
+<!-- ================================================================================================================================== -->
+</head>
+<body>
+        <nav id="nav_1">
+        <ul id="ul_nav">
+            <!-- 链接对应网页链接 -->
+            <li><a href="../HTML/整车页面.HTML" onmouseover="jr1(this)" onmouseout="lk1(this)">整车推荐</a></li>
+            <li><a href="../HTML/车架页面.html" onmouseover="jr1(this)" onmouseout="lk1(this)">车架推荐</a></li>
+            <li><a href="../HTML/配件.html" onmouseover="jr1(this)" onmouseout="lk1(this)">零件道具</a></li>
+            <li><a href="../HTML/服装头盔.html" onmouseover="jr1(this)" onmouseout="lk1(this)">人身装备</a></li>
+            <li><a href="../HTML/装配计算器.html" onmouseover="jr1(this)" onmouseout="lk1(this)">计算清单</a></li>
+            <li><a href="#get_in" onmouseover="jr1(this)" onmouseout="lk1(this)">关于网站</a></li>  
+            <li><a href="../骑乐网.html#工具篇" onmouseover="jr1(this)" onmouseout="lk1(this)">返回首页</a></li>
+        </ul>
+         <a href=""><img src="../img/logo.jpg" alt="logo" id="img_nav"></a> <!--链接关于网站的html -->
+    </nav>
+    <script src="../JS文件/导航栏.js"></script>
+
+
+    <div class="container">
+        <h2>我的空间</h2>
+
+        <!-- 发布作品区域 -->
+        <div id="publishSection">
+            <h3>发布作品</h3>
+            <button id="showUploadFormButton" onclick="showUploadForm(event)">上传作品</button>
+            <form id="postForm" enctype="multipart/form-data" onsubmit="uploadPost(event)" style="display:none; margin-top: 15px;">
+                <textarea id="postContent" name="content" placeholder="写下你的作品内容..." rows="5"></textarea>
+                <input type="file" id="postFile" name="file" accept="image/*,video/*">
+                <button type="submit" id="uploadButton">确认上传</button>
+            </form>
+        </div>
+
+        <hr>
+
+        <!-- 展示作品区域 -->
+        <div id="postsSection">
+            <h3>作品展示</h3>
+            <!-- 动态加载作品 -->
+        </div>
+    </div>
+
+    <script src="../JS文件/个人空间.js"></script>
+    <script>
+    function showUploadForm(event) {
+        event.preventDefault();
+        document.getElementById('showUploadFormButton').style.display = 'none';
+        document.getElementById('postForm').style.display = 'block';
+    }
+    </script>
+</body>
+</html>

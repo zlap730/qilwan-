@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../img/iocioc.ioc" type="image/x-icon">
+    <link rel="stylesheet" href="../css文档/首页导航栏UI设计.css">
+    <link rel="stylesheet" href="../css文档/整车页面.css">
+    <title>自行车推荐</title>
+</head>
+<body>
+    <nav id="nav_1">
+        <ul id="ul_nav">
+            <!-- 链接对应网页链接 -->
+            <li><a href="../HTML/车架页面.html" onmouseover="jr1(this)" onmouseout="lk1(this)">车架推荐</a></li>
+            <li><a href="../HTML/配件.html" onmouseover="jr1(this)" onmouseout="lk1(this)">零件道具</a></li>
+            <li><a href="../HTML/服装头盔.html" onmouseover="jr1(this)" onmouseout="lk1(this)">人身装备</a></li>
+            <li><a href="../HTML/装配计算器.html" onmouseover="jr1(this)" onmouseout="lk1(this)">计算清单</a></li>
+            <li><a href="#get_in" onmouseover="jr1(this)" onmouseout="lk1(this)">关于网站</a></li>  
+            <li><a href="../骑乐网.html" onmouseover="jr1(this)" onmouseout="lk1(this)">返回首页</a></li>
+        </ul>
+         <a href=""><img src="../img/logo.jpg" alt="logo" id="img_nav"></a> <!--链接关于网站的html -->
+    </nav>
+    <script src="../JS文件/导航栏.js"></script>
+    <header class="header1">
+        <div>
+           <img src="../img/背景图/hq720.webp" alt="背景图" id="bg-img1">
+           <span id="span_bg">How to Choose a Bicycle That Suit Yourself</span>
+            <span id="span_bg1"><a href="">如何选择适合的自行车</a></span>
+           <div class="nav_title">
+            <!-- 这里就来链接前面写的关于自行车种类的wed页面 -->
+                <ul>
+                    <span>自行车种类</span>
+                    <li><a href="" onmouseover="nav_jr(this)" onmouseout="nav_lk(this)">山地车</a></li>
+                    <li><a href="" onmouseover="nav_jr(this)" onmouseout="nav_lk(this)">公路车</a></li>
+                    <li><a href="" onmouseover="nav_jr(this)" onmouseout="nav_lk(this)">电助力</a></li>
+                    <li><a href="" onmouseover="nav_jr(this)" onmouseout="nav_lk(this)">土坡车</a></li>
+                    <li><a href="" onmouseover="nav_jr(this)" onmouseout="nav_lk(this)">街攀车</a></li>
+                    <li><a href="" onmouseover="nav_jr(this)" onmouseout="nav_lk(this)">TT车</a></li>
+                    <li><a href="" onmouseover="nav_jr(this)" onmouseout="nav_lk(this)">场地车</a></li>
+                    <li><a href="" onmouseover="nav_jr(this)" onmouseout="nav_lk(this)">死飞</a></li>
+                </ul>
+           </div>
+           <script src="../JS文件/整车页面js.js"></script>
+        </div>
+        <div class="text_1">
+            <p>在我们选择买第一辆自行车前我们通常会去想：</p>
+            <p>我想要一辆什么样的自行车？</p>
+            <p>它是我的通勤工具？还是我个人爱好的运动工具？</p>
+            <p>这个问题我相信各位在自己的心中有属于自己的答案。</p>
+            <p>自行车的种类极其的丰富多样。有各种不同领域和用途。</p>
+            <p>本章将在您的预算和您自身的需要这两点来展开</p>
+            <p>究竟有什么车适合你，符合你的需求。</p>
+            <p>不妨可以看看别人的视频是如何介绍的：</p>
+        </div>
+        
+        <div style="width:600px; height:900px; overflow-y:auto; position:relative; left:150px; top:50px;">
+            <div class="survey-card">
+            <h2>问卷推荐调查</h2>
+                <div class="question">
+                    <h3>1. 您的主要骑行路况是？</h3>
+                    <label><input type="radio" name="terrain" value="city"> 城市平坦道路（通勤/休闲）</label>
+                    <label><input type="radio" name="terrain" value="mountain"> 山地/崎岖路面（越野、爬坡）</label>
+                    <label><input type="radio" name="terrain" value="mixed"> 混合路面（部分公路+部分碎石/土路）</label>
+                    <label><input type="radio" name="terrain" value="road"> 长距离公路骑行（竞速/耐力）</label>
+                </div>
+        
+                <div class="question">
+                    <h3>2. 您的预算范围是？</h3>
+                    <label><input type="radio" name="budget" value="2000"> 2000元以下（经济实用型）</label>
+                    <label><input type="radio" name="budget" value="5000"> 2000-5000元（性价比均衡型）</label>
+                    <label><input type="radio" name="budget" value="10000"> 5000-10000元（中高端性能型）</label>
+                    <label><input type="radio" name="budget" value="max"> 10000元以上（专业/定制级）</label>
+                </div>
+        
+                <div class="question">
+                    <h3>3. 您的核心需求是？</h3>  <!-- 改为单选 -->
+                    <label><input type="radio" name="needs" value="light"> 轻便易携带</label>
+                    <label><input type="radio" name="needs" value="comfort"> 高舒适性</label>
+                    <label><input type="radio" name="needs" value="durable"> 耐用低维护</label>
+                    <label><input type="radio" name="needs" value="speed"> 高速度性能</label>
+                    <label><input type="radio" name="needs" value="multi"> 多功能性</label>
+                </div>
+        
+                <div class="question">
+                    <h3>4. 您希望推荐的品牌类型是？</h3>
+                    <label><input type="radio" name="brand" value="international"> 国际大牌</label>
+                    <label><input type="radio" name="brand" value="domestic"> 国产高性价比</label>
+                    <label><input type="radio" name="brand" value="any"> 均可</label>
+                </div>
+        
+                <button onclick="generateRecommendation()">获取推荐</button>
+            </div>
+        
+            <div id="result" class="survey-card"></div>
+        </div>
+        
+            <a id="video_a" href="https://www.bilibili.com/video/BV1eW4y1e7HS/?spm_id_from=333.337.search-card.all.click&vd_source=f2d6aa0358f04a67e1c2ba513038df95">转载自B站UP:掠影_Cycling</a>
+            <video src="../video/史上最全公路车小白入门指南！Part 1(精做重制)公路车选车事项及其他车身装备！ BV1eW4y1e7HS.mp4" controls id="video1" volume="0.5"></video>
+    </header>
+    <header class="header1">
+        <div style="width: 100%;font-size: 30px;padding: 10px;position: relative;top: 20px;left: 20px;">
+            <p>如果你想要买整车，你可以联系你所在地区的车店老板。</p>
+            <p>一般来讲刚开始玩车大伙都会有个比较担心的问题</p>   
+        </div>
+    <div id="word-cloud" style="width: 600px; height: 400px;font-weight: 900;position: relative;top: 15px;"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wordcloud2.js/1.1.0/wordcloud2.min.js"></script>
+    <script>
+        var words = [
+            {text: "网购买车没保障", weight: 80},
+            {text: "自己不会修", weight: 67},
+            {text: "还是选二手好？", weight: 64},
+            {text: "选全新整车好？", weight: 52},
+            {text: "网购售后如何", weight: 45},
+            {text: "这辆车适不适合自己", weight: 30}
+        ];
+
+        WordCloud(document.getElementById('word-cloud'), { list: words.map(word => [word.text, word.weight]) });
+    </script>
+    <div class="asword_div">
+        <p>这些问题都是很正常的，毕竟买车是一件大事。</p>
+        <p>如果你是新手，建议你可以去实体店购买。</p>
+        <p style='border-bottom: 1.5px black solid;height: 30px;'>这样你可以得到更多的售后服务和保障。</p>
+        <p>如果你是老手，你可以选择网购。</p>
+        <p>这样你可以得到更多的选择和价格优势。</p>
+        <p>如果你的动手能力强，可以考虑收二手自己改装。</p>
+        <p>这样你可以得到更多的<span>性价比</span>和<span>个性化</span>选择。</p>
+    </div>
+    </header>
+
+</body>
+</html>

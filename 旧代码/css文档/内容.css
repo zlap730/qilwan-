@@ -1,0 +1,217 @@
+body{
+    background-image: url('../../img/深圳湾自行车照.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 1890px 1300px; 
+}
+/* 背景设置 */
+
+
+
+
+/* 第一页的css设置 */
+#top_section{
+
+    width: 1500px;
+    height: 1150px;
+    background-color: bisque;
+    margin-top: 40px;
+    margin-left: 170.500px;
+    margin-right: 170.500px;
+    opacity: 0.95;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    
+}
+
+
+.div1_section{
+    width: 1500px;
+    height: 490px;
+    
+}
+
+
+#video_set{
+    width: 700px;
+    height: 400px;
+    border-radius: 20px;
+    position: relative;
+    top: 50px;
+    left: 20px;
+    float: left;
+}
+
+.div1_section p{
+    float: left;
+    font-size: 22px;
+    font-family: '黑体';
+    text-align: left;
+    position: relative;
+    left: 50px;
+    top: 15px;
+    width: 700px;
+    line-height: 35px;
+    text-indent: 2em;
+    margin: 0;
+    margin-top: 15px;
+}
+
+.div2_section{
+    top: 20px;
+    position: relative;
+    width: 1400px;
+    margin: auto;
+}
+
+.div2_class1{
+    float: left;
+    width: 900px;
+    height: 300px;
+}
+
+
+
+/* //========切换盒子的样式设置==================== */
+
+
+ /* 大盒子样式，设置为相对定位，以便内部盒子进行绝对定位 */
+ .big-box {
+    position: relative;
+    width: 1350px; /* 这里可根据需要调整大盒子宽度 */
+    height: 500px; /* 这里可根据需要调整大盒子高度 */
+    margin: 0 auto;
+    overflow: hidden; /* 隐藏超出大盒子范围的内容 */
+    
+}
+
+/* 内部每个小盒子的样式，设置为绝对定位 */
+.small-box {
+    position: absolute;
+    width: 1200px; /* 这里可根据需要调整小盒子宽度，和大盒子宽度保持一致以便切换时无缝衔接 */
+    height: 450px; /* 这里可根据需要调整小盒子高度，和大盒子高度保持一致以便切换时无缝衔接 */
+    top: 30px;
+    left: 75px;
+    display: none; /* 初始时都隐藏，后面通过JavaScript控制显示 */
+    border: 3px solid black;
+    animation: fadeIn 0.7s ease;
+    border-radius: 15px;
+    background-color: beige;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* 这里添加一个类名，用于表示当前显示的小盒子，可设置不同的样式来突出显示当前盒子 */
+.small-box.active {
+    display: block;
+}
+
+/* 左右切换按钮的样式 */
+.switch-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 45px;
+    height: 45px;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    font-weight:bolder;
+    text-align: center;
+    line-height: 43px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition:  0.3s ease
+}
+
+.switch-btn.left {
+    left: 20px;
+}
+
+.switch-btn.right {
+    right: 20px;
+}
+
+.small-box h3{
+    text-align: center;
+    width: 400px;
+}
+
+.盒子内容{
+    width: 580px;
+    height: 450px;
+    float: left;
+    position: relative;
+    border-radius: 15px;
+    background-color: cornsilk;
+}
+#video1{
+    width: 600px;
+    height: 450px;
+    position: relative;
+    float: right;
+    right: 15px;
+    bottom: 15px;
+}
+.盒子内容1{
+    width: 1200px;
+    height: 450px;
+    
+    position: relative;
+}
+.盒子内容 p{
+    font-size: 18px;
+    font-family: '等线';
+    margin-top: 30px;
+    line-height: 35px;
+    width: 560px;
+    position: relative;
+    top: 10px;
+    left: 15px;
+    
+}
+#h3_P{
+    margin: auto;
+    position: relative;
+    top: 20px;
+    font-size: 21px;
+}
+#iframe1{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+/* =============================================================== */
+
+#内容2页面{
+    width: 1500px;
+    height: 500px;
+    background-color: bisque;
+    margin: auto;
+
+}
+#video_main{
+    width: 70%;
+    margin: auto;
+    position: relative;
+    left: 220px;
+    border-radius: 10px;
+}
+
+#additional_info *{margin: 0;padding: 0;}
+
+#additional_info{
+    width: 1500px;
+    margin: auto;
+    position: relative;
+    background-color: bisque;
+    border-radius: 10px;
+}
+

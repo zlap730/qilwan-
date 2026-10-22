@@ -1,0 +1,15 @@
+.nav-div-color{
+    position: fixed;
+    top: 0;
+    background-color: rgba(0, 0,);
+    border: 1px solid  transparent;
+    border-radius: 5px;
+    box-sizing: border-box;
+    opacity: 1;
+}
+:root{
+    color: white;
+}
+p:hover{
+    color: red;
+}

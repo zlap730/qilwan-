@@ -24,14 +24,14 @@ function onAvatarError(event) {
  * 迁移后：导航只写这一次，7 个页面共享；hover 交给 CSS，全局函数 jr1/lk1 可以整体删除。
  */
 const navItems = [
-  { label: '整车推荐', source: 'HTML/整车页面.HTML' },
-  { label: '车架推荐', source: 'HTML/车架页面.html' },
-  { label: '零件道具', source: 'HTML/配件.html' },
+  { label: '整车推荐', to: '/pending/整车推荐' },
+  { label: '车架推荐', to: '/pending/车架推荐' },
+  { label: '零件道具', to: '/pending/零件道具' },
   { label: '变速器', to: '/shifters' },
-  { label: '人身装备', source: 'HTML/服装头盔.html' },
+  { label: '人身装备', to: '/pending/人身装备' },
   { label: '计算清单', to: '/calculator' },
   { label: '讨论区', to: '/forum' },
-  { label: '关于网站', to: '/' }
+  { label: '关于网站', to: '/about' }
 ]
 
 function close() {

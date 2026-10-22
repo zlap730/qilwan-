@@ -26,6 +26,8 @@ const SHOT_DIR = process.env.SHOT_DIR || ''
 
 const ROUTES = [
   { path: '/', name: '首页' },
+  { path: '/about', name: '关于' },
+  { path: '/pending/维修工具', name: '整理中' },
   { path: '/forum', name: '讨论区' },
   { path: '/calculator', name: '装配清单' },
   { path: '/shifters', name: '变速器大全' },

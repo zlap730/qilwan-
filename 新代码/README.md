@@ -54,13 +54,15 @@ npm.cmd run start
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 ```
 
-## 已经迁移的 7 块
+## 已经迁移的内容
 
 | 原文件（在 `旧代码/` 下） | 迁移后 | 关键变化 |
 | --- | --- | --- |
 | 17 份复制粘贴的 `<nav>` | `components/NavBar.vue` | 导航只写一次；`onmouseover="jr1(this)"` 全局函数 → CSS `:hover` |
 | 各页复制粘贴的页脚 | `components/FooterBar.vue` | 同上 |
-| `骑乐网.html`（824 行） | `views/HomeView.vue` | 首页骨架 + 迁移范围说明 |
+| `骑乐网.html` 的「自己组装/保养/维修爱车」+「其他自行车用品」 | `views/HomeView.vue`（首页） | 5 个 float + `position:relative` 方块（写死 1400×700）→ CSS Grid（首行 2.2:1:1，次行装配占 1 列、异响占 2 列）；配色/图文/竖排标题照搬 |
+| `骑乐网.html` 的「网站功能 / 关于网站 / 关于我们与网站 / 入门向导」 | `views/AboutView.vue`（`/about`） | 介绍性内容独立成页，首页让位给工具入口 |
+| 旧站里只有导航、没有正文的页面（维修工具/刹车/异响/配件/服装头盔/车架） | `views/PendingView.vue`（`/pending/:name`） | 点进去不再是空白，说明"整理中"并给出可用入口 |
 | `HTML/论坛.html` + `JS文件/评论区代码.js`（413 行） | `views/ForumView.vue` + `components/CommentItem.vue` + `api/comments.js` | `innerHTML` 拼字符串 → 组件插值（顺带修掉 XSS）；8 个 `getElementById` + `addEventListener` → `v-model` / `@submit` |
 | `HTML/装配计算器.html`（381 行手写 TR）+ `表格计算器.js` + `装配计算器.js` | `views/CalculatorView.vue` | 30 多个 `<tr>` → 一份数据数组 + `v-for`；点按钮算总价 → `computed` 自动算；xlsx 由 CDN 全局变量改为按需 `import()` |
 | `HTML/变速器大全.html` + `JS文件/变速器大全-选项框.js`（1,058 行） | `views/ShifterView.vue` + `data/shifterBrands.js` + `data/shifterMeta.js` | 8 个品牌的 900 多行正文原样抽成数据模块；分类/品牌切换、淡入动画、页头滚动图片、CSV 参数表全部保留 |
@@ -138,10 +140,10 @@ BASE_URL=http://localhost:4173 node scripts/layout-audit.mjs     # 审计构建�
     ├── assets/legacy/  从 旧代码/css文档/ 复制来的 6 个 CSS
     ├── components/    NavBar / FooterBar / CommentItem
     ├── data/          shifterBrands.js（8 个品牌资料）+ shifterMeta.js（分类/品牌元数据）
-    ├── router/        6 条路由
+    ├── router/        8 条路由（首页 / 关于 / 整理中 / 讨论区 / 装配清单 / 变速器大全 / 登录）
     ├── stores/        Pinia 登录态
     ├── utils/         resolveAssetUrl（统一处理 /uploads 路径）、时间格式化
-    └── views/         Home / Forum / Calculator / Shifter / Login
+    └── views/         Home / About / Pending / Forum / Calculator / Shifter / Login
 ```
 
 ## 已知未完成

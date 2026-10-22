@@ -24,6 +24,7 @@ function onAvatarError(event) {
  * 迁移后：导航只写这一次，7 个页面共享；hover 交给 CSS，全局函数 jr1/lk1 可以整体删除。
  */
 const navItems = [
+  { label: '首页', to: '/' },
   { label: '整车推荐', to: '/pending/整车推荐' },
   { label: '车架推荐', to: '/pending/车架推荐' },
   { label: '零件道具', to: '/pending/零件道具' },
@@ -210,6 +211,13 @@ onBeforeUnmount(() => document.removeEventListener('click', onDocumentClick))
   padding-right: 10px;
   text-align: left;
   white-space: nowrap;
+}
+
+/* 当前所在页的菜单项加一条橙色下划线，方便知道自己在哪一页
+   （只对「完全匹配」生效，否则 首页 会在所有页面都亮着） */
+#ul_nav li a.router-link-exact-active {
+  border-bottom: 4px solid rgb(252, 158, 70);
+  color: rgb(252, 158, 70);
 }
 
 /* 1280~1440 之间字号收一点，7 个菜单不会挤在一起 */

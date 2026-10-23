@@ -127,4 +127,130 @@ router.get('/check-login', (req, res) => {
     }
 });
 
+// ────────────────────────────────────────────────────────────
+// 找回密码（邮箱验证码）
+// 流程：POST /forgot-password 发验证码 → POST /reset-password 校验并改密
+// 安全约定：① 不暴露邮箱是否注册；② 同一账号 60 秒内只能发一次；
+//          ③ 验证码 10 分钟过期、最多试 5 次、用过即失效；④ 库里只存哈希。
+// ────────────────────────────────────────────────────────────
+
+const crypto = require('crypto');
+const { PasswordReset } = require('../models');
+const { sendResetCode, isConfigured: mailConfigured } = require('../utils/mailer');
+
+const RESET_TTL_MS = 10 * 60 * 1000; // 验证码有效期 10 分钟
+const RESET_COOLDOWN_MS = 60 * 1000; // 同一账号再次发送的间隔
+const RESET_MAX_ATTEMPTS = 5; // 最多验证失败次数
+
+// 生成 6 位数字验证码
+function createCode() {
+    return String(crypto.randomInt(0, 1000000)).padStart(6, '0');
+}
+
+router.post('/forgot-password', [
+    body('email')
+        .trim()
+        .notEmpty().withMessage('请输入邮箱')
+        .isEmail().withMessage('邮箱格式不正确')
+        .normalizeEmail()
+], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ error: '输入校验失败', details: errors.array().map(item => item.msg) });
+    }
+
+    const { email } = req.body;
+
+    try {
+        const user = await User.findOne({ where: { email } });
+
+        // 无论邮箱是否存在都返回同样的提示，避免被用来探测账号
+        const genericMessage = '如果该邮箱已注册，验证码已发送，请查收（含垃圾邮件箱）';
+        if (!user) return res.json({ message: genericMessage, delivered: false });
+
+        // 冷却时间：防止被当成短信轰炸工具
+        const latest = await PasswordReset.findOne({
+            where: { userId: user.id },
+            order: [['created_at', 'DESC']]
+        });
+        if (latest && Date.now() - new Date(latest.created_at).getTime() < RESET_COOLDOWN_MS) {
+            return res.status(429).json({ error: '发送太频繁，请 1 分钟后再试' });
+        }
+
+        const code = createCode();
+        const codeHash = await bcrypt.hash(code, 10);
+
+        await PasswordReset.create({
+            userId: user.id,
+            codeHash,
+            expiresAt: new Date(Date.now() + RESET_TTL_MS)
+        });
+
+        const result = await sendResetCode(email, code);
+
+        // 开发模式（没配 SMTP）把验证码回传给前端，方便本地走通流程；配置后不再返回
+        const payload = { message: genericMessage, delivered: result.delivered };
+        if (!mailConfigured) {
+            payload.devCode = code;
+            payload.hint = '当前后端未配置 SMTP，验证码只打印在服务端控制台，已通过 devCode 返回（仅开发用）';
+        }
+
+        res.json(payload);
+    } catch (err) {
+        console.error('发送找回密码验证码失败:', err);
+        res.status(500).json({ error: '发送验证码失败，请稍后重试' });
+    }
+});
+
+router.post('/reset-password', [
+    body('email').trim().notEmpty().isEmail().withMessage('邮箱格式不正确').normalizeEmail(),
+    body('code').trim().notEmpty().isLength({ min: 6, max: 6 }).withMessage('验证码为 6 位数字'),
+    body('password').notEmpty().isLength({ min: 6, max: 100 }).withMessage('新密码长度至少6位')
+], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ error: '输入校验失败', details: errors.array().map(item => item.msg) });
+    }
+
+    const { email, code, password } = req.body;
+
+    try {
+        const user = await User.findOne({ where: { email } });
+        if (!user) return res.status(400).json({ error: '验证码无效或已过期' });
+
+        const record = await PasswordReset.findOne({
+            where: {
+                userId: user.id,
+                usedAt: null,
+                expiresAt: { [Sequelize.Op.gt]: new Date() }
+            },
+            order: [['created_at', 'DESC']]
+        });
+        if (!record) return res.status(400).json({ error: '验证码无效或已过期，请重新获取' });
+
+        if (record.attempts >= RESET_MAX_ATTEMPTS) {
+            return res.status(429).json({ error: '验证码错误次数过多，请重新获取' });
+        }
+
+        const ok = await bcrypt.compare(code, record.codeHash);
+        if (!ok) {
+            await record.update({ attempts: record.attempts + 1 });
+            return res.status(400).json({ error: '验证码不正确' });
+        }
+
+        // 改密码 + 作废该用户其它未使用的验证码
+        await user.update({ password: await bcrypt.hash(password, 10) });
+        await record.update({ usedAt: new Date() });
+        await PasswordReset.update(
+            { usedAt: new Date() },
+            { where: { userId: user.id, usedAt: null } }
+        );
+
+        res.json({ message: '密码已重置，请用新密码登录' });
+    } catch (err) {
+        console.error('重置密码失败:', err);
+        res.status(500).json({ error: '重置密码失败，请稍后重试' });
+    }
+});
+
 module.exports = router;

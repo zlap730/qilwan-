@@ -279,6 +279,34 @@ router.delete('/:id', authMiddleware, async (req, res) => {
   }
 });
 
+// 编辑自己的评论（个人中心 → 评论管理）
+// 只允许改正文，且只能改自己的、未被删除的评论
+router.patch('/:id', authMiddleware, async (req, res) => {
+  try {
+    const content = String(req.body?.content ?? '').trim();
+
+    if (!content) return res.status(400).json({ error: '评论内容不能为空' });
+    if (content.length > 1000) return res.status(400).json({ error: '评论内容最多 1000 字' });
+
+    const comment = await Comment.findByPk(req.params.id);
+    if (!comment) return res.status(404).json({ error: '评论不存在' });
+    if (comment.status !== 'active') return res.status(400).json({ error: '这条评论已删除，无法编辑' });
+    if (comment.authorId !== req.user.id) return res.status(403).json({ error: '只能编辑自己的评论' });
+
+    await comment.update({ content });
+
+    res.json({
+      id: comment.id,
+      content: comment.content,
+      created_at: comment.created_at,
+      updated_at: comment.updated_at
+    });
+  } catch (err) {
+    console.error('编辑评论失败:', err);
+    res.status(500).json({ error: '编辑评论失败', details: err.message });
+  }
+});
+
 // 上传评论图片（单独上传到commentimages表）
 router.post('/:commentId/images', authMiddleware, upload.single('image'), async (req, res) => {
   try {

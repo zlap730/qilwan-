@@ -69,7 +69,8 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 | `HTML/变速器调试.html` + 3 个动画 JS | `views/TuningView.vue`（`/shifters/tuning`） | 子导航改吸顶锚点；「手变/前拨/后拨」鼠标悬停切图 → `partIndex`；异响 3 个标签 → `tabIndex`；55MB 本地教学视频改成 B 站外链 |
 | `HTML/整车页面.HTML` + `整车页面js.js` + `json/自行车推荐数据.json` | `views/BikesView.vue`（`/bikes`） + `data/bikes.json` | 73 款车 JSON 改为构建期 import（不再发请求）；问卷 4 题用 `v-model` + `computed` 过滤；wordcloud2.js 换成纯 CSS 词云 |
 | `HTML/运动简介.html`、`装备介绍和骑行知识/*.html`、`公路车.html`、`山地车.html` | `views/ArticlesView.vue`（`/articles`） + `views/ArticleView.vue`（`/article/:slug`） + `data/articles.js` + `public/articles/` | 5 篇正文抽出并清洗（去 script/内联样式/事件），图片 15 张 7.9MB 放 public；公路车页原来正文被注释，从注释里恢复了 3 节 |
-| `HTML/个人信息.html` + `JS文件/个人信息.js` | `views/ProfileView.vue`（`/profile`） + `api/users.js` | 登录态走 Pinia；读取用 `GET /api/users/me`，保存走 `PUT /api/users/:id`（multipart 头像）；注销走 `DELETE`；不再手工解析 cookie |
+| `HTML/个人信息.html` + `JS文件/个人信息.js` | `views/ProfileView.vue`（`/profile`） + `api/users.js` | 升级成**个人中心**（参考 B 站布局）：概览 / 改资料（含**改用户名**）/ **换头像** / **改密码（验旧密码）** / **我的评论管理**（筛选、编辑、删除）；注销走 `DELETE` |
+| 无（新增） | `views/ForgotPasswordView.vue`（`/forgot-password`） + `server/utils/mailer.js` + `password_resets` 表 | **邮箱验证码找回密码**：6 位码、10 分钟有效、60 秒冷却、最多试 5 次；未配置 SMTP 时走开发模式（控制台 + devCode） |
 | `HTML/地图.html` | `views/MapView.vue`（`/map`） | 高德 JS API 改为进入路由才加载；key 支持 `VITE_AMAP_KEY`；加载失败有明确提示而不是白屏 |
 | `HTML/登陆页面.html` 内联 script + `用户登录.js`（两份重复实现，规则还不一致） | `views/LoginView.vue` + `api/auth.js` + `stores/user.js` | 合并成一份；前端 2-30 位校验对齐后端 3-30 位；登录态统一进 Pinia |
 | **`旧代码/app/` 整个后端** | **`server/`** | 依赖补进 package.json、静态目录精简、托管 dist、修密码泄露/默认头像/`/me` 路由/越权/删号 500 等 6 个问题，详见结构说明第八节 |
@@ -145,18 +146,16 @@ BASE_URL=http://localhost:4173 node scripts/layout-audit.mjs     # 审计构建�
     ├── assets/legacy/  从 旧代码/css文档/ 复制来的 6 个 CSS
     ├── components/    NavBar / FooterBar / CommentItem
     ├── data/          shifterBrands.js、shifterMeta.js、bikes.json（73 款车）、articles.js（5 篇文章）
-    ├── router/        14 条路由（首页 / 关于 / 整车 / 变速器 ×2 / 文章 ×2 / 计算清单 / 讨论区 / 个人信息 / 地图 / 整理中 / 登录）
+    ├── router/        16 条路由（首页 / 关于 / 整车 / 变速器 ×2 / 文章 ×2 / 计算清单 / 讨论区 / 个人中心 / 找回密码 / 地图 / 整理中 / 登录）
     ├── stores/        Pinia 登录态
     ├── utils/         resolveAssetUrl（统一处理 /uploads 路径）、时间格式化
-    └── views/         Home / About / Bikes / Shifter / Tuning / Articles / Article / Calculator / Forum / Profile / Map / Pending / Login
+    └── views/         Home / About / Bikes / Shifter / Tuning / Articles / Article / Calculator / Forum / Profile / ForgotPassword / Map / Pending / Login
 ```
 
 ## 已知未完成
 
 - 整车/车架/配件/服装头盔/刹车/维修工具：静态展示页，搬进 `<template>` 即可；
-- 变速器调试页（`旧代码/HTML/变速器调试.html`）：选项卡 + 折叠动画，12KB，建议下一步做；
-- 个人信息 / 个人空间：后端接口已具备（`/api/users/me`、`PUT /api/users/:id`），前端页面还没写；
-  `/api/posts`（个人空间的"作品"）后端仍然没有，需要新增表和接口；
+- **个人空间**：依赖后端 `/api/posts`（旧站这个接口根本没实现），需要新增 posts 表和接口；
+- **找回密码要真正发信**：需要配 SMTP（见 `server/.env.example` 与 `项目结构说明.md` 第十二节）；
 - 运动简介 / 装备介绍 / 骑行知识：`旧代码/文案/` 里 20 篇 txt 可以转成 md，用 `/knowledge/:slug` 一条路由全搞定；
-- 地图页：高德 JS API 换成 `@amap/amap-jsapi-loader` 即可；
 - 后端安全项（multer 升级、cookie httpOnly、登录限流）见 `项目结构说明.md` 第十节。

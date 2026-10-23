@@ -116,6 +116,7 @@ async function submitRegister() {
       <p v-else-if="notice" class="form-msg ok">{{ notice }}</p>
       <button type="submit" id="but_join" :disabled="busy">{{ busy ? '登录中…' : '登录' }}</button>
       <a href="#" class="zc" @click.prevent="switchMode('register')">注册</a>
+      <router-link to="/forgot-password" class="forgot-link">忘记密码？</router-link>
     </form>
 
     <form v-else id="注册窗口" class="login-card" @submit.prevent="submitRegister">
@@ -213,5 +214,19 @@ async function submitRegister() {
 .back-home:hover{
   color:rgba(60, 60, 60, 0.6);
   transition: all 0.1s ease;
+}
+
+/* 「忘记密码？」入口：绝对定位到卡片右下角，避免撑开固定高度的登录卡 */
+.forgot-link {
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+  color: #b96a26;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
 }
 </style>

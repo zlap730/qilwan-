@@ -91,6 +91,86 @@ exports.updateUser = async (req, res) => {
   }
 }
 
+// 修改密码（个人中心 → 登录与安全）
+// 为什么要求旧密码：JWT 有效期 7 天，万一 token 泄露，只靠 token 就能改密码等于账号失守。
+exports.changePassword = async (req, res) => {
+  try {
+    const { oldPassword, newPassword } = req.body || {}
+
+    if (!oldPassword || !newPassword) {
+      return res.status(400).json({ error: '原密码和新密码都不能为空' })
+    }
+    if (String(newPassword).length < 6) {
+      return res.status(400).json({ error: '新密码长度至少 6 位' })
+    }
+    if (oldPassword === newPassword) {
+      return res.status(400).json({ error: '新密码不能与原密码相同' })
+    }
+
+    const user = await User.findByPk(req.user.id)
+    if (!user) return res.status(404).json({ error: '用户不存在' })
+
+    const valid = await bcrypt.compare(oldPassword, user.password)
+    if (!valid) return res.status(401).json({ error: '原密码不正确' })
+
+    await user.update({ password: await bcrypt.hash(newPassword, 10) })
+    res.json({ message: '密码已更新' })
+  } catch (err) {
+    res.status(500).json({ error: '修改密码失败', details: err.message })
+  }
+}
+
+// 我发过的评论（个人中心 → 评论管理）
+// 支持 ?status=active|deleted 过滤；不传表示全部（含已删除，方便自己回看）。
+exports.getMyComments = async (req, res) => {
+  try {
+    const where = { authorId: req.user.id }
+    if (req.query.status === 'active' || req.query.status === 'deleted') {
+      where.status = req.query.status
+    }
+
+    const comments = await Comment.findAll({
+      where,
+      order: [['created_at', 'DESC']]
+    })
+
+    const commentIds = comments.map((item) => item.id)
+    const images = commentIds.length
+      ? await CommentImage.findAll({ where: { commentId: commentIds } })
+      : []
+
+    // 按评论 id 分组图片
+    const imagesByComment = {}
+    for (const image of images) {
+      if (!imagesByComment[image.commentId]) imagesByComment[image.commentId] = []
+      imagesByComment[image.commentId].push({
+        id: image.id,
+        imageUrl: image.imageUrl,
+        filename: image.filename
+      })
+    }
+
+    const list = comments.map((item) => ({
+      id: item.id,
+      content: item.content,
+      image: item.image,
+      targetId: item.targetId,
+      status: item.status,
+      created_at: item.created_at,
+      images: imagesByComment[item.id] || []
+    }))
+
+    res.json({
+      total: list.length,
+      active: list.filter((item) => item.status === 'active').length,
+      deleted: list.filter((item) => item.status === 'deleted').length,
+      items: list
+    })
+  } catch (err) {
+    res.status(500).json({ error: '读取我的评论失败', details: err.message })
+  }
+}
+
 // 删除账号
 // 注意：comments/comments_image 表对 users 有外键，直接删 user 会报 FK 约束错误（旧代码的 500 就是这么来的）。
 // 这里用事务按「评论图片 → 评论 → 用户」的顺序清理，保证要么全删、要么全不删。

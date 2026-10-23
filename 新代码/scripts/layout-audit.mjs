@@ -35,7 +35,8 @@ const ROUTES = [
   { path: '/bikes', name: '整车推荐' },
   { path: '/articles', name: '文章列表' },
   { path: '/article/gear', name: '文章详情' },
-  { path: '/profile', name: '个人信息' },
+  { path: '/profile', name: '个人中心' },
+  { path: '/forgot-password', name: '找回密码' },
   { path: '/map', name: '地图' },
   { path: '/login', name: '登录' }
 ]

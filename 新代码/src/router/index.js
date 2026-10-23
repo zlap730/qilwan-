@@ -55,11 +55,18 @@ const routes = [
     meta: { title: '整车推荐' }
   },
   {
-    // 原 HTML/个人信息.html：资料修改 / 注销（需要登录）
+    // 原 HTML/个人信息.html：资料修改 / 头像 / 改密码 / 我的评论（需要登录）
     path: '/profile',
     name: 'profile',
     component: () => import('@/views/ProfileView.vue'),
-    meta: { title: '个人信息' }
+    meta: { title: '个人中心' }
+  },
+  {
+    // 找回密码：邮箱验证码两步流程（原站没有，属于新增功能）
+    path: '/forgot-password',
+    name: 'forgot-password',
+    component: () => import('@/views/ForgotPasswordView.vue'),
+    meta: { title: '找回密码', bare: true }
   },
   {
     // 原 HTML/地图.html：高德地图

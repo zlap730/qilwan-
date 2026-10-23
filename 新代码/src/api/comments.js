@@ -19,3 +19,8 @@ export function createComment({ content, targetId, image }) {
 export function deleteComment(id) {
   return http.delete(`/comments/${id}`).then((res) => res.data)
 }
+
+/** 编辑自己的评论正文（个人中心 → 评论管理） */
+export function updateComment(id, content) {
+  return http.patch(`/comments/${id}`, { content }).then((res) => res.data)
+}

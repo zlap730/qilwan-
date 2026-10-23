@@ -26,11 +26,8 @@ function onAvatarError(event) {
 const navItems = [
   { label: '首页', to: '/' },
   { label: '整车推荐', to: '/bikes' },
-  { label: '车架推荐', to: '/pending/车架推荐' },
-  { label: '零件道具', to: '/pending/零件道具' },
-  { label: '变速器', to: '/shifters' },
   { label: '人身装备', to: '/pending/人身装备' },
-  { label: '计算清单', to: '/calculator' },
+  { label: 'DIY清单计算', to: '/calculator' },
   { label: '讨论区', to: '/forum' },
   { label: '关于网站', to: '/about' }
 ]
@@ -216,10 +213,10 @@ onBeforeUnmount(() => document.removeEventListener('click', onDocumentClick))
   white-space: nowrap;
 }
 
-/* 当前所在页的菜单项加一条橙色下划线，方便知道自己在哪一页
+/* 当前所在页的菜单项：只把文字变成橙色，不加下划线
    （只对「完全匹配」生效，否则 首页 会在所有页面都亮着） */
 #ul_nav li a.router-link-exact-active {
-  border-bottom: 4px solid rgb(252, 158, 70);
+  border-bottom: 0;
   color: rgb(252, 158, 70);
 }
 

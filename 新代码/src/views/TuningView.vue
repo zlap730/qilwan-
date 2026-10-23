@@ -171,7 +171,7 @@ function scrollTo(id) {
           <p v-if="异响标签[tabIndex].video" class="video-note">
             旧站这里内嵌了一段「变速不准？可能是变速线要断！」的教学视频（55MB），
             新站没有把视频打包进来，可以直接去 UP 主页面看：
-            <a href="https://space.bilibili.com/427727066" target="_blank" rel="noopener">gocyc 的 B 站主页</a>。
+            <a href="https://www.bilibili.com/video/BV1QL4y1u74j/?spm_id_from=333.1387.homepage.video_card.click&vd_source=f2d6aa0358f04a67e1c2ba513038df95" target="_blank" rel="noopener">gocyc 的 B 站主页</a>。
           </p>
         </template>
 

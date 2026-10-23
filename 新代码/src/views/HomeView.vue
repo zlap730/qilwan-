@@ -193,6 +193,7 @@ a.tile:hover img {
   font-size: clamp(18px, 1.6vw, 30px);
   font-weight: 900;
   white-space: nowrap;
+  text-align: center;
 }
 
 /* ① 变速器 */

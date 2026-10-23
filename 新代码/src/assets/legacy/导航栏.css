@@ -50,9 +50,11 @@ a{
     width: 100px;
     height: 40px;
     position: relative;
-    border-bottom: 0px solid orange;
+    /* 迁移改动：原来的 border-bottom 是给「悬停下划线」用的，现在导航只靠文字变色，
+       这里一并置空，避免在任何状态下压出一条线 */
+    border-bottom: 0;
     padding-top: 15px;
-    transition: border-bottom 0.1s ease;
+    transition: color 0.15s ease;
 }
 
 /* 导航图片logo设置 */

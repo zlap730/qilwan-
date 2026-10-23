@@ -64,7 +64,7 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 | `骑乐网.html` 的「网站功能 / 关于网站 / 关于我们与网站 / 入门向导」 | `views/AboutView.vue`（`/about`） | 介绍性内容独立成页，首页让位给工具入口 |
 | 旧站里只有导航、没有正文的页面（维修工具/刹车/异响/配件/服装头盔/车架） | `views/PendingView.vue`（`/pending/:name`） | 点进去不再是空白，说明"整理中"并给出可用入口 |
 | `HTML/论坛.html` + `JS文件/评论区代码.js`（413 行） | `views/ForumView.vue` + `components/CommentItem.vue` + `api/comments.js` | `innerHTML` 拼字符串 → 组件插值（顺带修掉 XSS）；8 个 `getElementById` + `addEventListener` → `v-model` / `@submit` |
-| `HTML/装配计算器.html`（381 行手写 TR）+ `表格计算器.js` + `装配计算器.js` | `views/CalculatorView.vue` | 30 多个 `<tr>` → 一份数据数组 + `v-for`；点按钮算总价 → `computed` 自动算；xlsx 由 CDN 全局变量改为按需 `import()` |
+| `HTML/装配计算器.html`（381 行手写 TR）+ `表格计算器.js` + `装配计算器.js` | `views/CalculatorView.vue` + `components/CalcRefPanel.vue` + `data/calculatorRefs.js` + `data/shifterTables.json` | 30 多个 `<tr>` → 一份数据数组 + `v-for`；合计用 `computed` 自动算；xlsx 按需 `import()`。**新增左右分栏 + 双向折叠**：右侧「参考内容」三个标签分别承接原来的**车架推荐 / 零件道具 / 变速器**（变速器表格由 `scripts/extract-calc-refs.mjs` 从旧站资料自动抽取），折叠状态记在 localStorage |
 | `HTML/变速器大全.html` + `JS文件/变速器大全-选项框.js`（1,058 行） | `views/ShifterView.vue` + `data/shifterBrands.js` + `data/shifterMeta.js` | 8 个品牌的 900 多行正文原样抽成数据模块；分类/品牌切换、淡入动画、页头滚动图片、CSV 参数表全部保留 |
 | `HTML/变速器调试.html` + 3 个动画 JS | `views/TuningView.vue`（`/shifters/tuning`） | 子导航改吸顶锚点；「手变/前拨/后拨」鼠标悬停切图 → `partIndex`；异响 3 个标签 → `tabIndex`；55MB 本地教学视频改成 B 站外链 |
 | `HTML/整车页面.HTML` + `整车页面js.js` + `json/自行车推荐数据.json` | `views/BikesView.vue`（`/bikes`） + `data/bikes.json` | 73 款车 JSON 改为构建期 import（不再发请求）；问卷 4 题用 `v-model` + `computed` 过滤；wordcloud2.js 换成纯 CSS 词云 |

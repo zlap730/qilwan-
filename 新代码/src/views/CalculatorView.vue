@@ -1,19 +1,23 @@
 <!--
-  CalculatorView.vue —— 装配清单（计算器）
+  CalculatorView.vue —— 装配清单（计算器 + 参考内容）
   路由：/calculator
 
-  30 多行的自行车配件清单表格：配件名 / 单价 / 数量 / 规格 / 备注，
-  表格用数据数组 + v-for 生成，合计用 computed 自动算（改单价立刻更新），
-  底部「点击下载表格」用 xlsx 按需导出 Excel。
-  对应旧站：装配计算器.html + 表格计算器.js + 装配计算器.js。
+  页面分左右两块，两块都能单独折叠：
+    左：30 多行的自行车配件清单表格（配件名 / 单价 / 数量 / 规格 / 备注），
+        数据数组 + v-for 生成，合计用 computed 自动算，底部按钮按需 import xlsx 导出 Excel；
+    右：CalcRefPanel「参考内容」，三个标签承接原来导航里的三项：
+        车架参考（原车架推荐）/ 零件道具（原零件道具）/ 变速器参考（原变速器）。
 
-  数据来源：表格模板固定在文件顶部 templateRows 数组里；导出依赖 xlsx（按需 import）
+  折叠规则：收起明细 → 参考面板占满整行；收起参考 → 表格占满整行；
+            折叠状态记在 localStorage（qile.calculator.layout），刷新后保持。
+  对应旧站：装配计算器.html + 表格计算器.js + 装配计算器.js。
 -->
 <script setup>
 import { computed, ref } from 'vue'
 
 import downloadIcon from '@/assets/img/图标文件/download_111133.png'
 import heroImage from '@/assets/img/晓风车架.png'
+import CalcRefPanel from '@/components/CalcRefPanel.vue'
 import '@/assets/legacy/装配计算器.css'
 
 /*
@@ -86,6 +90,47 @@ const itemCount = computed(() =>
 
 const filledCount = computed(() => dataRows.value.filter((row) => row.part).length)
 
+/*
+ * 可折叠：
+ *  - 底部「填写明细」独立折叠，收起后只看合计，把纵向空间让给右侧参考；
+ *  - 从表格顶部点「收起」，右侧参考面板会展开到表格上方占满整行；
+ *  - 折叠状态记在 localStorage，下次进来保持上次的样子。
+ */
+const STORAGE_KEY = 'qile.calculator.layout'
+
+function readLayout() {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}')
+  } catch {
+    return {}
+  }
+}
+
+const saved = readLayout()
+const detailOpen = ref(saved.detailOpen !== false) // 明细默认展开
+const refOpen = ref(saved.refOpen !== false) // 参考面板默认展开
+
+function saveLayout() {
+  try {
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({ detailOpen: detailOpen.value, refOpen: refOpen.value })
+    )
+  } catch {
+    /* 隐私模式下 localStorage 可能不可写，忽略即可 */
+  }
+}
+
+function toggleDetail() {
+  detailOpen.value = !detailOpen.value
+  saveLayout()
+}
+
+function toggleRef() {
+  refOpen.value = !refOpen.value
+  saveLayout()
+}
+
 const notice = ref('')
 let noticeTimer
 function flash(message) {
@@ -137,95 +182,130 @@ async function exportXlsx() {
     </section>
 
     <section class="sheet">
-      <div id="nav_table">
-        <ul>
-          <li>配置清单</li>
-          <li>物品</li>
-          <li>单价</li>
-          <li>数量</li>
-          <li>配件规格</li>
-          <li>备注</li>
-        </ul>
+      <!-- 工具条：折叠开关 + 合计速览（收起明细后也能看到总价） -->
+      <div class="sheet-bar">
+        <div class="bar-left">
+          <button type="button" class="fold-btn" @click="toggleDetail">
+            <span class="caret" :class="{ open: detailOpen }">▾</span>
+            {{ detailOpen ? '收起明细' : '展开明细' }}
+          </button>
+          <button type="button" class="fold-btn" @click="toggleRef">
+            <span class="caret" :class="{ open: refOpen }">▾</span>
+            {{ refOpen ? '收起参考' : '展开参考' }}
+          </button>
+        </div>
+        <div class="bar-right">
+          <span class="sum">合计 <b>¥{{ total.toFixed(2) }}</b></span>
+          <span class="sum-weak">{{ itemCount }} 件 · 已填 {{ filledCount }} 项</span>
+        </div>
       </div>
 
-      <div id="div_table">
-        <form @submit.prevent>
-          <table id="table" border="1">
-            <!-- PC 自适应：用 colgroup 按百分比分配列宽，替代原来每格写死 px 的做法 -->
-            <colgroup>
-              <col class="c-label" />
-              <col class="c-part" />
-              <col class="c-price" />
-              <col class="c-qty" />
-              <col class="c-spec" />
-              <col class="c-remark" />
-            </colgroup>
-            <tbody>
-              <template v-for="row in rows" :key="row.id">
-                <tr v-if="row.gap" class="item-row gap-row">
-                  <td colspan="6" />
-                </tr>
+      <!-- 主体：表格 + 参考面板。参考收起时表格占满，表格收起时参考占满 -->
+      <div
+        class="sheet-body"
+        :class="{ 'detail-closed': !detailOpen, 'ref-closed': !refOpen, 'both-closed': !detailOpen && !refOpen }"
+      >
+        <div v-if="detailOpen" class="table-col">
+          <div id="nav_table">
+            <ul>
+              <li>配置清单</li>
+              <li>物品</li>
+              <li>单价</li>
+              <li>数量</li>
+              <li>配件规格</li>
+              <li>备注</li>
+            </ul>
+          </div>
 
-                <tr v-else class="item-row">
-                  <td>
-                    <select v-if="row.options" v-model="row.choice" class="config-select">
-                      <option v-for="option in row.options" :key="option" :value="option">
-                        {{ option }}
-                      </option>
-                    </select>
-                    <template v-else>
-                      {{ row.label }}<span v-if="row.optional">(选填)</span>
-                    </template>
-                  </td>
+          <div id="div_table">
+            <form @submit.prevent>
+              <table id="table" border="1">
+                <!-- PC 自适应：用 colgroup 按百分比分配列宽，替代原来每格写死 px 的做法 -->
+                <colgroup>
+                  <col class="c-label" />
+                  <col class="c-part" />
+                  <col class="c-price" />
+                  <col class="c-qty" />
+                  <col class="c-spec" />
+                  <col class="c-remark" />
+                </colgroup>
+                <tbody>
+                  <template v-for="row in rows" :key="row.id">
+                    <tr v-if="row.gap" class="item-row gap-row">
+                      <td colspan="6" />
+                    </tr>
 
-                  <td>
-                    <input v-model="row.part" type="text" class="col-part" :placeholder="row.placeholder" />
-                  </td>
-                  <td>
-                    <input v-model.number="row.price" type="number" min="0" step="0.01" class="col-price" />
-                  </td>
-                  <td>
-                    <input v-model.number="row.qty" type="number" min="0" class="col-qty" />
-                  </td>
-                  <td>
-                    <input v-model="row.spec" type="text" class="col-spec" />
-                  </td>
-                  <td>
-                    <input v-model="row.remark" type="text" class="col-remark" />
-                  </td>
-                </tr>
-              </template>
+                    <tr v-else class="item-row">
+                      <td>
+                        <select v-if="row.options" v-model="row.choice" class="config-select">
+                          <option v-for="option in row.options" :key="option" :value="option">
+                            {{ option }}
+                          </option>
+                        </select>
+                        <template v-else>
+                          {{ row.label }}<span v-if="row.optional">(选填)</span>
+                        </template>
+                      </td>
 
-              <tr class="item-row total-row">
-                <td>总计预算：</td>
-                <td>
-                  <input id="jsjs" type="text" :value="`¥${total.toFixed(2)}`" readonly />
-                </td>
-                <td>
-                  <input id="numnum" type="text" :value="`${itemCount} 件`" readonly />
-                </td>
-                <td colspan="3" class="auto-tip">
-                  已填 {{ filledCount }} 项 · 单价/数量一改，合计自动重算（原来的「点击计算最终结果」按钮可以退休了）
-                </td>
-              </tr>
-            </tbody>
+                      <td>
+                        <input v-model="row.part" type="text" class="col-part" :placeholder="row.placeholder" />
+                      </td>
+                      <td>
+                        <input v-model.number="row.price" type="number" min="0" step="0.01" class="col-price" />
+                      </td>
+                      <td>
+                        <input v-model.number="row.qty" type="number" min="0" class="col-qty" />
+                      </td>
+                      <td>
+                        <input v-model="row.spec" type="text" class="col-spec" />
+                      </td>
+                      <td>
+                        <input v-model="row.remark" type="text" class="col-remark" />
+                      </td>
+                    </tr>
+                  </template>
 
-            <tfoot>
-              <tr>
-                <td colspan="6">在填写的过程中请您确认好填写配件中的规格大小，以防出现配件之间规格不兼容的问题</td>
-              </tr>
-            </tfoot>
-          </table>
-        </form>
-      </div>
+                  <tr class="item-row total-row">
+                    <td>总计预算：</td>
+                    <td>
+                      <input id="jsjs" type="text" :value="`¥${total.toFixed(2)}`" readonly />
+                    </td>
+                    <td>
+                      <input id="numnum" type="text" :value="`${itemCount} 件`" readonly />
+                    </td>
+                    <td colspan="3" class="auto-tip">
+                      已填 {{ filledCount }} 项 · 单价/数量一改，合计自动重算
+                    </td>
+                  </tr>
+                </tbody>
 
-      <p id="table_P">填写此表格后可以点击下载将表格下载到本地中 | 下载不收费</p>
+                <tfoot>
+                  <tr>
+                    <td colspan="6">在填写的过程中请您确认好填写配件中的规格大小，以防出现配件之间规格不兼容的问题</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </form>
+          </div>
 
-      <div class="export">
-        <label for="exportButton">
-          <img :src="downloadIcon" alt="下载图标" />
-        </label>
-        <input id="exportButton" type="button" value="点击下载表格" @click="exportXlsx" />
+          <p id="table_P">填写此表格后可以点击下载将表格下载到本地中 | 下载不收费</p>
+
+          <div class="export">
+            <label for="exportButton">
+              <img :src="downloadIcon" alt="下载图标" />
+            </label>
+            <input id="exportButton" type="button" value="点击下载表格" @click="exportXlsx" />
+          </div>
+        </div>
+
+        <!-- 明细收起后的提示条 -->
+        <div v-if="!detailOpen" class="collapsed-hint">
+          <p>填写明细已收起，合计 ¥{{ total.toFixed(2) }}（{{ itemCount }} 件）。</p>
+          <button type="button" class="fold-btn" @click="toggleDetail">展开明细继续填写</button>
+        </div>
+
+        <!-- 右侧参考：车架 / 零件道具 / 变速器 -->
+        <CalcRefPanel v-if="refOpen" class="ref-col" />
       </div>
     </section>
 
@@ -274,11 +354,137 @@ async function exportXlsx() {
 }
 
 .sheet {
-  width: min(1400px, 94vw);
+  width: min(1560px, 96vw);
   margin: 0 auto;
   padding-bottom: 40px;
   background-image: linear-gradient(0deg, #fff, bisque);
   border-radius: 8px;
+}
+
+/* ── 工具条：折叠按钮 + 合计速览 ── */
+.sheet-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 12px 14px;
+}
+
+.bar-left,
+.bar-right {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.fold-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  border: 1px solid #e8c9a6;
+  border-radius: 999px;
+  background: #fffdf9;
+  color: #b96a26;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.fold-btn:hover {
+  background: #fdf1e0;
+}
+
+.fold-btn .caret {
+  display: inline-block;
+  transition: transform 0.2s ease;
+  transform: rotate(-90deg);
+}
+
+.fold-btn .caret.open {
+  transform: rotate(0deg);
+}
+
+.sum {
+  color: #4a3b2c;
+  font-size: 14px;
+}
+
+.sum b {
+  margin-left: 4px;
+  color: #c0392b;
+  font-size: 18px;
+}
+
+.sum-weak {
+  color: #8a7761;
+  font-size: 12px;
+}
+
+/* ── 主体：左边表格 / 右边参考，两边都能单独折叠 ── */
+.sheet-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.62fr) minmax(340px, 1fr);
+  gap: 14px;
+  padding: 0 14px;
+  align-items: start;
+}
+
+/* 参考收起：表格占满整行 */
+.sheet-body.ref-closed {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* 明细收起：参考面板占满整行（这时表格区域只剩一条提示条） */
+.sheet-body.detail-closed {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.table-col {
+  min-width: 0;
+}
+
+.ref-col {
+  /* 让参考面板跟着视线固定在表格旁边，滚动填表时也能参考 */
+  position: sticky;
+  top: 76px;
+  max-height: calc(100vh - 110px);
+  display: flex;
+}
+
+.collapsed-hint {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 18px 16px;
+  margin-bottom: 4px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px dashed #e6d7c2;
+}
+
+.collapsed-hint p {
+  margin: 0;
+  color: #4a3b2c;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* 窄屏：参考面板落到表格下面，不吸顶 */
+@media (max-width: 1280px) {
+  .sheet-body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ref-col {
+    position: static;
+    max-height: 520px;
+  }
 }
 
 /* 原来 6 个 li 靠 left/right 手调像素对齐，这里改成和表格列同宽的 grid，

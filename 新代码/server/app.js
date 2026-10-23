@@ -97,13 +97,27 @@ async function start() {
     console.log('数据库同步成功')
 
     const PORT = process.env.PORT || 3000
-    app.listen(PORT, () => {
+    const server = app.listen(PORT, () => {
       console.log(`后端服务已启动：http://localhost:${PORT}`)
       if (fs.existsSync(distDir)) {
         console.log('检测到 dist/，前端页面与接口同端口提供：http://localhost:' + PORT)
       } else {
         console.log('未检测到 dist/，仅提供 /api 与 /uploads（前端请用 npm run dev）')
       }
+    })
+
+    // 端口被占用时给一句人话，而不是抛一坨 EADDRINUSE 堆栈
+    server.on('error', (err) => {
+      if (err.code === 'EADDRINUSE') {
+        console.error(`\n[启动失败] 端口 ${PORT} 已被占用，后端没起来。`)
+        console.error('最常见的原因：已经有一个后端在跑（比如另一个终端窗口、或上次的进程没关干净）。')
+        console.error('处理办法：')
+        console.error('  1) 关掉另一个正在跑后端的终端窗口（或那个 启动.cmd 窗口），再重新启动；')
+        console.error('  2) 想同时跑两份就改 server/.env 里的 PORT，并同步改 vite.config.js 的代理端口；')
+        console.error(`  3) 查看是谁占用的：netstat -ano | findstr :${PORT}`)
+        process.exit(1)
+      }
+      throw err
     })
   } catch (err) {
     console.error('启动失败：', err.message)

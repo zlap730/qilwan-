@@ -1,3 +1,13 @@
+<!--
+  ForgotPasswordView.vue —— 找回密码（邮箱验证码）
+  路由：/forgot-password
+
+  两步：① 输入注册邮箱 → 后端发 6 位验证码；② 输入验证码 + 新密码 → 重置密码。
+  后端没配置 SMTP 时走开发模式，页面会直接显示验证码方便本地调试。
+  登录页的「忘记密码？」入口跳到这里。属于旧站没有的新增功能。
+
+  数据来源：接口：POST /api/auth/forgot-password、POST /api/auth/reset-password
+-->
 <script setup>
 import { computed, onBeforeUnmount, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'

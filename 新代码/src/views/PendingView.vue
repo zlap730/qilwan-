@@ -1,3 +1,13 @@
+<!--
+  PendingView.vue —— 页面整理中（占位页）
+  路由：/pending/:name（如 /pending/维修工具）
+
+  旧站里有些页面点进去只有导航条、没有正文（维修工具 / 刹车 / 异响 / 配件 / 服装头盔 / 车架等），
+  迁移后用这个页面统一兜底：显示「XX 整理中」，并给出几个可用的入口，避免一片空白。
+  等这些页面的内容补齐后，把对应路由改成真正的页面即可。
+
+  数据来源：无数据，只读取路由参数 name
+-->
 <script setup>
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'

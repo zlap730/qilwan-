@@ -1,3 +1,14 @@
+<!--
+  CalculatorView.vue —— 装配清单（计算器）
+  路由：/calculator
+
+  30 多行的自行车配件清单表格：配件名 / 单价 / 数量 / 规格 / 备注，
+  表格用数据数组 + v-for 生成，合计用 computed 自动算（改单价立刻更新），
+  底部「点击下载表格」用 xlsx 按需导出 Excel。
+  对应旧站：装配计算器.html + 表格计算器.js + 装配计算器.js。
+
+  数据来源：表格模板固定在文件顶部 templateRows 数组里；导出依赖 xlsx（按需 import）
+-->
 <script setup>
 import { computed, ref } from 'vue'
 

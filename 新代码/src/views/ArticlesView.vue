@@ -1,3 +1,13 @@
+<!--
+  ArticlesView.vue —— 骑行知识 · 文章列表
+  路由：/articles
+
+  5 篇文章的卡片列表：运动简介 / 装备介绍 / 骑行知识 / 公路车 / 山地车。
+  每张卡显示标题、一句摘要、封面，点进去是 /article/:slug。
+  对应旧站：运动简介.html、装备介绍.html、骑行知识.html、公路车.html、山地车.html 五个独立页面。
+
+  数据来源：@/data/articles.js（标题、摘要、封面）；正文图片在 public/articles/
+-->
 <script setup>
 import { articles } from '@/data/articles'
 

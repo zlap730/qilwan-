@@ -1,3 +1,13 @@
+<!--
+  ForumView.vue —— 讨论区
+  路由：/forum
+
+  评论列表（头像、用户名、时间、正文、图片）+ 底部固定发评论条（可带图）
+  + 点图片放大预览 + 删除自己的评论。没登录只能看，登录后才能发言。
+  对应旧站：论坛.html + JS文件/评论区代码.js。
+
+  数据来源：接口：GET/POST /api/comments、DELETE /api/comments/:id；单条评论渲染在 @/components/CommentItem.vue
+-->
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 

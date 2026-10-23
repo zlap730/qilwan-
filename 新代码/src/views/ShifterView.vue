@@ -1,3 +1,13 @@
+<!--
+  ShifterView.vue —— 变速器大全
+  路由：/shifters
+
+  顶部 3 张图片循环滚动；中间「国产 / 进口」分类切换；下方 8 个品牌的品牌卡，
+  点品牌显示该品牌的价格表、说明和外链（带淡入动画）。
+  对应旧站：变速器大全.html + JS文件/变速器大全-选项框.js（1,058 行）。
+
+  数据来源：@/data/shifterBrands.js（8 个品牌的正文）、@/data/shifterMeta.js（分类与品牌清单）
+-->
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 

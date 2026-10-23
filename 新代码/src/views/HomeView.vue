@@ -1,3 +1,15 @@
+<!--
+  HomeView.vue —— 首页（工具入口）
+  路由：/
+
+  进来看到的第一个页面。上方橙色底板里是「自己组装 / 保养 / 维修爱车」的 5 个方块：
+  变速器|刹车|调试（4 张卡）、维修工具、车辆保养、自行车装配、异响查找/解决；
+  下方是「其他自行车用品」三张入口卡。
+  对应旧站：骑乐网.html 里的 #section-4 + 其他自行车用品。
+  跳到：/shifters/tuning（变速器调试）、/calculator（装配清单）、/shifters、/pending/*（未迁移页面）
+
+  数据来源：图片来自 @/assets/img/*，几个入口是写在本文件里的数组
+-->
 <script setup>
 import 前拨图 from '@/assets/img/前拨.png'
 import 后变速器图 from '@/assets/img/后变速器.png'

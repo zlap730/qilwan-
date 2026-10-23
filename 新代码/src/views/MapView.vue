@@ -1,3 +1,13 @@
+<!--
+  MapView.vue —— 车店 / 骑行地图
+  路由：/map
+
+  用高德地图 JS API 显示一张地图（中心沿用旧站设置的北京坐标），进入页面时才加载脚本。
+  高德 key 可以放在 .env 的 VITE_AMAP_KEY；加载失败会显示可读提示而不是空白。
+  对应旧站：地图.html。
+
+  数据来源：高德 JS API（webapi.amap.com/maps）
+-->
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 

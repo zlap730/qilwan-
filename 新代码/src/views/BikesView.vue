@@ -1,3 +1,14 @@
+<!--
+  BikesView.vue —— 整车推荐（选车问卷）
+  路由：/bikes
+
+  顶部是选车主视觉；下面是 4 道问卷（路况 / 预算 / 需求 / 品牌），
+  点「获取推荐」后从 73 款车里筛出匹配车型，并给出适用场景和核心配置；
+  再往下是「大家买车前最担心的几件事」的 CSS 词云和买车建议。
+  对应旧站：整车页面.HTML + JS文件/整车页面js.js（wordcloud2 词云已换成纯 CSS）。
+
+  数据来源：@/data/bikes.json（73 款车）、@/assets/img/hq720.webp
+-->
 <script setup>
 import { computed, reactive, ref } from 'vue'
 

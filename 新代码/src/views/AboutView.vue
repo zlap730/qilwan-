@@ -1,3 +1,13 @@
+<!--
+  AboutView.vue —— 关于网站
+  路由：/about
+
+  介绍性页面：一、网站功能；二、关于网站（纯公益初心）；关于我们与网站（免责声明 + 配图）；
+  最后是「入门向导」三张卡，分别链到运动简介 / 骑行知识 / 装备介绍三篇文章。
+  对应旧站：骑乐网.html 里的「网站功能 / 关于网站 / 关于我们与网站 / 入门向导」几段。
+
+  数据来源：正文是写在模板里的静态文字；图片来自 @/assets/img/*
+-->
 <script setup>
 import 关于网站图 from '@/assets/img/关于网站.jpg'
 import 运动简介图 from '@/assets/img/sram_gx_web_waterfall_this_is_web.webp'

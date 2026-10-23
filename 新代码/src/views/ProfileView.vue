@@ -1,3 +1,15 @@
+<!--
+  ProfileView.vue —— 个人中心
+  路由：/profile（可带 ?tab=profile|avatar|security|comments）
+
+  参考 B 站个人中心：顶部渐变头图 + 圆形头像 + 用户名/邮箱 + 成长进度条 + 4 项统计，
+  下面是左侧菜单 + 右侧内容，共 5 个面板：
+    个人中心（概览） / 修改资料（改用户名、邮箱、简介） / 更换头像 /
+    登录与安全（改密码、忘记密码入口、注销账号） / 我的评论（筛选、编辑、删除）。
+  对应旧站：个人信息.html + JS文件/个人信息.js（在此基础上扩展到个人中心）。
+
+  数据来源：接口：GET /users/me、PUT /users/:id、PUT /users/me/password、GET /users/me/comments、PATCH/DELETE /comments/:id
+-->
 <script setup>
 import { computed, onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'

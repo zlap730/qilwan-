@@ -1,3 +1,13 @@
+<!--
+  ArticleView.vue —— 骑行知识 · 文章详情
+  路由：/article/:slug（如 /article/gear）
+
+  按 URL 里的 slug 从数据里取一篇文章，渲染标题、摘要和正文（v-html）。
+  slug 对不上时显示「文章不存在」并给出返回列表的链接。
+  正文里的排版规则（字号、间距、图片宽度）写在文件末尾的非 scoped 样式里。
+
+  数据来源：@/data/articles.js
+-->
 <script setup>
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'

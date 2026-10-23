@@ -1,3 +1,13 @@
+<!--
+  LoginView.vue —— 登录 / 注册
+  路由：/login
+
+  登录与注册表单（同一个页面切换），带前端校验，登录成功后把 token 和用户信息写进 Pinia。
+  右下角有「忘记密码？」入口。这个页面不显示导航栏和页脚（路由 meta.bare = true）。
+  对应旧站：登陆页面.html 内联脚本 + 用户登录.js（原来两份重复实现，这里合并成一份）。
+
+  数据来源：接口：POST /api/auth/login、POST /api/auth/register；状态存在 @/stores/user.js
+-->
 <script setup>
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'

@@ -11,6 +11,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "admin": "node server/scripts/make-admin.js",
+    "create-admin": "node server/scripts/create-admin.js",
     "cleanup:uploads": "node server/scripts/cleanup-uploads.js"
   },
   "dependencies": {

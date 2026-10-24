@@ -77,6 +77,10 @@ onBeforeUnmount(() => document.removeEventListener('click', onDocumentClick))
           <router-link to="/profile" @click="close">个人信息</router-link>
           <router-link to="/articles" @click="close">骑行知识</router-link>
           <router-link to="/map" @click="close">车店地图</router-link>
+          <!-- 只有管理员才看得到后台入口 -->
+          <router-link v-if="store.user?.isAdmin" to="/admin/users" class="nav-admin" @click="close">
+            管理后台
+          </router-link>
           <span class="nav-tip">个人空间依赖后端 /api/posts，尚未迁移</span>
           <a href="#" @click.prevent="logout">退出账号</a>
         </div>
@@ -145,6 +149,12 @@ onBeforeUnmount(() => document.removeEventListener('click', onDocumentClick))
 .nav-dropdown a {
   color: #c0392b;
   font-size: 14px;
+}
+
+/* 后台入口用蓝色区分，一眼能认出来 */
+.nav-dropdown a.nav-admin {
+  color: #1890ff;
+  font-weight: 700;
 }
 
 .nav-tip {

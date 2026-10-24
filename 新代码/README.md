@@ -152,10 +152,20 @@ BASE_URL=http://localhost:4173 node scripts/layout-audit.mjs     # 审计构建�
     └── views/         Home / About / Bikes / Shifter / Tuning / Articles / Article / Calculator / Forum / Profile / ForgotPassword / Map / Pending / Login
 ```
 
+## 后台管理（/admin）
+
+| 页面 | 路由 | 作用 |
+| --- | --- | --- |
+| 用户管理 | `/admin/users` | 统计、搜索、设/取消管理员、重置密码、删除用户 |
+| 评论管理 | `/admin/comments` | 全部/已通过/待审/已驳回筛选、搜索、隐藏 |
+| 评论审核 | `/admin/review` | 待审列表，通过 / 驳回（可填原因） |
+
+初始管理员：`admin` / `946898zhoupeng`（**上线前务必改掉**）。
+创建或重置：`npm run create-admin -- admin 新密码`。
+
 ## 已知未完成
 
-- **评论审核管理页**：后端接口（`/api/admin/comments*`）和 `auditStatus` 字段已就绪，
-  还差一个 `views/AdminCommentsView.vue`；先把账号设成管理员：`npm run admin 你的用户名`；
+- 后台的**多选 + 批量操作**（批量删除/批量通过）还没做，目前是逐条操作；
 - 整车/车架/配件/服装头盔/刹车/维修工具：静态展示页，搬进 `<template>` 即可；
 - **个人空间**：依赖后端 `/api/posts`（旧站这个接口根本没实现），需要新增 posts 表和接口；
 - **找回密码要真正发信**：需要配 SMTP（见 `server/.env.example` 与 `项目结构说明.md` 第十二节）；

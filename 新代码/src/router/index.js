@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
+import { useUserStore } from '@/stores/user'
+
 // 原项目是 29 个 HTML 文件的多页站，这里按「一个页面一条路由」逐步迁移。
 // 首页 = 旧站的「自己组装/保养/维修爱车」工具入口页；关于网站单独一条路由。
 const routes = [
@@ -95,6 +97,33 @@ const routes = [
     component: () => import('@/views/ArticleView.vue'),
     meta: { title: '文章' }
   },
+  {
+    // 后台管理：左侧菜单 + 三个子页面，只有 isAdmin 能进（守卫在下面）
+    path: '/admin',
+    component: () => import('@/layouts/AdminLayout.vue'),
+    meta: { requiresAdmin: true, bare: true },
+    children: [
+      { path: '', redirect: '/admin/users' },
+      {
+        path: 'users',
+        name: 'admin-users',
+        component: () => import('@/views/admin/AdminUsersView.vue'),
+        meta: { title: '用户管理', requiresAdmin: true, bare: true }
+      },
+      {
+        path: 'comments',
+        name: 'admin-comments',
+        component: () => import('@/views/admin/AdminCommentsView.vue'),
+        meta: { title: '评论管理', requiresAdmin: true, bare: true }
+      },
+      {
+        path: 'review',
+        name: 'admin-review',
+        component: () => import('@/views/admin/AdminReviewView.vue'),
+        meta: { title: '评论审核', requiresAdmin: true, bare: true }
+      }
+    ]
+  },
   { path: '/:pathMatch(.*)*', redirect: '/' }
 ]
 
@@ -111,6 +140,21 @@ const router = createRouter({
 router.afterEach((to) => {
   const base = '骑乐网 · 普骑屋'
   document.title = to.meta.title ? `${to.meta.title} | ${base}` : base
+})
+
+// 后台守卫：没登录先去登录页（登录后自动跳回来），登录了但不是管理员则回首页
+// 注意：这里不要用 window.alert 弹提示——页面会被阻塞，体验也不好；用一个 query 让首页去提示
+router.beforeEach((to) => {
+  if (!to.meta.requiresAdmin) return true
+
+  const store = useUserStore()
+  if (!store.isLoggedIn) {
+    return { path: '/login', query: { redirect: to.fullPath } }
+  }
+  if (!store.user?.isAdmin) {
+    return { path: '/', query: { denied: 'admin' } }
+  }
+  return true
 })
 
 export default router

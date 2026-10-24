@@ -1,0 +1,287 @@
+/* 后台管理通用样式（被 /admin/* 的三个页面共用）
+   风格对齐参考图：浅灰底、白卡片、蓝色主按钮、红色删除按钮、灰色表头。
+
+   命名前缀统一 .a- ，避免和前台样式冲突。 */
+
+.a-card {
+  padding: 16px;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.a-card + .a-card {
+  margin-top: 14px;
+}
+
+/* 顶部统计卡 */
+.a-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.a-stat {
+  padding: 16px 18px;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.a-stat-value {
+  font-size: 26px;
+  font-weight: 800;
+  color: #1f2a37;
+  line-height: 1.2;
+}
+
+.a-stat-label {
+  margin-top: 4px;
+  color: #8a97a8;
+  font-size: 13px;
+}
+
+.a-stat.accent .a-stat-value {
+  color: #1890ff;
+}
+
+.a-stat.warn .a-stat-value {
+  color: #fa8c16;
+}
+
+.a-stat.danger .a-stat-value {
+  color: #f5222d;
+}
+
+/* 工具行：搜索框 + 按钮 */
+.a-toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.a-input {
+  width: 260px;
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 14px;
+  color: #333;
+  box-sizing: border-box;
+}
+
+.a-input:focus {
+  outline: none;
+  border-color: #1890ff;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.15);
+}
+
+.a-btn {
+  height: 34px;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.a-btn:hover {
+  opacity: 0.88;
+}
+
+.a-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.a-btn-primary {
+  background: #1890ff;
+  color: #fff;
+}
+
+.a-btn-ghost {
+  background: #fff;
+  border-color: #d9d9d9;
+  color: #555;
+}
+
+.a-btn-warn {
+  background: #fa8c16;
+  color: #fff;
+}
+
+.a-btn-danger {
+  background: #f5222d;
+  color: #fff;
+}
+
+.a-btn-sm {
+  height: 28px;
+  padding: 0 10px;
+  font-size: 13px;
+}
+
+/* 表格 */
+.a-table-wrap {
+  overflow-x: auto;
+}
+
+.a-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  color: #333;
+  table-layout: auto;
+}
+
+.a-table th,
+.a-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #f0f0f0;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.a-table th {
+  background: #fafafa;
+  color: #555;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.a-table tbody tr:hover td {
+  background: #fafcff;
+}
+
+.a-table .nowrap {
+  white-space: nowrap;
+}
+
+.a-table .muted {
+  color: #8a97a8;
+}
+
+.a-table .ellipsis {
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.a-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #f0f0f0;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+/* 状态标签 */
+.a-tag {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.a-tag-green {
+  background: #f6ffed;
+  border: 1px solid #b7eb8f;
+  color: #52c41a;
+}
+
+.a-tag-red {
+  background: #fff1f0;
+  border: 1px solid #ffa39e;
+  color: #f5222d;
+}
+
+.a-tag-blue {
+  background: #e6f7ff;
+  border: 1px solid #91d5ff;
+  color: #1890ff;
+}
+
+.a-tag-orange {
+  background: #fff7e6;
+  border: 1px solid #ffd591;
+  color: #fa8c16;
+}
+
+.a-tag-gray {
+  background: #f5f5f5;
+  border: 1px solid #d9d9d9;
+  color: #8a97a8;
+}
+
+/* 分页 */
+.a-pager {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-top: 14px;
+  color: #666;
+  font-size: 13px;
+}
+
+.a-pager button {
+  min-width: 30px;
+  height: 30px;
+  padding: 0 8px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  background: #fff;
+  color: #555;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.a-pager button.active {
+  border-color: #1890ff;
+  background: #1890ff;
+  color: #fff;
+}
+
+.a-pager button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 空状态 / 提示 */
+.a-empty {
+  padding: 40px 0;
+  color: #9aa7b8;
+  text-align: center;
+  font-size: 14px;
+}
+
+.a-msg {
+  margin: 0 0 10px;
+  font-size: 13px;
+}
+
+.a-msg-error {
+  color: #f5222d;
+}
+
+.a-msg-ok {
+  color: #52c41a;
+}
+
+.a-ops {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}

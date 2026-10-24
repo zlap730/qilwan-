@@ -10,13 +10,14 @@
 -->
 <script setup>
 import { reactive, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 import { login as loginApi, register as registerApi } from '@/api/auth'
 import bgImage from '@/assets/img/单车与日落.jpg'
 import { useUserStore } from '@/stores/user'
 import '@/assets/legacy/登陆页面.css'
 
+const route = useRoute()
 const router = useRouter()
 const store = useUserStore()
 
@@ -50,7 +51,11 @@ async function submitLogin() {
   try {
     const data = await loginApi({ identifier: form.identifier.trim(), password: form.password })
     store.setSession({ token: data.token, user: data.user })
-    router.push('/forum')
+
+    // 管理员登录后直接进后台；其余人回讨论区（或回到被拦截前的页面）
+    const redirect = route.query.redirect
+    if (redirect) router.push(String(redirect))
+    else router.push(data.user?.isAdmin ? '/admin/users' : '/forum')
   } catch (err) {
     error.value = err.friendlyMessage || '用户名或密码错误，请重试'
   } finally {

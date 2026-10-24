@@ -6,6 +6,7 @@ const authRoutes = require('./auth');
 const userRoutes = require('./userRoutes');
 const commentRoutes = require('./comments');
 const adminCommentRoutes = require('./adminComments');
+const adminUserRoutes = require('./adminUsers');
 
 const router = express.Router();
 
@@ -21,7 +22,10 @@ router.use('/users', userRoutes);
 // 评论路由：最终路径为 /api/comments
 router.use('/comments', commentRoutes);
 
-// 评论审核（管理员）：最终路径为 /api/admin/comments
+// 后台：评论审核与管理 → /api/admin/comments
 router.use('/admin/comments', adminCommentRoutes);
+
+// 后台：用户管理 → /api/admin/users
+router.use('/admin/users', adminUserRoutes);
 
 module.exports = router;

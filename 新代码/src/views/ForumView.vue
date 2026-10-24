@@ -21,12 +21,41 @@ import { useI18n } from 'vue-i18n'
 import { createComment, deleteComment, listComments } from '@/api/comments'
 import CommentItem from '@/components/CommentItem.vue'
 import { useUserStore } from '@/stores/user'
+import forumBg from '@/assets/img/深圳湾骑车壁纸图.jpg'
 import '@/assets/legacy/论坛.css'
 
 const store = useUserStore()
 const { t } = useI18n()
 
 const comments = ref([])
+
+/*
+ * 分区：维修讨论区 / 骑行讨论区
+ * 用评论的 targetId 区分（repair / riding）。
+ * 旧数据 targetId 都是 'default'，统一归到「骑行讨论区」，避免历史发言消失。
+ */
+const CATEGORIES = [
+  { key: 'repair', labelKey: 'forum.catRepair', descKey: 'forum.catRepairDesc' },
+  { key: 'riding', labelKey: 'forum.catRiding', descKey: 'forum.catRidingDesc' }
+]
+const activeCategory = ref('repair')
+
+function categoryOf(comment) {
+  return comment.targetId === 'repair' ? 'repair' : 'riding'
+}
+
+const categoryCount = computed(() => ({
+  repair: comments.value.filter((item) => categoryOf(item) === 'repair').length,
+  riding: comments.value.filter((item) => categoryOf(item) === 'riding').length
+}))
+
+const visibleComments = computed(() =>
+  comments.value.filter((item) => categoryOf(item) === activeCategory.value)
+)
+
+const activeCategoryMeta = computed(
+  () => CATEGORIES.find((item) => item.key === activeCategory.value) || CATEGORIES[0]
+)
 const loading = ref(true)
 const error = ref('')
 const formOpen = ref(false)
@@ -178,6 +207,8 @@ async function submit() {
   try {
     const result = await createComment({
       content: text,
+      // 分区靠 targetId 区分，发到哪个区就带哪个 id
+      targetId: activeCategory.value,
       parentId: replyTarget.value?.id,
       images: images.value.map((item) => item.file),
       video: video.value?.file
@@ -218,30 +249,48 @@ const loggedInTip = computed(() =>
 )
 
 const totalCount = computed(() =>
-  comments.value.reduce((sum, item) => sum + 1 + (item.replies?.length || 0), 0)
+  visibleComments.value.reduce((sum, item) => sum + 1 + (item.replies?.length || 0), 0)
 )
 
 onMounted(load)
 </script>
 
 <template>
-  <main class="page-forum">
+  <main class="page-forum" :style="{ backgroundImage: `url(${forumBg})` }">
     <section class="forum-shell">
       <header class="forum-head">
-        <h1>{{ t('forum.title') }}</h1>
-        <span class="login-tip">{{ loggedInTip }}</span>
+        <div class="head-main">
+          <h1>{{ t('forum.title') }}</h1>
+          <span class="login-tip">{{ loggedInTip }}</span>
+        </div>
         <span class="count-tip">{{ t('forum.total', { n: totalCount }) }}</span>
       </header>
+
+      <!-- 分区：维修讨论区 / 骑行讨论区 -->
+      <nav class="cat-tabs">
+        <button
+          v-for="cat in CATEGORIES"
+          :key="cat.key"
+          type="button"
+          class="cat-tab"
+          :class="{ active: activeCategory === cat.key }"
+          @click="activeCategory = cat.key"
+        >
+          {{ t(cat.labelKey) }}
+          <span class="cat-count">{{ categoryCount[cat.key] }}</span>
+        </button>
+      </nav>
+      <p class="cat-desc">{{ t(activeCategoryMeta.descKey) }}</p>
 
       <div class="comments-section">
         <div class="commentsContainer">
           <p v-if="loading" class="state">{{ t('common.loading') }}</p>
           <p v-else-if="error" class="state state-error">{{ error }}</p>
-          <p v-else-if="!comments.length" class="state">{{ t('forum.empty') }}</p>
+          <p v-else-if="!visibleComments.length" class="state">{{ t('forum.empty') }}</p>
 
           <template v-else>
             <CommentItem
-              v-for="item in comments"
+              v-for="item in visibleComments"
               :key="item.id"
               :comment="item"
               :current-user-id="store.userId"
@@ -258,11 +307,7 @@ onMounted(load)
     <!-- 底部发评论条：外层铺满宽度做背景，内层限宽居中，避免页脚文字从两侧露出来 -->
     <div class="comment-bar">
       <div class="comment-bar-inner">
-        <button type="button" class="toggleCommentButton" :class="{ active: formOpen }" @click="toggleForm">
-          {{ formOpen ? t('forum.collapse') : t('forum.addComment') }}
-        </button>
-
-        <form v-if="formOpen" class="commentForm" @submit.prevent="submit">
+        <form class="commentForm" @submit.prevent="submit">
         <!-- 回复提示 -->
         <div v-if="replyTarget" class="reply-banner">
           <span>{{ t('forum.replying') }} <b>@{{ replyTarget.User?.username }}</b>：{{ (replyTarget.content || 'media').slice(0, 20) }}</span>
@@ -342,24 +387,55 @@ onMounted(load)
 <style scoped>
 .page-forum {
   min-height: 100vh;
-  padding: 110px 0 240px;
+  padding: 96px 0 280px;
+  /* 主背景：骑行照片 + 暖色渐变遮罩，保证和站点主题一致 */
+  background-position: center top;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+/* 遮罩层：让照片不至于抢文字的对比度 */
+.page-forum::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(250, 245, 235, 0.72) 0%, rgba(246, 231, 210, 0.86) 100%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .forum-shell {
   /* PC 自适应：原来是 80%，在 2560 屏上会变成 2000px 宽，一屏只有一两行字 */
+  position: relative;
+  z-index: 1;
   width: min(1100px, 92vw);
-  min-height: 620px;
+  min-height: 560px;
   margin: 0 auto;
-  padding: 18px 24px 40px;
-  border-radius: 6px;
-  background-color: rgba(255, 228, 196, 0.95);
+  padding: 20px 24px 36px;
+  border-radius: 16px;
+  /* 半透明主题色卡片 + 磨砂，底下的照片会透上来一点点 */
+  background: rgba(255, 250, 243, 0.82);
+  backdrop-filter: blur(10px) saturate(1.1);
+  -webkit-backdrop-filter: blur(10px) saturate(1.1);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 18px 40px rgba(120, 90, 50, 0.16);
 }
 
 .forum-head {
   display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+}
+
+.head-main {
+  display: flex;
   align-items: baseline;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 14px;
 }
 
 .forum-head h1 {
@@ -374,6 +450,59 @@ onMounted(load)
 
 /* 原 CSS 里 .commentsContainer 有 left:-200px / width:70%，是用来抵消旧布局的，
    SPA 里容器结构变了，这里归零 */
+/* 分区标签（维修讨论区 / 骑行讨论区） */
+.cat-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 8px 0 4px;
+}
+
+.cat-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 20px;
+  border: 1px solid rgba(232, 201, 166, 0.9);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+  color: #7a6248;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.cat-tab:hover {
+  background: rgba(255, 245, 232, 0.95);
+}
+
+.cat-tab.active {
+  border-color: #e8863c;
+  background: #e8863c;
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(232, 134, 60, 0.28);
+}
+
+.cat-count {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.08);
+  font-size: 12px;
+}
+
+.cat-tab.active .cat-count {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.cat-desc {
+  margin: 0 0 14px;
+  color: #8a7761;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
 .commentsContainer {
   left: 0;
   width: 100%;
@@ -549,34 +678,46 @@ onMounted(load)
    旧样式是 width:50% + left:25% 的浮动条；这里改成「整宽背景 + 内层限宽」，
    这样页脚文字不会从浮动条两侧露出来，滚动时也始终压在页面最上面。
    ============================================================ */
+/* 底部评论条：浮动小卡片，不再是一条通栏色带（之前收起时也很占地方） */
 .comment-bar {
-  /* 旧样式是 position: fixed，页脚会被压在下面；
-     改成 sticky：滚动时始终贴在视口底部，滚到页脚时会自然停在页脚上方 */
-  position: sticky;
-  bottom: 0;
-  width: 100%;
-  left: 0;
-  right: 0;
-  transform: none;
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  width: min(760px, 94vw);
   box-sizing: border-box;
-  padding: 10px 0 12px;
-  border-top: 1px solid #e6d7c2;
-  background: #f6eee2;
-  box-shadow: 0 -6px 20px rgba(120, 90, 50, 0.14);
+  background: transparent;
   z-index: 60;
+  pointer-events: none;
 }
 
 .comment-bar-inner {
   display: flex;
   flex-direction: column;
-  width: min(760px, 94vw);
-  margin: 0 auto;
-  max-height: 66vh;
+  align-items: flex-end;
+  gap: 8px;
+  max-height: 62vh;
   overflow-y: auto;
+  pointer-events: auto;
+  /* 收起时只有一颗按钮，展开时卡片自然变高 */
+  background: transparent;
+  padding: 0;
 }
 
 /* 「添加评论 / 收起」按钮：旧样式是 width:100%，展开时整条变红，太抢眼；
    改成右侧的小胶囊按钮，绿色=添加、红色=收起（保留旧站的颜色语义） */
+/* 展开后的输入卡片：半透明白 + 磨砂，浮在照片上 */
+.comment-bar .commentForm {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  background: rgba(255, 253, 249, 0.96);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 14px 34px rgba(80, 60, 40, 0.22);
+}
+
 .comment-bar .toggleCommentButton {
   width: auto;
   min-width: 108px;
@@ -604,7 +745,7 @@ onMounted(load)
 }
 
 .comment-bar .commentInput {
-  min-height: 96px;
+  min-height: 64px;
   border: 1px solid #e2d6c4;
   border-radius: 8px;
   background: #fff;

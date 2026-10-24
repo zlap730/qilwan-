@@ -11,6 +11,9 @@
 <script setup>
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 /*
  * 「页面整理中」占位页。
@@ -25,21 +28,19 @@ const name = computed(() => String(route.params.name || '这个页面'))
 <template>
   <main class="page-pending">
     <section class="card">
-      <p class="tag">页面整理中</p>
+      <p class="tag">{{ t('pending.tag') }}</p>
       <h1>「{{ name }}」</h1>
-      <p class="desc">
-        旧站里这一页还没有写内容，迁移新版时先把入口留着，等资料整理好会补在这里。
-      </p>
+      <p class="desc">{{ t('pending.desc') }}</p>
 
       <div class="links">
-        <span>可以先看：</span>
-        <router-link to="/shifters">变速器大全</router-link>
-        <router-link to="/calculator">装配清单</router-link>
-        <router-link to="/forum">讨论区</router-link>
-        <router-link to="/about">关于网站</router-link>
+        <span>{{ t('pending.tryThese') }}</span>
+        <router-link to="/shifters">{{ t('shifter.title') }}</router-link>
+        <router-link to="/calculator">{{ t('calculator.title') }}</router-link>
+        <router-link to="/forum">{{ t('forum.title') }}</router-link>
+        <router-link to="/about">{{ t('about.title') }}</router-link>
       </div>
 
-      <router-link class="back" to="/">← 返回首页</router-link>
+      <router-link class="back" to="/">{{ t('pending.backHome') }}</router-link>
     </section>
   </main>
 </template>

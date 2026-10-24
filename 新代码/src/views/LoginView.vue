@@ -10,6 +10,7 @@
 -->
 <script setup>
 import { reactive, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
 
 import { login as loginApi, register as registerApi } from '@/api/auth'
@@ -20,6 +21,7 @@ import '@/assets/legacy/登陆页面.css'
 const route = useRoute()
 const router = useRouter()
 const store = useUserStore()
+const { t } = useI18n()
 
 const mode = ref('login')
 const busy = ref(false)
@@ -118,7 +120,7 @@ async function submitRegister() {
     <!-- 原来是 video 背景 + 两个 div 靠 style.display 切换，这里换成 v-if + <form>，
          顺带就有了「回车提交」和浏览器自带的密码管理器支持 -->
     <form v-if="mode === 'login'" id="登录窗口" class="login-card" @submit.prevent="submitLogin">
-      <h2>登录</h2>
+      <h2>{{ t('login.loginBtn') }}</h2>
       <input v-model="form.identifier" class="input_text" type="text" placeholder="账号" autocomplete="username" />
       <input
         v-model="form.password"
@@ -135,7 +137,7 @@ async function submitRegister() {
     </form>
 
     <form v-else id="注册窗口" class="login-card" @submit.prevent="submitRegister">
-      <h2>注册账号</h2>
+      <h2>{{ t('login.registerBtn') }}</h2>
       <input v-model="form.username" class="zc_text" type="text" placeholder="账号" autocomplete="username" />
       <input
         v-model="form.password"

@@ -1,7 +1,9 @@
 <script setup>
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 
+import { useLocaleStore } from '@/stores/locale'
 import { useUserStore } from '@/stores/user'
 import { resolveAvatar } from '@/utils/asset'
 import placeholder from '@/assets/img/图标文件/占位.png'
@@ -9,6 +11,8 @@ import '@/assets/legacy/导航栏.css'
 
 const store = useUserStore()
 const router = useRouter()
+const { t } = useI18n()
+const localeStore = useLocaleStore()
 const open = ref(false)
 
 // 后端注册时把默认头像写成 /img/图标文件/默认头像.png，但这个文件根本不存在（img 目录里没有
@@ -21,16 +25,18 @@ function onAvatarError(event) {
 /*
  * 原实现：每个 HTML 都复制一份这坨 <nav>，hover 效果靠 onmouseover="jr1(this)" 调全局函数
  * 直接改 el.style.borderBottom，所以每页都得再引一次 导航栏.js。
- * 迁移后：导航只写这一次，7 个页面共享；hover 交给 CSS，全局函数 jr1/lk1 可以整体删除。
+ * 迁移后：导航只写这一次，所有页面共享；文字走 i18n，切换语言即时生效。
+ *
+ * 注意：to 里的路径保持中文（/pending/人身装备 是旧链接，路由参数是中文），只翻译显示文字。
  */
-const navItems = [
-  { label: '首页', to: '/' },
-  { label: '整车推荐', to: '/bikes' },
-  { label: '人身装备', to: '/pending/人身装备' },
-  { label: 'DIY清单计算', to: '/calculator' },
-  { label: '讨论区', to: '/forum' },
-  { label: '关于网站', to: '/about' }
-]
+const navItems = computed(() => [
+  { label: t('nav.home'), to: '/' },
+  { label: t('nav.bikes'), to: '/bikes' },
+  { label: t('nav.gear'), to: '/pending/人身装备' },
+  { label: t('nav.calculator'), to: '/calculator' },
+  { label: t('nav.forum'), to: '/forum' },
+  { label: t('nav.about'), to: '/about' }
+])
 
 function close() {
   open.value = false
@@ -46,6 +52,10 @@ function logout() {
   router.push('/')
 }
 
+function switchLanguage(next) {
+  localeStore.setLocale(next)
+}
+
 onMounted(() => document.addEventListener('click', onDocumentClick))
 onBeforeUnmount(() => document.removeEventListener('click', onDocumentClick))
 </script>
@@ -53,11 +63,9 @@ onBeforeUnmount(() => document.removeEventListener('click', onDocumentClick))
 <template>
   <nav id="nav_1">
     <ul id="ul_nav">
-      <li v-for="item in navItems" :key="item.label">
+      <li v-for="item in navItems" :key="item.to">
         <router-link v-if="item.to" :to="item.to" @click="close">{{ item.label }}</router-link>
-        <span v-else class="nav-todo" :title="`原页面 ${item.source} 不在本次验证范围内`">
-          {{ item.label }}
-        </span>
+        <span v-else class="nav-todo">{{ item.label }}</span>
       </li>
     </ul>
 
@@ -74,29 +82,73 @@ onBeforeUnmount(() => document.removeEventListener('click', onDocumentClick))
         </button>
 
         <div v-show="open" class="nav-dropdown">
-          <router-link to="/profile" @click="close">个人信息</router-link>
-          <router-link to="/articles" @click="close">骑行知识</router-link>
-          <router-link to="/map" @click="close">车店地图</router-link>
+          <router-link to="/profile" @click="close">{{ t('nav.profile') }}</router-link>
+
+          <!-- 语言切换：放在「个人信息」下面，两个按钮点一下就切 -->
+          <div class="nav-lang">
+            <span class="nav-lang-label">{{ t('nav.language') }}</span>
+            <div class="nav-lang-btns">
+              <button
+                type="button"
+                class="nav-lang-btn"
+                :class="{ active: !localeStore.isEnglish }"
+                @click="switchLanguage('zh-CN')"
+              >
+                中文
+              </button>
+              <button
+                type="button"
+                class="nav-lang-btn"
+                :class="{ active: localeStore.isEnglish }"
+                @click="switchLanguage('en')"
+              >
+                English
+              </button>
+            </div>
+          </div>
+
+          <router-link to="/articles" @click="close">{{ t('nav.articles') }}</router-link>
+          <router-link to="/map" @click="close">{{ t('nav.map') }}</router-link>
           <!-- 只有管理员才看得到后台入口 -->
           <router-link v-if="store.user?.isAdmin" to="/admin/users" class="nav-admin" @click="close">
-            管理后台
+            {{ t('nav.admin') }}
           </router-link>
-          <span class="nav-tip">个人空间依赖后端 /api/posts，尚未迁移</span>
-          <a href="#" @click.prevent="logout">退出账号</a>
+          <a href="#" @click.prevent="logout">{{ t('nav.logout') }}</a>
         </div>
       </template>
 
-      <router-link v-else class="nav-login" to="/login">登录</router-link>
+      <router-link v-else class="nav-login" to="/login">{{ t('nav.login') }}</router-link>
     </div>
   </nav>
 </template>
 
 <style scoped>
-.nav-todo {
+/* 英文标签比中文长：旧 CSS 把 li / a 都写死 100px，英文会折行甚至重叠。
+   这里用 scoped 规则（多一个属性选择器，优先级高于全局 导航栏.css）改成按内容宽度。 */
+#ul_nav {
+  gap: 4px;
+  left: 24px;
+}
+
+#ul_nav li {
+  flex: 0 1 auto;
+  width: auto;
+  min-width: 0;
+  height: auto;
+  left: 0;
+}
+
+#ul_nav li a,
+#ul_nav li a:link {
   display: block;
-  width: 100%;
-  height: 40px;
-  padding-top: 15px;
+  width: auto;
+  min-width: 72px;
+  padding: 15px 14px 0;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.nav-todo {
   color: rgba(255, 255, 255, 0.6);
   text-shadow: 1px 1px 0 #000;
   cursor: not-allowed;
@@ -138,7 +190,7 @@ onBeforeUnmount(() => document.removeEventListener('click', onDocumentClick))
   display: flex;
   flex-direction: column;
   gap: 6px;
-  min-width: 190px;
+  min-width: 210px;
   padding: 10px;
   border-radius: 8px;
   background: #fff;
@@ -155,6 +207,44 @@ onBeforeUnmount(() => document.removeEventListener('click', onDocumentClick))
 .nav-dropdown a.nav-admin {
   color: #1890ff;
   font-weight: 700;
+}
+
+/* 语言切换块 */
+.nav-lang {
+  padding: 6px 0 8px;
+  border-top: 1px solid #f0e6d8;
+  border-bottom: 1px solid #f0e6d8;
+}
+
+.nav-lang-label {
+  display: block;
+  margin-bottom: 6px;
+  color: #9a8b78;
+  font-size: 12px;
+}
+
+.nav-lang-btns {
+  display: flex;
+  gap: 6px;
+}
+
+.nav-lang-btn {
+  flex: 1 1 0;
+  padding: 5px 0;
+  border: 1px solid #e8d4b6;
+  border-radius: 6px;
+  background: #fffdf9;
+  color: #7a6248;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.nav-lang-btn.active {
+  border-color: #e8863c;
+  background: #e8863c;
+  color: #fff;
 }
 
 .nav-tip {
@@ -175,85 +265,5 @@ onBeforeUnmount(() => document.removeEventListener('click', onDocumentClick))
 
 .nav-login:hover {
   background: #d2762f;
-}
-
-/* ============================================================
-   PC 自适应（1024 ~ 2560 全宽通用）
-   原样式：7 个菜单项各写死 100px、整体从左侧 40px 开始。
-   现在：菜单整组仍靠左排（左对齐，不居中），每项宽度跟着文字走，
-   间隙用 clamp 随屏宽微调，右侧给 logo 和登录区留出固定位置。
-   ============================================================ */
-#nav_1 {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 0 clamp(16px, 2vw, 32px);
-  box-sizing: border-box;
-}
-
-#ul_nav {
-  flex: 0 1 auto;
-  display: flex;
-  justify-content: flex-start;
-  gap: clamp(4px, 0.7vw, 18px);
-  /* 靠左排，不再用 margin:auto 居中；给自己留出右侧 logo(100px)+登录区(130px) 的空间 */
-  width: auto;
-  max-width: calc(100% - 300px);
-  margin: 0;
-  padding: 0;
-  left: 0;
-}
-
-#ul_nav li {
-  flex: 0 1 auto;
-  width: auto;
-  min-width: 0;
-  left: 0;
-  text-align: left;
-}
-
-/* 文字左对齐，链接宽度跟着文字走（下划线也只压在文字下面） */
-#ul_nav li a,
-#ul_nav li a:link,
-.nav-todo {
-  width: auto;
-  padding-left: 10px;
-  padding-right: 10px;
-  text-align: left;
-  white-space: nowrap;
-}
-
-/* 当前所在页的菜单项：只把文字变成橙色，不加下划线
-   （只对「完全匹配」生效，否则 首页 会在所有页面都亮着） */
-#ul_nav li a.router-link-exact-active {
-  border-bottom: 0;
-  color: rgb(252, 158, 70);
-}
-
-/* 1280~1440 之间字号收一点，7 个菜单不会挤在一起 */
-@media (max-width: 1440px) {
-  #ul_nav {
-    gap: 10px;
-  }
-
-  #ul_nav li a,
-  .nav-todo {
-    font-size: 17px;
-    padding-left: 8px;
-    padding-right: 8px;
-  }
-}
-
-@media (max-width: 1280px) {
-  #ul_nav {
-    gap: 6px;
-  }
-
-  #ul_nav li a,
-  .nav-todo {
-    font-size: 15.5px;
-    padding-left: 6px;
-    padding-right: 6px;
-  }
 }
 </style>

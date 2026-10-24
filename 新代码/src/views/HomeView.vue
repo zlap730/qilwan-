@@ -11,6 +11,9 @@
   数据来源：图片来自 @/assets/img/*，几个入口是写在本文件里的数组
 -->
 <script setup>
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+
 import 前拨图 from '@/assets/img/前拨.png'
 import 后变速器图 from '@/assets/img/后变速器.png'
 import 夹器图 from '@/assets/img/夹器.jpg'
@@ -28,28 +31,31 @@ import 人身装备图 from '@/assets/img/人身装备.webp'
  * 这里改成 CSS Grid：第一行 2.2:1:1，第二行 装配占第 1 列、异响占后两列，
  * 布局比例和截图一致，但能跟着屏宽缩放。
  */
-const 变速器入口 = [
-  { label: '前变速器', to: '/shifters/tuning', img: 前拨图 },
-  { label: '后变速器', to: '/shifters/tuning', img: 后变速器图 },
-  { label: '圈刹夹器', to: '/pending/刹车调试', img: 夹器图 },
-  { label: '碟片夹器', to: '/pending/刹车调试', img: 碟刹图 }
-]
+const { t } = useI18n()
 
-const 异响入口 = [
-  { label: '查找异响', to: '/pending/异响处理', img: 查找异响图 },
-  { label: '解决异响', to: '/pending/异响处理', img: 解决异响图 }
-]
+// 文字走 i18n：切换语言时 computed 重新求值，页面即时更新
+const 变速器入口 = computed(() => [
+  { label: t('home.frontDerailleur'), to: '/shifters/tuning', img: 前拨图 },
+  { label: t('home.rearDerailleur'), to: '/shifters/tuning', img: 后变速器图 },
+  { label: t('home.rimBrake'), to: '/pending/刹车调试', img: 夹器图 },
+  { label: t('home.discBrake'), to: '/pending/刹车调试', img: 碟刹图 }
+])
+
+const 异响入口 = computed(() => [
+  { label: t('home.findNoise'), to: '/pending/异响处理', img: 查找异响图 },
+  { label: t('home.solveNoise'), to: '/pending/异响处理', img: 解决异响图 }
+])
 </script>
 
 <template>
   <main class="page-home">
     <section class="tools">
-      <h1 class="tools-title">自己组装 / 保养 / 维修爱车</h1>
+      <h1 class="tools-title">{{ t('home.toolTitle') }}</h1>
 
       <div class="tools-grid">
         <!-- ① 变速器 | 刹车 | 调试：左侧竖排标题 + 2×2 小卡 -->
         <article class="tile tile-shift">
-          <h2 class="vertical-title">变速器 | 刹车 | 调试</h2>
+          <h2 class="vertical-title">{{ t('home.shiftTitle') }}</h2>
           <div class="shift-grid">
             <router-link v-for="item in 变速器入口" :key="item.label" :to="item.to" class="shift-card">
               <img :src="item.img" :alt="item.label" loading="lazy" />
@@ -60,35 +66,28 @@ const 异响入口 = [
 
         <!-- ② 维修工具 -->
         <router-link class="tile tile-simple" to="/pending/维修工具">
-          <h2>维修工具</h2>
+          <h2>{{ t('home.tools') }}</h2>
           <img :src="工具图" alt="维修工具" loading="lazy" />
         </router-link>
 
         <!-- ③ 车辆保养 -->
         <router-link class="tile tile-simple" to="/pending/车辆保养">
-          <h2>车辆保养</h2>
+          <h2>{{ t('home.care') }}</h2>
           <img :src="保养图" alt="车辆保养" loading="lazy" />
         </router-link>
 
         <!-- ④ 自行车装配：竖排标题 + 一句文案 + 图 -->
         <router-link class="tile tile-build" to="/calculator">
-          <h2 class="vertical-title">自行车装配</h2>
+          <h2 class="vertical-title">{{ t('home.build') }}</h2>
           <div class="build-body">
-            <p>
-              你是否有过想要自己组装一台充满
-              <span class="c1">个</span><span class="c2">性</span><span class="c3">化</span>
-              的自行车，那么你可以看看这个
-            </p>
+            <p>{{ t('home.buildDesc') }}</p>
             <img :src="装车图" alt="自行车装配" loading="lazy" />
           </div>
         </router-link>
 
         <!-- ⑤ 异响查找 / 解决 -->
         <article class="tile tile-noise">
-          <p class="noise-text">
-            雨骑完后是否有过因为无法解决异响的烦恼？<br />
-            那你可以来看看我们提供的<em>查找方法</em>和<em>解决方法</em>
-          </p>
+          <p class="noise-text">{{ t('home.noise') }}</p>
           <div class="noise-grid">
             <router-link v-for="item in 异响入口" :key="item.label" :to="item.to" class="noise-card">
               <img :src="item.img" :alt="item.label" loading="lazy" />
@@ -101,16 +100,16 @@ const 异响入口 = [
 
     <!-- 其他自行车用品（原页是一个横向切换卡，这里先用两张入口卡） -->
     <section class="goods">
-      <h2>· 其他自行车用品</h2>
+      <h2>· {{ t('home.otherGear') }}</h2>
       <div class="goods-grid">
         <router-link class="goods-card goods-personal" to="/pending/人身装备">
-          <span>人身装备</span>
+          <span>{{ t('home.gearCards.apparel') }}</span>
         </router-link>
         <router-link class="goods-card goods-parts" to="/pending/零件道具">
-          <span>零件道具</span>
+          <span>{{ t('home.gearCards.parts') }}</span>
         </router-link>
         <router-link class="goods-card goods-shifter" to="/shifters">
-          <span>变速器大全</span>
+          <span>{{ t('shifter.title') }}</span>
         </router-link>
       </div>
     </section>

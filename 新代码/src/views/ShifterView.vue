@@ -2,7 +2,7 @@
   ShifterView.vue —— 变速器大全
   路由：/shifters
 
-  顶部 3 张图片循环滚动；中间「国产 / 进口」分类切换；下方 8 个品牌的品牌卡，
+  顶部 3 张图片循环滚动；中间「{{ t('shifter.domestic') }} / {{ t('shifter.imported') }}」分类切换；下方 8 个品牌的品牌卡，
   点品牌显示该品牌的价格表、说明和外链（带淡入动画）。
   对应旧站：变速器大全.html + JS文件/变速器大全-选项框.js（1,058 行）。
 
@@ -10,6 +10,7 @@
 -->
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import bike00 from '@/assets/img/00.jpg'
 import bikeAM from '@/assets/img/AM山地车.jpg'
@@ -17,6 +18,8 @@ import bikeRoad from '@/assets/img/2公路车图片.jpg'
 import { brandContents } from '@/data/shifterBrands'
 import { brandCsvMap, shifterCategories } from '@/data/shifterMeta'
 import '@/assets/legacy/变速器大全.css'
+
+const { t } = useI18n()
 
 /*
  * 原实现（变速器大全-选项框.js，1058 行）：

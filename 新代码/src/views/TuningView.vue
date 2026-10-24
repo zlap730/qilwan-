@@ -11,6 +11,9 @@
 -->
 <script setup>
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 import 手变图 from '@/assets/img/手变.png'
 import 前拨图 from '@/assets/img/前拨.jpg'

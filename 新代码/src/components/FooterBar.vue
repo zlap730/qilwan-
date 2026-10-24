@@ -1,5 +1,9 @@
 <script setup>
+import { useI18n } from 'vue-i18n'
+
 import '@/assets/legacy/页脚.css'
+
+const { t } = useI18n()
 
 function toTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -12,23 +16,23 @@ function toTop() {
       <table id="foot_tab" cellspacing="10">
         <tbody>
           <tr>
-            <td>制作者:</td>
+            <td>{{ t('footer.maker') }}</td>
             <td>Zero_Point</td>
             <td>闲尘游</td>
             <td>晓峰</td>
           </tr>
           <tr>
-            <td>创作时间：</td>
+            <td>{{ t('footer.createdAt') }}</td>
             <td>2024/4/22</td>
             <td />
           </tr>
           <tr>
-            <td>注意事项：</td>
-            <td>本网站仅供学习参考</td>
-            <td>如有疑问请联系邮箱</td>
+            <td>{{ t('footer.notice') }}</td>
+            <td>{{ t('footer.noticeText') }}</td>
+            <td>{{ t('footer.ask') }}</td>
           </tr>
           <tr>
-            <td>邮箱：</td>
+            <td>{{ t('footer.email') }}</td>
             <td>Z1916819975@163.com</td>
             <td />
           </tr>
@@ -37,15 +41,15 @@ function toTop() {
     </div>
 
     <div class="foot_logo">
-      <p class="wx">微信公众号<br /><strong>13556870440</strong></p>
+      <p class="wx">{{ t('footer.wechat') }}<br /><strong>13556870440</strong></p>
     </div>
   </footer>
 
   <div class="网站信息">
     <ul id="foot">
-      <li>©2024 普骑屋</li>
-      <li>本内容仅供参考，如有疑问可联系我们</li>
-      <li>微信号：13556870440</li>
+      <li>{{ t('footer.copyright') }}</li>
+      <li>{{ t('footer.ask') }}</li>
+      <li>WeChat: 13556870440</li>
     </ul>
   </div>
 

@@ -13,6 +13,7 @@
 -->
 <script setup>
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import placeholder from '@/assets/img/图标文件/占位.png'
 import { formatTime, resolveAssetUrl } from '@/utils/asset'
@@ -26,6 +27,8 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['delete', 'preview', 'reply'])
+
+const { t } = useI18n()
 
 const MAX_DEPTH = 2 // 最多展示两层，更深的回复统一挂到第二层（显示 @某人）
 
@@ -74,7 +77,7 @@ function onImageError(event) {
       <div class="comment-user-info">
         <span class="comment-username">
           {{ username }}
-          <span v-if="replyTo" class="reply-target">回复 @{{ replyTo }}</span>
+          <span v-if="replyTo" class="reply-target">{{ t('forum.replyTo', { name: replyTo }) }}</span>
         </span>
         <span class="comment-time">{{ time }}</span>
       </div>
@@ -113,10 +116,10 @@ function onImageError(event) {
 
     <div class="comment-actions">
       <button v-if="canReply && depth < MAX_DEPTH" type="button" class="replyButton" @click="emit('reply', comment)">
-        回复
+        {{ t('forum.replyAction') }}
       </button>
       <button v-if="canDelete" type="button" class="deleteButton" @click="emit('delete', comment.id)">
-        删除
+        {{ t('common.delete') }}
       </button>    </div>
 
     <!-- 递归渲染回复 -->

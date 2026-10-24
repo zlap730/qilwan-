@@ -9,6 +9,9 @@
   数据来源：正文是写在模板里的静态文字；图片来自 @/assets/img/*
 -->
 <script setup>
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+
 import 关于网站图 from '@/assets/img/关于网站.jpg'
 import 运动简介图 from '@/assets/img/sram_gx_web_waterfall_this_is_web.webp'
 import 骑行技巧图 from '@/assets/img/屏幕截图 1.png'
@@ -20,67 +23,66 @@ import 安全知识图 from '@/assets/img/屏幕截图2.png'
  * 外加原来的「入门向导」三张卡片。
  * 首页已经改成「工具入口」，所以这些介绍性内容单独放这里。
  */
-const 入门向导 = [
-  { title: '运动简介', to: '/article/sport', img: 运动简介图 },
-  { title: '骑行技巧', to: '/article/knowledge', img: 骑行技巧图 },
-  { title: '装备介绍', to: '/article/gear', img: 安全知识图 }
-]
+const { t } = useI18n()
+
+const disclaimerItems = computed(() => [
+  t('about.disclaimerItems.0'),
+  t('about.disclaimerItems.1'),
+  t('about.disclaimerItems.2'),
+  t('about.disclaimerItems.3')
+])
+
+const 入门向导 = computed(() => [
+  { title: t('about.guides.0.title'), desc: t('about.guides.0.desc'), to: '/article/sport', img: 运动简介图 },
+  { title: t('about.guides.1.title'), desc: t('about.guides.1.desc'), to: '/article/knowledge', img: 骑行技巧图 },
+  { title: t('about.guides.2.title'), desc: t('about.guides.2.desc'), to: '/article/gear', img: 安全知识图 }
+])
 </script>
 
 <template>
   <main class="page-about">
     <header class="hero">
-      <p class="kicker">ABOUT</p>
-      <h1>关于网站</h1>
-      <p class="lead">一个纯公益性质的自行车知识共享站 —— 把骑行、维修、装配的经验整理成能看懂的东西。</p>
+      <p class="kicker">{{ t('about.kicker') }}</p>
+      <h1>{{ t('about.title') }}</h1>
+      <p class="lead">{{ t('about.intro') }}</p>
     </header>
 
     <section class="block">
-      <h2>一、网站功能</h2>
-      <p>
-        骑行知识的宣传和讲解。这里汇聚了丰富的自行车骑行知识和维修技巧，无论是新手入门还是经验丰富的骑行者，希望都能在这找到有用的信息。
-        <mark>从骑行安全（如正确佩戴头盔、遵守交通规则）到长途骑行的规划（包括路线选择、补给点设置）</mark>，我们都会涉及讲解。
-      </p>
-      <p>
-        提供常见类型自行车骑行的技巧视频和相关 UP 的视频推荐，如爬坡技巧、控车练习、在不同路况下的骑行姿势等。
-      </p>
+      <h2>{{ t('about.featuresTitle') }}</h2>
+      <p>{{ t('about.featuresText1') }}</p>
+      <p>{{ t('about.featuresText2') }}</p>
     </section>
 
     <section class="block">
-      <h2>二、关于网站</h2>
-      <p>
-        我的梦想是致力于打造一个<strong>纯公益性质</strong>的自行车知识共享网站。
-        我的目标是通过传播骑行知识和维修装配等技能和知识，让更多的人了解自行车运动带来的乐趣。
-        自行车作为一种小众的运动方式，我希望能够让越来越多的人能够知道自行车文化的发展。
-      </p>
+      <h2>{{ t('about.originTitle') }}</h2>
+      <p>{{ t('about.originText') }}</p>
     </section>
 
     <section class="block two-col">
       <img :src="关于网站图" alt="关于网站" loading="lazy" />
       <div>
-        <h2>关于我们与网站</h2>
+        <h2>{{ t('about.disclaimerTitle') }}</h2>
         <ul>
-          <li>本网站所提供的所有信息仅供学习和参考目的，应自行判断并承担使用这些信息所带来的风险。</li>
-          <li>本网站不对因使用网站上的信息而造成的任何直接或间接损失负责，包括但不限于人身伤害、财产损失等。</li>
-          <li>尽管我们尽力确保信息的准确性和完整性，但由于知识的不断更新和实际情况的多样性，信息可能存在误差，若有问题可以联系邮箱告知修改以及意见。</li>
-          <li>如果涉及到版权侵权问题，请联系我们，我们会尽快处理。</li>
+          <li v-for="(item, index) in disclaimerItems" :key="index">{{ item }}</li>
         </ul>
       </div>
     </section>
 
     <section class="block">
-      <h2>入门向导</h2>
-      <p class="hint">三个入口：先了解运动本身，再学技巧，最后把安全知识过一遍。</p>
+      <h2>{{ t('about.guideTitle') }}</h2>
+      <p class="hint">{{ t('about.guideHint') }}</p>
       <div class="guide-grid">
         <router-link v-for="item in 入门向导" :key="item.title" :to="item.to" class="guide-card">
           <img :src="item.img" :alt="item.title" loading="lazy" />
           <span>{{ item.title }}</span>
+          <small v-if="item.desc" class="guide-desc">{{ item.desc }}</small>
         </router-link>
       </div>
     </section>
 
     <p class="contact">
-      联系邮箱：<a href="mailto:Z1916819975@163.com">Z1916819975@163.com</a> · 微信号 13556870440
+      {{ t('footer.email') }}<a href="mailto:Z1916819975@163.com">Z1916819975@163.com</a> ·
+      {{ t('footer.wechat') }} 13556870440
     </p>
   </main>
 </template>

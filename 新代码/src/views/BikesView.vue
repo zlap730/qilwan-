@@ -11,6 +11,7 @@
 -->
 <script setup>
 import { computed, reactive, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import bikesData from '@/data/bikes.json'
 import heroImage from '@/assets/img/hq720.webp'
@@ -48,6 +49,8 @@ const terrainDesc = {
   mixed: '混合路面',
   road: '公路竞速'
 }
+
+const { t } = useI18n()
 
 const questions = [
   {

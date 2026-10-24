@@ -16,6 +16,7 @@
 -->
 <script setup>
 import { computed, onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import { createComment, deleteComment, listComments } from '@/api/comments'
 import CommentItem from '@/components/CommentItem.vue'
@@ -23,6 +24,7 @@ import { useUserStore } from '@/stores/user'
 import '@/assets/legacy/论坛.css'
 
 const store = useUserStore()
+const { t } = useI18n()
 
 const comments = ref([])
 const loading = ref(true)
@@ -212,7 +214,7 @@ async function remove(id) {
 }
 
 const loggedInTip = computed(() =>
-  store.isLoggedIn ? `当前登录：${store.displayName}` : '未登录：可以浏览，登录后可以发言'
+  store.isLoggedIn ? t('forum.loggedIn', { name: store.displayName }) : t('forum.guest')
 )
 
 const totalCount = computed(() =>
@@ -226,16 +228,16 @@ onMounted(load)
   <main class="page-forum">
     <section class="forum-shell">
       <header class="forum-head">
-        <h1>讨论区</h1>
+        <h1>{{ t('forum.title') }}</h1>
         <span class="login-tip">{{ loggedInTip }}</span>
-        <span class="count-tip">共 {{ totalCount }} 条发言</span>
+        <span class="count-tip">{{ t('forum.total', { n: totalCount }) }}</span>
       </header>
 
       <div class="comments-section">
         <div class="commentsContainer">
-          <p v-if="loading" class="state">评论加载中…</p>
+          <p v-if="loading" class="state">{{ t('common.loading') }}</p>
           <p v-else-if="error" class="state state-error">{{ error }}</p>
-          <p v-else-if="!comments.length" class="state">还没有人发言，来抢第一个沙发吧。</p>
+          <p v-else-if="!comments.length" class="state">{{ t('forum.empty') }}</p>
 
           <template v-else>
             <CommentItem
@@ -257,20 +259,20 @@ onMounted(load)
     <div class="comment-bar">
       <div class="comment-bar-inner">
         <button type="button" class="toggleCommentButton" :class="{ active: formOpen }" @click="toggleForm">
-          {{ formOpen ? '收起' : '添加评论' }}
+          {{ formOpen ? t('forum.collapse') : t('forum.addComment') }}
         </button>
 
         <form v-if="formOpen" class="commentForm" @submit.prevent="submit">
         <!-- 回复提示 -->
         <div v-if="replyTarget" class="reply-banner">
-          <span>正在回复 <b>@{{ replyTarget.User?.username }}</b>：{{ (replyTarget.content || '图片/视频').slice(0, 20) }}</span>
-          <button type="button" class="link-btn" @click="cancelReply">取消回复</button>
+          <span>{{ t('forum.replying') }} <b>@{{ replyTarget.User?.username }}</b>：{{ (replyTarget.content || 'media').slice(0, 20) }}</span>
+          <button type="button" class="link-btn" @click="cancelReply">{{ t('forum.cancelReply') }}</button>
         </div>
 
         <textarea
           v-model="content"
           class="commentInput"
-          :placeholder="replyTarget ? `回复 @${replyTarget.User?.username}` : '在这里输入你的评论'"
+          :placeholder="replyTarget ? t('forum.replyPlaceholder', { name: replyTarget.User?.username }) : t('forum.placeholder')"
           maxlength="1000"
         />
 
@@ -292,7 +294,7 @@ onMounted(load)
 
         <div class="form-tools">
           <label class="tool-btn" :class="{ disabled: images.length >= MAX_IMAGES }">
-            图片 {{ images.length }}/{{ MAX_IMAGES }}
+            {{ t('forum.images', { n: images.length, max: MAX_IMAGES }) }}
             <input
               ref="imageInput"
               type="file"
@@ -304,7 +306,7 @@ onMounted(load)
           </label>
 
           <label class="tool-btn" :class="{ disabled: Boolean(video) }">
-            {{ video ? '已选视频' : `视频 ≤${MAX_VIDEO_MB}MB` }}
+            {{ video ? t('forum.videoPicked') : t('forum.video', { size: MAX_VIDEO_MB }) }}
             <input
               ref="videoInput"
               type="file"
@@ -314,10 +316,10 @@ onMounted(load)
             />
           </label>
 
-          <span class="hint">支持 JPG/PNG/WEBP/GIF · 视频 MP4/WEBM/MOV，建议 60 秒内</span>
+          <span class="hint">{{ t('forum.hint') }}</span>
 
           <button type="submit" class="submitButton" :disabled="submitting">
-            {{ submitting ? '提交中…' : replyTarget ? '回复' : '提交' }}
+            {{ submitting ? t('common.loading') : replyTarget ? t('forum.reply') : t('forum.submit') }}
           </button>
         </div>
       </form>

@@ -10,6 +10,7 @@
 -->
 <script setup>
 import { computed, onBeforeUnmount, reactive, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 
 import { forgotPassword, resetPassword } from '@/api/auth'
@@ -25,6 +26,7 @@ import bgImage from '@/assets/img/单车与日落.jpg'
  */
 
 const router = useRouter()
+const { t } = useI18n()
 
 const step = ref(1)
 const email = ref('')

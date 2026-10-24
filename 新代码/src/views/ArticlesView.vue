@@ -9,7 +9,18 @@
   数据来源：@/data/articles.js（标题、摘要、封面）；正文图片在 public/articles/
 -->
 <script setup>
-import { articles } from '@/data/articles'
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+import { articles as articlesZh } from '@/data/articles'
+import { articles as articlesEn } from '@/data/articles.en'
+import { useLocaleStore } from '@/stores/locale'
+
+const { t } = useI18n()
+const localeStore = useLocaleStore()
+
+// 中文/英文两套文章数据，切换语言时整个列表跟着换
+const articles = computed(() => (localeStore.isEnglish ? articlesEn : articlesZh))
 
 /*
  * 文章列表页。
@@ -22,12 +33,12 @@ import { articles } from '@/data/articles'
 <template>
   <main class="page-articles">
     <header class="hero">
-      <p class="kicker">ARTICLES</p>
-      <h1>骑行知识</h1>
+      <p class="kicker">{{ t('articles.kicker') }}</p>
+      <h1>{{ t('articles.title') }}</h1>
       <p class="lead">
         把旧站里关于自行车运动、装备和骑行技巧的内容整理到一起：先认识这项运动，再看装备，最后练动作。
       </p>
-      <p class="count">共 {{ articles.length }} 篇</p>
+      <p class="count">{{ t('articles.count', { n: articles.length }) }}</p>
     </header>
 
     <div class="card-grid">
@@ -46,7 +57,7 @@ import { articles } from '@/data/articles'
         <div class="card-body">
           <h2>{{ a.title }}</h2>
           <p class="summary">{{ a.summary }}</p>
-          <span class="more">阅读全文 →</span>
+          <span class="more">{{ t('articles.readMore') }} →</span>
         </div>
       </router-link>
     </div>

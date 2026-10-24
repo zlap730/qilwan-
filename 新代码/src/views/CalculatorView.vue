@@ -14,6 +14,7 @@
 -->
 <script setup>
 import { computed, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import downloadIcon from '@/assets/img/图标文件/download_111133.png'
 import heroImage from '@/assets/img/晓风车架.png'
@@ -96,6 +97,8 @@ const filledCount = computed(() => dataRows.value.filter((row) => row.part).leng
  *  - 从表格顶部点「收起」，右侧参考面板会展开到表格上方占满整行；
  *  - 折叠状态记在 localStorage，下次进来保持上次的样子。
  */
+const { t } = useI18n()
+
 const STORAGE_KEY = 'qile.calculator.layout'
 
 function readLayout() {
@@ -174,9 +177,9 @@ async function exportXlsx() {
   <main class="page-calculator">
     <section class="intro">
       <div class="intro-text">
-        <p>我致力于为那些喜欢自己组装自行车的朋友提供便利，让你可以线上直接列出组装车所需的清单。</p>
-        <p>填完下表即可实时得到预算合计，并可一键导出 Excel 交给车店报价。</p>
-        <p>如果您希望为自己的爱车量身定制独特配置，我们也很乐意为您提供专业建议和支持。</p>
+        <p>{{ t('calculator.intro1') }}</p>
+        <p>{{ t('calculator.intro2') }}</p>
+        <p>{{ t('calculator.intro3') }}</p>
       </div>
       <img class="intro-img" :src="heroImage" alt="车架" />
     </section>
@@ -187,15 +190,15 @@ async function exportXlsx() {
         <div class="bar-left">
           <button type="button" class="fold-btn" @click="toggleDetail">
             <span class="caret" :class="{ open: detailOpen }">▾</span>
-            {{ detailOpen ? '收起明细' : '展开明细' }}
+            {{ detailOpen ? t('calculator.hideDetail') : t('calculator.showDetail') }}
           </button>
           <button type="button" class="fold-btn" @click="toggleRef">
             <span class="caret" :class="{ open: refOpen }">▾</span>
-            {{ refOpen ? '收起参考' : '展开参考' }}
+            {{ refOpen ? t('calculator.hideRef') : t('calculator.showRef') }}
           </button>
         </div>
         <div class="bar-right">
-          <span class="sum">合计 <b>¥{{ total.toFixed(2) }}</b></span>
+          <span class="sum">{{ t('calculator.sum') }} <b>¥{{ total.toFixed(2) }}</b></span>
           <span class="sum-weak">{{ itemCount }} 件 · 已填 {{ filledCount }} 项</span>
         </div>
       </div>
@@ -208,12 +211,12 @@ async function exportXlsx() {
         <div v-if="detailOpen" class="table-col">
           <div id="nav_table">
             <ul>
-              <li>配置清单</li>
-              <li>物品</li>
-              <li>单价</li>
-              <li>数量</li>
-              <li>配件规格</li>
-              <li>备注</li>
+              <li>{{ t('calculator.colLabel') }}</li>
+              <li>{{ t('calculator.colPart') }}</li>
+              <li>{{ t('calculator.colPrice') }}</li>
+              <li>{{ t('calculator.colQty') }}</li>
+              <li>{{ t('calculator.colSpec') }}</li>
+              <li>{{ t('calculator.colRemark') }}</li>
             </ul>
           </div>
 
@@ -266,7 +269,7 @@ async function exportXlsx() {
                   </template>
 
                   <tr class="item-row total-row">
-                    <td>总计预算：</td>
+                    <td>{{ t('calculator.total') }}</td>
                     <td>
                       <input id="jsjs" type="text" :value="`¥${total.toFixed(2)}`" readonly />
                     </td>
@@ -274,27 +277,27 @@ async function exportXlsx() {
                       <input id="numnum" type="text" :value="`${itemCount} 件`" readonly />
                     </td>
                     <td colspan="3" class="auto-tip">
-                      已填 {{ filledCount }} 项 · 单价/数量一改，合计自动重算
+                      {{ t('calculator.filled', { n: filledCount }) }}
                     </td>
                   </tr>
                 </tbody>
 
                 <tfoot>
                   <tr>
-                    <td colspan="6">在填写的过程中请您确认好填写配件中的规格大小，以防出现配件之间规格不兼容的问题</td>
+                    <td colspan="6">{{ t('calculator.footnote') }}</td>
                   </tr>
                 </tfoot>
               </table>
             </form>
           </div>
 
-          <p id="table_P">填写此表格后可以点击下载将表格下载到本地中 | 下载不收费</p>
+          <p id="table_P">{{ t('calculator.downloadTip') }}</p>
 
           <div class="export">
             <label for="exportButton">
               <img :src="downloadIcon" alt="下载图标" />
             </label>
-            <input id="exportButton" type="button" value="点击下载表格" @click="exportXlsx" />
+            <input id="exportButton" type="button" :value="t('calculator.download')" @click="exportXlsx" />
           </div>
         </div>
 

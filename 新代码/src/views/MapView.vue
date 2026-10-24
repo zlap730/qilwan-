@@ -10,6 +10,9 @@
 -->
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 /*
  * 地图页：原 HTML/地图.html

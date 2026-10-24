@@ -11,8 +11,17 @@
 <script setup>
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 
-import { articles } from '@/data/articles'
+import { articles as articlesZh } from '@/data/articles'
+import { articles as articlesEn } from '@/data/articles.en'
+import { useLocaleStore } from '@/stores/locale'
+
+const { t } = useI18n()
+const localeStore = useLocaleStore()
+
+// 按当前语言挑数据源：slug 两边完全一致，所以路由不用变
+const articles = computed(() => (localeStore.isEnglish ? articlesEn : articlesZh))
 
 /*
  * 文章详情页。
@@ -20,7 +29,7 @@ import { articles } from '@/data/articles'
  * 正文的 sections 用 v-html 渲染（内容已在数据层清洗过）。
  */
 const route = useRoute()
-const article = computed(() => articles.find((item) => item.slug === route.params.slug))
+const article = computed(() => articles.value.find((item) => item.slug === route.params.slug))
 </script>
 
 <template>
@@ -40,15 +49,15 @@ const article = computed(() => articles.find((item) => item.slug === route.param
       ></section>
 
       <footer class="article-foot">
-        <router-link class="back-link" to="/articles">← 返回文章列表</router-link>
+        <router-link class="back-link" to="/articles">{{ t('articles.backToList') }}</router-link>
       </footer>
     </article>
 
     <!-- slug 对不上：给出明确的空状态，并留一条回列表的路 -->
     <div v-else class="article-missing">
-      <h1>文章不存在</h1>
-      <p>这个链接可能已经失效，或者这篇文章还没有迁移过来。</p>
-      <router-link class="back-link" to="/articles">返回文章列表</router-link>
+      <h1>{{ t('articles.notFound') }}</h1>
+      <p>{{ t('articles.notFoundDesc') }}</p>
+      <router-link class="back-link" to="/articles">{{ t('articles.backToList') }}</router-link>
     </div>
   </main>
 </template>

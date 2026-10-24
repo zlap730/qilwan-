@@ -63,7 +63,7 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 | `骑乐网.html` 的「自己组装/保养/维修爱车」+「其他自行车用品」 | `views/HomeView.vue`（首页） | 5 个 float + `position:relative` 方块（写死 1400×700）→ CSS Grid（首行 2.2:1:1，次行装配占 1 列、异响占 2 列）；配色/图文/竖排标题照搬 |
 | `骑乐网.html` 的「网站功能 / 关于网站 / 关于我们与网站 / 入门向导」 | `views/AboutView.vue`（`/about`） | 介绍性内容独立成页，首页让位给工具入口 |
 | 旧站里只有导航、没有正文的页面（维修工具/刹车/异响/配件/服装头盔/车架） | `views/PendingView.vue`（`/pending/:name`） | 点进去不再是空白，说明"整理中"并给出可用入口 |
-| `HTML/论坛.html` + `JS文件/评论区代码.js`（413 行） | `views/ForumView.vue` + `components/CommentItem.vue` + `api/comments.js` | `innerHTML` 拼字符串 → 组件插值（顺带修掉 XSS）；8 个 `getElementById` + `addEventListener` → `v-model` / `@submit` |
+| `HTML/论坛.html` + `JS文件/评论区代码.js`（413 行） | `views/ForumView.vue` + `components/CommentItem.vue` + `api/comments.js` | `innerHTML` 拼字符串 → 组件插值（顺带修掉 XSS）；8 个 `getElementById` + `addEventListener` → `v-model` / `@submit`。**升级**：楼中楼回复（回复 @某人）、**最多 9 张图**、**1 个视频（≤50MB）**、九宫格 + 视频播放；后端预留 `auditStatus` 审核字段与 `/api/admin/comments` 接口 |
 | `HTML/装配计算器.html`（381 行手写 TR）+ `表格计算器.js` + `装配计算器.js` | `views/CalculatorView.vue` + `components/CalcRefPanel.vue` + `data/calculatorRefs.js` + `data/shifterTables.json` | 30 多个 `<tr>` → 一份数据数组 + `v-for`；合计用 `computed` 自动算；xlsx 按需 `import()`。**新增左右分栏 + 双向折叠**：右侧「参考内容」三个标签分别承接原来的**车架推荐 / 零件道具 / 变速器**（变速器表格由 `scripts/extract-calc-refs.mjs` 从旧站资料自动抽取），折叠状态记在 localStorage |
 | `HTML/变速器大全.html` + `JS文件/变速器大全-选项框.js`（1,058 行） | `views/ShifterView.vue` + `data/shifterBrands.js` + `data/shifterMeta.js` | 8 个品牌的 900 多行正文原样抽成数据模块；分类/品牌切换、淡入动画、页头滚动图片、CSV 参数表全部保留 |
 | `HTML/变速器调试.html` + 3 个动画 JS | `views/TuningView.vue`（`/shifters/tuning`） | 子导航改吸顶锚点；「手变/前拨/后拨」鼠标悬停切图 → `partIndex`；异响 3 个标签 → `tabIndex`；55MB 本地教学视频改成 B 站外链 |
@@ -154,6 +154,8 @@ BASE_URL=http://localhost:4173 node scripts/layout-audit.mjs     # 审计构建�
 
 ## 已知未完成
 
+- **评论审核管理页**：后端接口（`/api/admin/comments*`）和 `auditStatus` 字段已就绪，
+  还差一个 `views/AdminCommentsView.vue`；先把账号设成管理员：`npm run admin 你的用户名`；
 - 整车/车架/配件/服装头盔/刹车/维修工具：静态展示页，搬进 `<template>` 即可；
 - **个人空间**：依赖后端 `/api/posts`（旧站这个接口根本没实现），需要新增 posts 表和接口；
 - **找回密码要真正发信**：需要配 SMTP（见 `server/.env.example` 与 `项目结构说明.md` 第十二节）；

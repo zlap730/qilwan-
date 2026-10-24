@@ -75,7 +75,23 @@ app.use((req, res) => {
 // ────────────────────────────────────────────
 app.use((err, req, res, next) => {
   console.error('[全局错误]', err.message)
-  const status = err.status || (err.code === 'LIMIT_FILE_SIZE' ? 413 : 500)
+
+  // multer 的报错要翻译成人话，否则「最多 9 张图」会变成 500 服务器内部错误
+  const multerMessages = {
+    LIMIT_FILE_SIZE: '文件太大：图片单张不超过 20MB，视频不超过 50MB',
+    LIMIT_FILE_COUNT: '文件数量太多：一条评论最多 9 张图 + 1 个视频',
+    LIMIT_UNEXPECTED_FILE: '文件数量超出限制：图片最多 9 张、视频最多 1 个',
+    LIMIT_FIELD_KEY: '表单字段名太长',
+    LIMIT_PART_COUNT: '表单字段太多'
+  }
+  if (err.code && multerMessages[err.code]) {
+    return res.status(400).json({ error: multerMessages[err.code], details: err.message })
+  }
+  if (err.name === 'MulterError') {
+    return res.status(400).json({ error: err.message, details: err.message })
+  }
+
+  const status = err.status || 500
   res.status(status).json({
     error: status === 500 ? '服务器内部错误' : err.message,
     details: err.message
@@ -95,6 +111,11 @@ async function start() {
 
     await sequelize.sync()
     console.log('数据库同步成功')
+
+    // sync() 只建新表，不会给老表加列；这里补上讨论区升级 / 管理员标记用的新列
+    const { runMigrations } = require('./utils/migrate')
+    const changed = await runMigrations()
+    if (changed > 0) console.log(`数据库结构已升级（${changed} 项改动）`)
 
     const PORT = process.env.PORT || 3000
     const server = app.listen(PORT, () => {

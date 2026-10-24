@@ -9,7 +9,9 @@
     "server": "node --watch server/app.js",
     "start": "concurrently -n web,api -c cyan,magenta \"npm:dev\" \"npm:server\"",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "admin": "node server/scripts/make-admin.js",
+    "cleanup:uploads": "node server/scripts/cleanup-uploads.js"
   },
   "dependencies": {
     "axios": "^1.7.9",

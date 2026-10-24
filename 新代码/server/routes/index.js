@@ -1,10 +1,11 @@
 // File: server/routes/index.js
-// 作用：路由总装配。把 /api/auth、/api/users、/api/comments 三组路由拼到 /api 下面。
+// 作用：路由总装配。把 /api/auth、/api/users、/api/comments、/api/admin 拼到 /api 下面。
 
 const express = require('express');
 const authRoutes = require('./auth');
 const userRoutes = require('./userRoutes');
 const commentRoutes = require('./comments');
+const adminCommentRoutes = require('./adminComments');
 
 const router = express.Router();
 
@@ -19,5 +20,8 @@ router.use('/users', userRoutes);
 
 // 评论路由：最终路径为 /api/comments
 router.use('/comments', commentRoutes);
+
+// 评论审核（管理员）：最终路径为 /api/admin/comments
+router.use('/admin/comments', adminCommentRoutes);
 
 module.exports = router;

@@ -27,6 +27,13 @@ const User = sequelize.define('User', {
     bio: {
         type: DataTypes.TEXT, // 用户简介
         allowNull: true
+    },
+    // 管理员标记：后续「评论审核」页面用它判断能不能进来
+    // 现在没有任何人默认是管理员，需要用 npm run make-admin 脚本或在数据库里手动置 true
+    isAdmin: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        field: 'isAdmin'
     }
 }, {
     timestamps: true,

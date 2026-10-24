@@ -55,6 +55,10 @@ function logout() {
       <header class="topbar">
         <div class="crumb">{{ pageTitle }}</div>
         <div class="top-right">
+          <!-- 跳到首页：新标签页打开，后台这页不会被顶掉，方便边改边看效果 -->
+          <router-link to="/" target="_blank" rel="noreferrer" class="top-btn">
+            🏠 跳到首页
+          </router-link>
           <span class="welcome">欢迎：{{ store.displayName }}</span>
           <button type="button" class="top-link" @click="logout">退出</button>
         </div>
@@ -202,6 +206,26 @@ function logout() {
 
 .top-link:hover {
   background: rgba(255, 255, 255, 0.16);
+}
+
+/* 「跳到首页」按钮：白底蓝字，比「退出」更显眼一点 */
+.top-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  background: #fff;
+  color: #1890ff;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+
+.top-btn:hover {
+  background: #e6f4ff;
 }
 
 .content {

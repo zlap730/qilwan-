@@ -253,13 +253,14 @@ onMounted(load)
       </div>
     </section>
 
-    <!-- 底部发评论条 -->
+    <!-- 底部发评论条：外层铺满宽度做背景，内层限宽居中，避免页脚文字从两侧露出来 -->
     <div class="comment-bar">
-      <button type="button" class="toggleCommentButton" :class="{ active: formOpen }" @click="toggleForm">
-        {{ formOpen ? '收起' : '添加评论' }}
-      </button>
+      <div class="comment-bar-inner">
+        <button type="button" class="toggleCommentButton" :class="{ active: formOpen }" @click="toggleForm">
+          {{ formOpen ? '收起' : '添加评论' }}
+        </button>
 
-      <form v-if="formOpen" class="commentForm" @submit.prevent="submit">
+        <form v-if="formOpen" class="commentForm" @submit.prevent="submit">
         <!-- 回复提示 -->
         <div v-if="replyTarget" class="reply-banner">
           <span>正在回复 <b>@{{ replyTarget.User?.username }}</b>：{{ (replyTarget.content || '图片/视频').slice(0, 20) }}</span>
@@ -320,6 +321,7 @@ onMounted(load)
           </button>
         </div>
       </form>
+      </div>
     </div>
 
     <transition name="toast">
@@ -541,16 +543,98 @@ onMounted(load)
 }
 
 /* ============================================================
-   PC 自适应：底部发评论的浮动条
-   原来是 width:50% + left:25%（固定按视口一半宽度算），
-   2560 屏上会拉成 1280px 宽的巨条，1280 屏又偏窄；改成居中、限宽。
+   底部发评论条
+   旧样式是 width:50% + left:25% 的浮动条；这里改成「整宽背景 + 内层限宽」，
+   这样页脚文字不会从浮动条两侧露出来，滚动时也始终压在页面最上面。
    ============================================================ */
 .comment-bar {
-  width: min(760px, 94vw);
-  left: 50%;
-  right: auto;
-  transform: translateX(-50%);
+  /* 旧样式是 position: fixed，页脚会被压在下面；
+     改成 sticky：滚动时始终贴在视口底部，滚到页脚时会自然停在页脚上方 */
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  right: 0;
+  transform: none;
   box-sizing: border-box;
+  padding: 10px 0 12px;
+  border-top: 1px solid #e6d7c2;
+  background: #f6eee2;
+  box-shadow: 0 -6px 20px rgba(120, 90, 50, 0.14);
+  z-index: 60;
+}
+
+.comment-bar-inner {
+  display: flex;
+  flex-direction: column;
+  width: min(760px, 94vw);
+  margin: 0 auto;
+  max-height: 66vh;
+  overflow-y: auto;
+}
+
+/* 「添加评论 / 收起」按钮：旧样式是 width:100%，展开时整条变红，太抢眼；
+   改成右侧的小胶囊按钮，绿色=添加、红色=收起（保留旧站的颜色语义） */
+.comment-bar .toggleCommentButton {
+  width: auto;
+  min-width: 108px;
+  align-self: flex-end;
+  margin-left: auto;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(40, 120, 60, 0.18);
+}
+
+.comment-bar .toggleCommentButton.active {
+  box-shadow: 0 2px 8px rgba(200, 40, 40, 0.18);
+}
+
+/* 展开后的表单卡片 */
+.comment-bar .commentForm {
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  background: #fffdf9;
+  border: 1px solid #efe2cd;
+}
+
+.comment-bar .commentInput {
+  min-height: 96px;
+  border: 1px solid #e2d6c4;
+  border-radius: 8px;
+  background: #fff;
+  font-family: inherit;
+  font-size: 15px;
+  color: #33261a;
+  resize: vertical;
+}
+
+.comment-bar .commentInput:focus {
+  outline: none;
+  border-color: #e8863c;
+  box-shadow: 0 0 0 3px rgba(232, 134, 60, 0.15);
+}
+
+/* 提交按钮：旧 CSS 是 float:right，会把工具行挤乱；这里用 flex 靠右 */
+.comment-bar .form-tools .submitButton {
+  float: none;
+  margin-left: auto;
+  padding: 8px 22px;
+  border-radius: 999px;
+  background: #e8863c;
+  color: #fff;
+  font-family: inherit;
+  font-weight: 700;
+  border: 0;
+  cursor: pointer;
+}
+
+.comment-bar .form-tools .submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 /* 评论里的长链接/长英文不要撑破卡片 */

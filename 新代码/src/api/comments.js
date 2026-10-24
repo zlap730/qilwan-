@@ -25,7 +25,8 @@ export function createComment({ content, targetId, parentId, images = [], video 
   if (video) form.append('video', video)
 
   // 注意：给 FormData 手动设置 Content-Type 会丢掉 boundary，交给 axios 自动生成
-  return http.post('/comments', form).then((res) => res.data)
+  // 视频可能几十 MB，默认 20 秒不够，这里单独放宽到 120 秒
+  return http.post('/comments', form, { timeout: 120000 }).then((res) => res.data)
 }
 
 export function deleteComment(id) {

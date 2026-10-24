@@ -34,3 +34,6 @@ desktop.ini
 .vscode/*
 !.vscode/settings.json
 !.vscode/extensions.json
+
+# DSH 会话面板的临时数据（不属于项目代码）
+.dsh-ops/

@@ -1,7 +1,7 @@
 {
   "name": "qile-web",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "description": "骑乐网（普骑屋）：Vue 3 前端 + Express 后端，一个工程两个进程",
   "scripts": {
